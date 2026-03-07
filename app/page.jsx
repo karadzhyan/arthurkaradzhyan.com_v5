@@ -14,8 +14,6 @@ import DecisionTree from "@/components/tools/DecisionTree";
 import WageStmtCheck from "@/components/tools/WageStmtCheck";
 import { insights } from "@/data/insights";
 import { caseLaw } from "@/data/caseLaw";
-import { commentary } from "@/data/commentary";
-import { getAllResourceCards } from "@/data/resources";
 
 const NAV = ["About","Practice","Tools","Insights","Industries","Cases","Matters","Background","Resources","Contact"];
 
@@ -96,9 +94,9 @@ export default function Site(){
           <h1 className="h-name" style={{margin:0}}>Arthur<br/>Karadzhyan</h1>
           <div className="h-title">Employment Defense Attorney · California</div>
           <div className="h-line"/>
-          <div className="h-desc">Defending employers in PAGA representative actions, wage-and-hour class actions, workplace investigations, and complex employment litigation across California.</div>
+          <div className="h-desc">PAGA representative actions, wage-and-hour class actions, workplace investigations, and single-plaintiff defense. Built on quantitative exposure modeling, not blanket assumptions.</div>
           <div className="h-cta"><button className="h-btn" onClick={()=>go("Contact")}>Get in Touch</button><button className="h-ghost" onClick={()=>go("Insights")}>Read Insights</button></div>
-          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:9,letterSpacing:3,textTransform:"uppercase",color:"#bbb",marginTop:36}}>ANALYTICAL PLATFORM · 8 INTERACTIVE TOOLS · 12 PUBLICATIONS · 12 CASE LAW ANALYSES · 6 INDUSTRY PROFILES · COMMENTARY</div>
+          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:9,letterSpacing:3,textTransform:"uppercase",color:"#bbb",marginTop:36}}>ANALYTICAL PLATFORM · 8 INTERACTIVE TOOLS · 12 PUBLICATIONS · 12 CASE LAW ANALYSES · 6 INDUSTRY PROFILES</div>
         </div>
       </section>
 
@@ -117,14 +115,14 @@ export default function Site(){
         <div className="ag">
           <div className="at2">
             <p>Most PAGA defense is reactive. A notice arrives, counsel answers, discovery happens, and someone negotiates a number at mediation. The exposure model — if one exists — is a back-of-the-envelope calculation based on blanket assumptions. The result: settlements driven by plaintiff's framing, not by the actual data.</p>
-            <p>I do it differently. Every matter starts with a quantitative exposure model that disaggregates penalties by violation category, applies per-category violation rates derived from actual time records and payroll data, strips non-recoverable categories under the ZB, N.A. and Kirby frameworks, and produces three scenarios — plaintiff maximum, data-driven realistic, and defense best case.</p>
+            <p>This practice is built differently. Every matter starts with a quantitative exposure model that disaggregates penalties by violation category, applies per-category violation rates from actual time records and payroll data, strips non-recoverable categories under the ZB, N.A. and Kirby frameworks, and produces three outputs — plaintiff maximum, data-driven realistic, and defense best case.</p>
             {/* Pull quote */}
             <div style={{padding:"20px 0",margin:"16px 0",borderTop:"1px solid #eee",borderBottom:"1px solid #eee"}}>
               <div style={{fontSize:20,fontWeight:300,color:"#2c3e3a",lineHeight:1.5,fontStyle:"italic"}}>"Among the strongest declarations I have reviewed in my career."</div>
               <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,color:"#999",marginTop:8,letterSpacing:2,textTransform:"uppercase"}}>Mediator — Former Plaintiff's Wage-and-Hour Attorney</div>
             </div>
-            <p>I built this practice on the plaintiff side — litigating wage-and-hour class actions on behalf of employees before transitioning to defense. That foundation isn't background. It's the operating system. I evaluate claims the way opposing counsel evaluates them, anticipate certification arguments before they're filed, and identify the pressure points that actually move mediations.</p>
-            <p>The eight interactive tools, twelve publications, and twelve case law analyses on this site aren't marketing. They are the methodology, made visible. The 2024 PAGA reforms created the most significant shift in defense strategy since the statute's enactment — and no published appellate decision has yet interpreted the reform provisions. The analytical frameworks being built right now will define the landscape when that authority arrives.</p>
+            <p>I built this practice on the plaintiff side — litigating wage-and-hour class actions on behalf of employees before transitioning to defense. I evaluate claims the way opposing counsel evaluates them, anticipate certification arguments before they're filed, and identify the pressure points that actually move mediations.</p>
+            <p>The tools, publications, and case analyses on this site are the working methodology — the same frameworks applied in active litigation, adapted for open access. The 2024 PAGA reforms created the most significant shift in defense strategy since the statute's enactment. No published appellate decision has yet interpreted the reform provisions. The analytical frameworks being built now will define the landscape when that authority arrives.</p>
           </div>
           <div className="as2">
             <h4 style={{color:"#2c3e3a"}}>Focus</h4>
@@ -148,8 +146,8 @@ export default function Site(){
       <section className="sec" ref={el=>refs.current["Practice"]=el} style={fade("Practice")}>
         <div className="sh"><div className="sn">02</div><h2 className="sl2">Practice Areas</h2><div className="sln"/></div>
         <div style={{marginBottom:40,marginTop:-36,maxWidth:700}}>
-          <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>Five practice areas. One through-line: every defense is built on the data, not around it.</div>
-          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>Plaintiff-side experience informs every strategic decision — from how certification motions are constructed to how mediations are priced. The tools, publications, and case analyses on this site are the working methodology.</div>
+          <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>Every defense is built on the data, not around it.</div>
+          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>Five practice areas unified by the same analytical infrastructure — quantitative exposure modeling, forensic payroll analysis, and penalty-by-penalty recoverability assessment. The tools and case analyses elsewhere on this site are the working components.</div>
         </div>
         {[{t:"PAGA Representative Actions",d:"Full-lifecycle defense from LWDA notice through resolution.",subs:[{t:"Exposure Modeling",d:"Three-scenario output with per-category violation rates, penalty stacking, and temporal bifurcation."},{t:"Penalty Caps",d:"Pre-notice documentation for the 15% cap, post-notice remediation within 60 days for the 30% cap."},{t:"Standing & Scope",d:"Reformed personal-experience requirement (§ 2699(c)). Manageability limitation under Estrada and § 2699(p)."},{t:"Arbitration",d:"Individual-claim arbitration under Adolph with stay of representative claims. Hohenshelt fee compliance."},{t:"Forensic Analysis",d:"Regular rate errors (Alvarado, Ferra), commission timing (Sciborski), derivative cascades (§ 226, § 203, § 210)."},{t:"Settlement",d:"Moniz framework with preemptive Kullar treatment. Cure proposals for employers under 100 employees."}]},{t:"Wage-and-Hour Class Actions",d:"Certification opposition through trial plan challenges.",subs:[{t:"Certification",d:"Predominance failures, individualized proof requirements, Duran-compliant sampling methodology challenges."},{t:"Class Definition",d:"Identifying overbroad definitions sweeping in exempt employees, multi-location workforces, or different job classifications."},{t:"Merits Defense",d:"Meal/rest under Brinker and Donohue, overtime and regular rate, off-the-clock, expense reimbursement, wage statements."},{t:"Dual-Track",d:"Coordinating PAGA and class defense — defeating certification narrows the PAGA case and drives the mediation calculus."}]},{t:"Workplace Investigations",d:"Fact-finding for harassment, discrimination, retaliation, and policy violation complaints.",subs:[{t:"Witness Protocols",d:"Structured interviews with credibility assessment — demeanor analysis, consistency mapping, corroboration tracking."},{t:"Reporting",d:"Defensible reports calibrated for board, C-suite, and carrier audiences. Privileged structures under attorney-client and work-product doctrines."},{t:"Remediation",d:"Post-investigation remediation planning and facilitated mediation for disrupted workplace relationships."}]},{t:"Employment Counseling & Compliance",d:"Pre-litigation compliance infrastructure designed for penalty cap qualification.",subs:[{t:"Penalty Cap Positioning",d:"Handbook drafting, supervisor training, payroll audits, and attestation systems — all documented for 15% cap evidence."},{t:"AWS Implementation",d:"Four-step DIR election process. One missed step retroactively converts every 10-hour day into daily overtime."},{t:"Commission Plans",d:"Sciborski forfeiture exposure analysis and § 2751 written-agreement compliance."},{t:"Regular Rate Audits",d:"Overtime and premium accuracy across all compensation components — commissions, bonuses, piece-rate, differentials."}]},{t:"Single-Plaintiff Litigation",d:"FEHA defense and individual Labor Code claims.",subs:[{t:"FEHA Defense",d:"Disability discrimination, accommodation, interactive process failures, harassment, retaliation, wrongful termination."},{t:"Misclassification",d:"Independent contractor analysis under the ABC test (Dynamex) and Borello multi-factor framework."},{t:"Early Resolution",d:"Pre-litigation demand evaluation, strategic assessment, and early resolution positioning."}]}].map(function(p,i){return <div className="prac-item" key={i}><div className="prac-title">{p.t}</div><div className="prac-desc"><div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,lineHeight:1.9,color:"#666",marginBottom:p.subs?16:0}}>{p.d}</div>{p.subs&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>{p.subs.map(function(sub,j){return <div key={j} style={{padding:"12px 16px",background:"#fafafa",borderLeft:"2px solid #2c3e3a"}}><div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:"#2c3e3a",marginBottom:4}}>{sub.t}</div><div style={{fontFamily:"'Outfit',sans-serif",fontSize:11,lineHeight:1.7,color:"#888"}}>{sub.d}</div></div>})}</div>}</div></div>})}
       </section>
@@ -159,7 +157,7 @@ export default function Site(){
         <section className="sec" ref={el=>refs.current["Tools"]=el} style={fade("Tools")}>
           <div className="sh"><div className="sn" style={{color:"#fff",opacity:.12}}>03</div><h2 className="sl2" style={{color:"#8aa39e"}}>Tools</h2><div className="sln" style={{background:"rgba(255,255,255,.1)"}}/></div>
           <div style={{marginBottom:32,marginTop:-36,maxWidth:700}}>
-            <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"rgba(255,255,255,.75)",fontStyle:"italic",marginBottom:12}}>Eight tools. Each one models a specific dimension of PAGA exposure that carriers, mediators, and opposing counsel encounter in every case.</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"rgba(255,255,255,.75)",fontStyle:"italic",marginBottom:12}}>The same exposure models used in active litigation — penalty estimation, regular rate forensics, recoverability filtering, statute-of-limitations mapping — adapted for open access.</div>
             <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"rgba(255,255,255,.45)",lineHeight:1.7}}>All calculations run in your browser. No data is transmitted or stored. Inputs are illustrative defaults — adjust to your matter.</div>
           </div>
 
@@ -242,7 +240,6 @@ export default function Site(){
               {activeTool===5&&<DerivativeMapper/>}
               {activeTool===6&&<DecisionTree/>}
               {activeTool===7&&<WageStmtCheck/>}
-              {(function(){var slugs=["paga-penalty-estimator","regular-rate-calculator","penalty-cap-qualifier","statute-of-limitations-calculator","recoverability-checker","derivative-penalty-mapper","paga-reform-decision-tree","wage-statement-compliance-checker"];return <Link href={"/tools/"+slugs[activeTool]} style={{display:"inline-flex",alignItems:"center",gap:6,marginTop:20,fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:"#8aa39e",textDecoration:"none",padding:"8px 16px",border:"1px solid rgba(138,163,158,.3)"}}>Open Full Tool Page →</Link>})()}
             </div>
           </div>
         </section>
@@ -251,7 +248,7 @@ export default function Site(){
       {/* INSIGHTS */}
       <section className="sec" ref={el=>refs.current["Insights"]=el} id="section-insights" style={fade("Insights")}>
         <div className="sh"><div className="sn">04</div><h2 className="sl2">Insights & Publications</h2><div className="sln"/></div>
-        <p style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",marginBottom:28,marginTop:-36}}>Click any publication to read the full analysis.</p>
+        <p style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",marginBottom:28,marginTop:-36}}>Original analysis of the frameworks, statutory provisions, and case authority that shape PAGA defense strategy. Click to read.</p>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
         {insights.map((ins,i)=>(
           <div key={i} className="card-hover" onClick={()=>{setExpandedInsight(expandedInsight===i?null:i);setExpandedCase(null);setExpandedInd(null);setExpanded(null)}} role="button" aria-expanded={expandedInsight===i} style={{
@@ -285,32 +282,6 @@ export default function Site(){
         ))}
         </div>
       </section>
-
-      {/* RECENT COMMENTARY */}
-      <div style={{padding:"48px 48px",borderTop:"1px solid #eee",background:"#fafafa"}}>
-        <div style={{maxWidth:1100,margin:"0 auto"}}>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:28}}>
-            <div style={{display:"flex",alignItems:"center",gap:12}}>
-              <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:4,textTransform:"uppercase",color:"#2c3e3a"}}>Recent Commentary</div>
-              <div style={{width:40,height:1,background:"#ddd"}}/>
-            </div>
-            <Link href="/commentary" style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:"#2c3e3a",textDecoration:"none",padding:"6px 14px",border:"1px solid #2c3e3a"}}>View All →</Link>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
-            {commentary.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)}).slice(0,4).map(function(item){
-              var d=new Date(item.date+"T00:00:00");var months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var dateLabel=months[d.getMonth()]+" "+d.getFullYear();
-              return(
-                <Link key={item.slug} href={"/commentary/"+item.slug} style={{textDecoration:"none",padding:"20px 24px",border:"1px solid #e8e8e8",background:"#fff",display:"block",transition:"all .3s",position:"relative",overflow:"hidden"}}>
-                  <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:"#2c3e3a"}}/>
-                  <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:500,color:"#999",letterSpacing:2,marginBottom:8}}>{dateLabel}</div>
-                  <div style={{fontSize:15,fontWeight:600,color:"#1a1a1a",lineHeight:1.4,marginBottom:8}}>{item.title}</div>
-                  <div style={{fontFamily:"'Outfit',sans-serif",fontSize:11,color:"#888",lineHeight:1.6}}>{item.summary.length>140?item.summary.slice(0,140)+"...":item.summary}</div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
       {/* INDUSTRY DEEP DIVES */}
       <div style={{background:"linear-gradient(160deg,#2c3e3a,#1e2d2a)",borderTop:"1px solid #eee"}} ref={el=>refs.current["Industries"]=el}>
@@ -421,7 +392,6 @@ export default function Site(){
                             </div>
                           ))}
                         </div>
-                        <Link href={"/industries/"+ind.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"").slice(0,80)} onClick={function(e){e.stopPropagation()}} style={{display:"inline-flex",alignItems:"center",gap:6,marginTop:20,fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:"#8aa39e",textDecoration:"none",padding:"8px 16px",border:"1px solid rgba(138,163,158,.3)"}}>Full Industry Profile →</Link>
                       </div>
                     </div>
                   </div>}
@@ -434,8 +404,8 @@ export default function Site(){
           <div style={{marginTop:40,padding:"28px 32px",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)"}}>
             <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:3,textTransform:"uppercase",color:"rgba(138,163,158,.5)",marginBottom:16}}>Why Industry-Specific Analysis</div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24}}>
-              <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,lineHeight:1.9,color:"rgba(255,255,255,.5)"}}>These six industries are not marketing categories. They represent structurally distinct PAGA and class action exposure profiles driven by differences in applicable wage orders, exemption frameworks, compensation structures, and operational patterns. A hospitality employer operating under Wage Order 5 with tipped employees and 24/7 scheduling faces a fundamentally different compliance landscape than an automotive dealership operating under Wage Order 7 with commissioned salespeople and flat-rate technicians.</div>
-              <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,lineHeight:1.9,color:"rgba(255,255,255,.5)"}}>Generic defense strategies that apply the same analytical framework across industries miss the structural vulnerabilities unique to each sector — the AWS election exposure in solar, the commission forfeiture pattern in automotive, the multi-worksite manageability challenge in staffing, the piece-rate legacy compliance gap in agriculture. Each industry profile maps the specific violation categories, governing authorities, and defense methodologies that apply to that sector's distinct exposure structure.</div>
+              <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,lineHeight:1.9,color:"rgba(255,255,255,.5)"}}>Each profile maps to a different wage order, exemption framework, and compensation structure. A hospitality employer under Wage Order 5 with tipped employees and 24/7 scheduling faces a fundamentally different compliance landscape than an automotive dealership under Wage Order 7 with commissioned salespeople and flat-rate technicians. The penalty exposure structure — and the viable defenses — diverge at every level.</div>
+              <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,lineHeight:1.9,color:"rgba(255,255,255,.5)"}}>The AWS election exposure in solar, the commission forfeiture pattern in automotive, the multi-worksite manageability challenge in staffing, the piece-rate legacy gap in agriculture — each requires a defense methodology calibrated to that sector's specific violation categories, governing authorities, and operational patterns.</div>
             </div>
           </div>
         </section>
@@ -445,8 +415,8 @@ export default function Site(){
       <div style={{padding:"40px 48px",borderTop:"1px solid #eee",borderBottom:"1px solid #eee",background:"#fafafa",textAlign:"center"}}>
         <div style={{maxWidth:540,margin:"0 auto"}}>
           <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:3,textTransform:"uppercase",color:"#2c3e3a",marginBottom:12}}>Stay Current</div>
-          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,color:"#888",marginBottom:20,lineHeight:1.6}}>These tools and publications are updated as new appellate authority develops. New decisions, reform developments, and analytical tools are published in the commentary section.</div>
-          <div style={{display:"flex",gap:12,justifyContent:"center"}}><button onClick={()=>go("Contact")} style={{fontFamily:"'Outfit',sans-serif",fontSize:11,fontWeight:600,letterSpacing:2,textTransform:"uppercase",padding:"12px 24px",background:"#2c3e3a",color:"#fff",border:"none",cursor:"pointer"}}>Contact</button><Link href="/commentary" style={{fontFamily:"'Outfit',sans-serif",fontSize:11,fontWeight:600,letterSpacing:2,textTransform:"uppercase",padding:"12px 24px",background:"none",color:"#2c3e3a",border:"1px solid #2c3e3a",textDecoration:"none",display:"inline-block"}}>Read Commentary</Link></div>
+          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:13,color:"#888",marginBottom:20,lineHeight:1.6}}>Tools, publications, and case analyses are updated as new appellate authority and reform developments emerge.</div>
+          <button onClick={()=>go("Contact")} style={{fontFamily:"'Outfit',sans-serif",fontSize:11,fontWeight:600,letterSpacing:2,textTransform:"uppercase",padding:"12px 24px",background:"#2c3e3a",color:"#fff",border:"none",cursor:"pointer"}}>Contact</button>
         </div>
       </div>
 
@@ -454,8 +424,8 @@ export default function Site(){
       <section className="sec" ref={el=>refs.current["Cases"]=el} style={fade("Cases")}>
         <div className="sh"><div className="sn">06</div><h2 className="sl2">Case Law Laboratory</h2><div className="sln"/></div>
         <div style={{marginBottom:32,marginTop:-36,maxWidth:750}}>
-          <div style={{fontFamily:"Georgia,serif",fontSize:18,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>Twelve decisions. Each one changed how PAGA defense is practiced.</div>
-          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>From Kirby's foundational distinction between wages and penalties, through Naranjo's derivative cascade that turns one meal violation into four penalty streams, to Hohenshelt's equitable rescue of late arbitration payments that reversed five years of strict-liability authority. The holdings are the floor. The defense strategy built on each holding is what moves mediations.</div>
+          <div style={{fontFamily:"Georgia,serif",fontSize:18,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>The holdings that define PAGA defense — and the strategies built on each one.</div>
+          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>From Kirby's foundational distinction between wages and penalties, through Naranjo's derivative cascade that turns one meal violation into four penalty streams, to Hohenshelt's equitable rescue of late arbitration payments that reversed five years of strict-liability authority. Each analysis maps the holding to a concrete defense application.</div>
         </div>
         <div className="tool-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
         {caseLaw.map((c,i)=>(
@@ -515,8 +485,8 @@ export default function Site(){
       <section className="sec" ref={el=>refs.current["Matters"]=el} style={fade("Matters")}>
         <div className="sh"><div className="sn">07</div><h2 className="sl2">Select Matters</h2><div className="sln"/></div>
         <div style={{marginBottom:32,marginTop:-36,maxWidth:750}}>
-          <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>The methodology in practice. Each engagement below produced a specific, identifiable defense outcome.</div>
-          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>A novel liability theory the supervising partner had never seen raised. A declaration a mediator described as among the strongest in his career. A forensic analysis that reduced claimed exposure by more than 60%. A client who requested the carrier transfer the next matter to maintain the working relationship. Click to expand.</div>
+          <div style={{fontFamily:"Georgia,serif",fontSize:19,lineHeight:1.6,color:"#555",fontStyle:"italic",marginBottom:12}}>Every engagement below produced a specific, identifiable defense outcome — not a participation narrative.</div>
+          <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#999",lineHeight:1.7}}>Exposure modeling that changed settlement authority. Novel theories that opened new lines of defense. Forensic analysis that collapsed inflated demands. Across hospitality, automotive, healthcare staffing, and single-plaintiff FEHA defense. Click to expand.</div>
         </div>
         <div className="tool-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
         {matters.map((m,i)=>(
@@ -552,10 +522,10 @@ export default function Site(){
         <div className="sh"><div className="sn">08</div><h2 className="sl2">Background</h2><div className="sln"/></div>
         <div className="about-grid">
           <div className="at2">
-            <p>I started on the plaintiff side — litigating wage-and-hour class actions at a Los Angeles firm that prosecuted meal-and-rest, overtime, and off-the-clock claims against mid-market and enterprise employers. I learned how plaintiff's counsel evaluates cases, prices risk, builds class certification motions, and approaches mediation. That perspective is now the foundation of every defense strategy I construct.</p>
-            <p>The transition to defense was deliberate. At a global litigation firm's employment practice group, I handled PAGA and wage-and-hour matters with a level of independence unusual for my seniority — building the quantitative exposure models, novel defense theories, and sampling methodologies that became standard analytical tools across the practice group. The "Two Hotels" temporal bifurcation framework, the 174-question expert deposition outline, the three-scenario penalty model — each originated from the recognition that PAGA defense requires a different kind of rigor than most employment litigation. The work drew attention: a mediator described one declaration as among the strongest he'd reviewed in his career; a client's executive requested that the carrier transfer new matters to maintain the working relationship; a partner noted that a novel liability theory I'd identified had never been raised in his decades of practice.</p>
-            <p>Earlier, I practiced intellectual property at a boutique firm — researching cutting-edge trademark and licensing issues, drafting prosecution briefs, and producing the kind of deep analytical writing that a transactional IP practice demands. That training in rigorous research, synthesis, and contractual precision translates directly to the work I do now: commission plan analysis, arbitration agreement drafting, and the statutory interpretation that PAGA defense requires.</p>
-            <p>The thread across all of it: I treat every legal problem as a system to be understood completely before a position is taken. The publications, case law analyses, and interactive tools on this site are not marketing — they are the methodology, made visible.</p>
+            <p>I started on the plaintiff side — litigating wage-and-hour class actions at a Los Angeles firm that prosecuted meal-and-rest, overtime, and off-the-clock claims against mid-market and enterprise employers. That work taught me where defendants lose cases: not at trial, but in the assumptions embedded in their exposure models, the concessions made before anyone runs the numbers, and the certification arguments they don't see coming. Every defense strategy I build starts from that perspective.</p>
+            <p>The transition to defense was deliberate. At a global litigation firm's employment practice group, I built the quantitative exposure models, novel defense theories, and sampling methodologies that became standard analytical tools across the practice group. The "Two Hotels" temporal bifurcation framework, the 174-question expert deposition outline, the three-scenario penalty model — each originated from the recognition that PAGA defense requires a different kind of rigor than most employment litigation. The results showed: a mediator described one declaration as among the strongest he'd reviewed in his career; a client's executive requested that the carrier transfer new matters to maintain the working relationship; a partner noted that a novel liability theory I'd identified had never been raised in his decades of practice.</p>
+            <p>Earlier, I practiced intellectual property at a boutique firm — trademark prosecution, licensing disputes, and the kind of close-grained statutory interpretation that transactional IP demands. The training shows in the work I do now: commission plan analysis requires the same precision as a license agreement, arbitration clause drafting requires the same attention to contingency, and PAGA's penalty architecture rewards the same instinct for structural reading.</p>
+            <p>The thread across all of it: I treat every legal problem as a system to be understood completely before a position is taken. The tools and analyses on this site exist because that is how I practice — and because the 2024 reforms created a landscape where the attorneys building the analytical frameworks now will define the field when appellate authority arrives.</p>
           </div>
           <div className="as2">
             <h4>Education</h4>
@@ -573,23 +543,36 @@ export default function Site(){
       <div ref={el=>refs.current["Resources"]=el} style={{background:"#f9f9f9",borderTop:"1px solid #eee",borderBottom:"1px solid #eee"}}>
         <section className="sec">
           <div className="sh"><div className="sn">09</div><h2 className="sl2">Resources</h2><div className="sln"/></div>
-          <p style={{fontFamily:"'Outfit',sans-serif",fontSize:13,color:"#888",marginBottom:32,marginTop:-36,maxWidth:600}}>Operational tools and reference materials for California employment defense.</p>
+          <p style={{fontFamily:"'Outfit',sans-serif",fontSize:13,color:"#888",marginBottom:32,marginTop:-36,maxWidth:600}}>Checklists, templates, and reference frameworks developed from active PAGA and class action defense — structured for carrier reporting, compliance documentation, and litigation preparation.</p>
           <div className="resource-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16,marginBottom:28}}>
-            {getAllResourceCards().map(function(r,i){
-              var inner = <div className="card-hover" style={{padding:"24px 20px",border:"1px solid #e0e0e0",background:"#fff",position:"relative",overflow:"hidden",height:"100%"}}>
-                <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:r.url?"linear-gradient(90deg,#2c3e3a,#4a7a6f)":"#2c3e3a"}}/>
+            {[
+              {title:"PAGA Notice Response Checklist",sub:"The First 72 Hours",desc:"Five-phase action plan from Day 1 through post-65-day litigation preparation. Matter information sheet, remediation plan structure, carrier notification guide, and key authorities appendix."},
+              {title:"Penalty Cap Qualification Tracker",sub:"§§ 2699(g) and 2699(h) Documentation",desc:"Two-track checklist for the 15% and 30% caps with statutory citations. Common documentation failures, 10-tab evidence assembly guide, and dollar-impact worksheet."},
+              {title:"Pre-PAGA Compliance Audit",sub:"Self-Assessment for California Employers",desc:"24-item assessment across five compliance categories with three industry-specific addenda. Scored output with remediation priority matrix and 90-day implementation timeline."},
+              {title:"Three-Scenario Exposure Template",sub:"Carrier-Ready Reporting Format",desc:"Structured template for presenting plaintiff maximum, data-driven realistic, and defense best case scenarios. Per-category breakdown, penalty cap impact analysis, and settlement authority format."},
+              {title:"Cure Proposal Framework",sub:"Employers Under 100 Employees",desc:"Step-by-step guide to the 33-day cure proposal process under § 2699.3. Sample proposal structure, LWDA filing procedures, cure conference preparation, and post-cure documentation."},
+              {title:"Regular Rate Audit Worksheet",sub:"Ferra and Alvarado Exposure",desc:"Calculating correct regular rates across compensation types — commissions, flat-sum bonuses, piece-rate, shift differentials. Side-by-side comparison with per-employee underpayment quantification."},
+              {title:"Derivative Cascade Reference",sub:"Naranjo Stacking — Pre- and Post-Reform",desc:"Visual reference mapping how a single meal period violation generates up to four penalty streams. Pre-reform full cascade and post-reform § 2699(i) anti-stacking limitations."},
+              {title:"Arbitration Agreement Checklist",sub:"Post-Adolph, Post-Hohenshelt",desc:"14-point review protocol. PAGA splitting provision analysis, poison pill identification, Iskanian waiver check, fee payment compliance, and Hohenshelt-responsive language."},
+              {title:"Wage Statement Compliance Matrix",sub:"Nine Elements of § 226(a)",desc:"Element-by-element compliance guide with common deficiency patterns, risk ratings, Naranjo derivative exposure, and remediation steps including post-Ferra regular rate display requirements."},
+              {title:"Mediation Preparation Guide",sub:"From Exposure Model to Settlement Authority",desc:"Three-scenario exposure presentation, penalty cap documentation package assembly, plaintiff demand rebuttal framework, carrier authority recommendation format, and Moniz requirements."},
+              {title:"Early Evaluation Conference Playbook",sub:"Maximizing § 2699.3(f)",desc:"Strategic guide to the post-reform EEC process. Confidential statement drafting, cure identification strategy, neutral evaluator preparation, and post-conference positioning."},
+              {title:"2024 Reform Quick Reference",sub:"AB 2288 / SB 92 — Defense Provisions",desc:"Single-page reference covering penalty caps (§§ 2699(g)-(h)), anti-stacking (§ 2699(i)), standing (§ 2699(c)(1)), manageability (§ 2699(p)), reduced penalties, weekly halving (§ 2699(o)), and cure procedures."},
+              {title:"Carrier Status Report Template",sub:"First 30 Days After Notice",desc:"Structured format for the initial carrier report: matter summary, three-scenario exposure analysis, defense strategy recommendation, litigation budget estimate, and early resolution assessment."},
+              {title:"Expert Deposition Framework",sub:"Statistical Sampling Challenges",desc:"Six-domain deposition outline targeting plaintiff's sampling expert: population definition, sample selection, violation definition, paid premiums, confidence intervals, and affirmative defense accommodation."},
+              {title:"Commission Plan Audit Checklist",sub:"Sciborski Forfeiture and § 2751 Compliance",desc:"Timing analysis framework for commission payment structures. Identifies forfeiture exposure for departed employees with pending deals, § 2751 written agreement requirements, and regular rate inclusion methodology."},
+              {title:"Manageability Motion Framework",sub:"Scope Limitation Under § 2699(p) and Estrada",desc:"Template for pre-trial manageability motions. Multi-worksite analysis, job classification variation mapping, individualized proof identification, and scope limitation order language."},
+            ].map((r,i) => (
+              <div key={i} className="card-hover" style={{padding:"24px 20px",border:"1px solid #e0e0e0",background:"#fff",position:"relative",overflow:"hidden"}}>
+                <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:"#2c3e3a"}}/>
                 <div style={{fontSize:14,fontWeight:700,color:"#1a1a1a",marginBottom:4,lineHeight:1.3}}>{r.title}</div>
                 <div style={{fontFamily:"'Outfit',sans-serif",fontSize:11,color:"#888",fontStyle:"italic",marginBottom:10}}>{r.sub}</div>
                 <div style={{fontFamily:"'Outfit',sans-serif",fontSize:11,lineHeight:1.7,color:"#777"}}>{r.desc}</div>
-                {r.url&&<div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:"#2c3e3a",marginTop:12}}>View Resource →</div>}
-              </div>;
-              return r.url
-                ? <Link key={i} href={r.url} style={{textDecoration:"none",display:"block"}}>{inner}</Link>
-                : <div key={i}>{inner}</div>;
-            })}
+              </div>
+            ))}
           </div>
           <div style={{maxWidth:480,margin:"0 auto",textAlign:"center"}}>
-            <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#888",marginBottom:8}}>Resources marked with → are available to view. Contact to request the remaining resources.</div>
+            <div style={{fontFamily:"'Outfit',sans-serif",fontSize:12,color:"#888",marginBottom:8}}>Contact to request any of these resources.</div>
             <button onClick={()=>go("Contact")} style={{fontFamily:"'Outfit',sans-serif",fontSize:11,fontWeight:600,letterSpacing:2,textTransform:"uppercase",padding:"12px 24px",background:"#2c3e3a",color:"#fff",border:"none",cursor:"pointer",whiteSpace:"nowrap"}}>Get in Touch</button>
           </div>
         </section>
@@ -682,4 +665,3 @@ export default function Site(){
     </div>
   );
 }
-
