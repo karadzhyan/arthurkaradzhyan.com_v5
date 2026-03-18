@@ -37,8 +37,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" style={{ scrollBehavior: 'smooth', scrollPaddingTop: '80px' }}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg" sizes="any" />
         <link
           rel="preconnect"
           href="https://fonts.googleapis.com"
@@ -115,18 +115,18 @@ export default function RootLayout({ children }) {
               "@type": "WebSite",
               "name": "Arthur Karadzhyan — Employment Defense Attorney",
               "url": "https://www.arthurkaradzhyan.com",
-              "description": "Analytical platform for California employment defense. Interactive PAGA tools, case law analyses, industry profiles, and defense publications.",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://www.arthurkaradzhyan.com/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
+              "description": "Analytical platform for California employment defense. Interactive PAGA tools, case law analyses, industry profiles, and defense publications."
             }),
           }}
         />
       </head>
       <body style={{ margin: 0, padding: 0, boxSizing: 'border-box' }}>
-        {children}
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <div id="main-content">
+          {children}
+        </div>
       </body>
     </html>
   );

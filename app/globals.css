@@ -5,6 +5,10 @@
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 ::selection{background:#2c3e3a;color:#fff}
 
+/* Skip link for accessibility */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:12px 24px;background:#2c3e3a;color:#fff;font-family:'Outfit',sans-serif;font-size:12px;letter-spacing:2px;text-decoration:none;text-transform:uppercase}
+.skip-link:focus{position:fixed;left:16px;top:16px;width:auto;height:auto;overflow:visible}
+
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes grow{from{width:0;opacity:0}to{width:48px;opacity:1}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
