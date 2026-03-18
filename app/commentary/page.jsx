@@ -28,29 +28,31 @@ export default function CommentaryIndex() {
     <div className="page-wrap">
       <SiteNav current="Commentary" />
 
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '80px 48px 120px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 12 }}>
-          <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 48, fontWeight: 300, color: '#2c3e3a', opacity: 0.18, lineHeight: 1 }}>—</div>
-          <h1 style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: 5, textTransform: 'uppercase', color: '#2c3e3a', margin: 0 }}>Commentary</h1>
-          <div style={{ flex: 1, height: 1, background: '#ddd' }} />
+      <div className="page-header">
+        <div className="page-header-inner">
+          <div className="page-label">Analysis</div>
+          <h1 className="page-title">Commentary</h1>
+          <p className="page-desc">
+            Timely analysis of California employment law developments, pending
+            Supreme Court decisions, and defense strategy updates.
+          </p>
         </div>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#888', lineHeight: 1.7, marginBottom: 48 }}>
-          Timely analysis of California employment law developments, pending Supreme Court decisions, and defense strategy updates.
-        </p>
+      </div>
 
+      <div className="page-body" style={{ maxWidth: 800 }}>
         {sorted.map(function(item) {
           return (
-            <Link key={item.slug} href={'/commentary/' + item.slug} style={{ textDecoration: 'none', display: 'block', padding: '28px 0', borderBottom: '1px solid #eee' }}>
-              <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
-                <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, fontWeight: 500, color: '#999', minWidth: 80, flexShrink: 0, paddingTop: 4 }}>
+            <Link key={item.slug} href={'/commentary/' + item.slug} className="commentary-item">
+              <div className="commentary-row">
+                <div className="commentary-date">
                   {formatShort(item.date)}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.35, marginBottom: 8 }}>{item.title}</div>
-                  <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#888', lineHeight: 1.7 }}>{item.summary}</div>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 10 }}>
+                <div className="commentary-body">
+                  <div className="commentary-title">{item.title}</div>
+                  <div className="commentary-summary">{item.summary}</div>
+                  <div className="commentary-tags">
                     {item.tags && item.tags.map(function(tag, j) {
-                      return <span key={j} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 8, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#2c3e3a', padding: '2px 6px', background: '#f0f5f4' }}>{tag}</span>;
+                      return <span key={j} className="commentary-tag">{tag}</span>;
                     })}
                   </div>
                 </div>
