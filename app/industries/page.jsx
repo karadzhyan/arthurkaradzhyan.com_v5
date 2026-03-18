@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { getIndustryIcon } from '@/components/Icons';
 
 export var metadata = {
   title: 'Industry Intelligence — PAGA Defense by Sector | Arthur Karadzhyan',
@@ -50,6 +51,7 @@ export default function IndustriesIndex() {
                 href={'/industries/' + ind.slug}
                 className="industry-index-card"
               >
+                {(function() { var IndIcon = getIndustryIcon(ind.name); return <div className="industry-index-icon"><IndIcon size={28} color="#2c3e3a" /></div>; })()}
                 <div className="industry-index-count">
                   {ind.issues.length} Exposure Categories
                 </div>

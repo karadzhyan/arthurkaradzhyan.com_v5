@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { tools } from '@/data/tools';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { getToolIcon } from '@/components/Icons';
 
 export var metadata = {
   title: 'Interactive Tools — PAGA Defense Analytics | Arthur Karadzhyan',
@@ -40,6 +41,7 @@ export default function ToolsIndex() {
                 href={'/tools/' + tool.slug}
                 className="tool-index-card"
               >
+                {(function() { var ToolIcon = getToolIcon(tool.component); return <div className="tool-index-icon"><ToolIcon size={28} color="#2c3e3a" /></div>; })()}
                 <div className="tool-index-id">{String(tool.id + 1).padStart(2, '0')}</div>
                 <h2 className="tool-index-name">{tool.name}</h2>
                 <div className="tool-index-sub">{tool.sub}</div>

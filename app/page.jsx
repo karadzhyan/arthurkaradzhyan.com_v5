@@ -11,6 +11,12 @@ import { industries } from "@/data/industries";
 import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import {
+  IconUser, IconBook, IconGavel, IconWrench, IconBuilding, IconBriefcase, IconPen,
+  IconPhone, IconFileText, IconClipboard, IconFolder,
+  IconBarChart, IconTrendUp, IconScale,
+  getToolIcon, getIndustryIcon,
+} from "@/components/Icons";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -28,13 +34,22 @@ export default function HomePage() {
     return function () { observer.disconnect(); };
   }, []);
 
+  var timelineData = [
+    { time: "Call", desc: "Scope & deadlines", Icon: IconPhone },
+    { time: "24 hrs", desc: "Preliminary assessment", Icon: IconFileText },
+    { time: "48 hrs", desc: "Action plan with citations", Icon: IconClipboard },
+    { time: "2 wks", desc: "Carrier status report", Icon: IconFolder },
+  ];
+
   return (
     <div className="page-wrap">
       <SiteNav />
 
       {/* HERO */}
       <section className="home-hero">
-        <div className="home-hero-panel" />
+        <div className="home-hero-panel">
+          <img src="/hero-pattern.svg" alt="" className="home-hero-panel-img" aria-hidden="true" />
+        </div>
         <div className="home-hero-content">
           <div className="home-hero-stat">10,098</div>
           <div className="home-hero-stat-label">
@@ -71,13 +86,18 @@ export default function HomePage() {
       <div className="home-stats" ref={statsRef}>
         <div className="home-stats-inner">
           {[
-            { num: "10098", suf: "", label: "PAGA Notices Filed\nin California (2025)" },
-            { num: "85", suf: "%", label: "Maximum Penalty\nReduction Under Reforms" },
-            { num: "33", suf: "", label: "Days — Shortest\nDeadline After Notice" },
-            { num: "3", suf: "", label: "Supreme Court PAGA\nCases Pending" },
+            { num: "10098", suf: "", label: "PAGA Notices Filed\nin California (2025)", Icon: IconBarChart },
+            { num: "85", suf: "%", label: "Maximum Penalty\nReduction Under Reforms", Icon: IconTrendUp },
+            { num: "33", suf: "", label: "Days — Shortest\nDeadline After Notice", Icon: null },
+            { num: "3", suf: "", label: "Supreme Court PAGA\nCases Pending", Icon: IconScale },
           ].map(function (s, i) {
             return (
               <div className="home-stat" key={i}>
+                {s.Icon && (
+                  <div className="home-stat-icon">
+                    <s.Icon size={20} color="#8aa39e" />
+                  </div>
+                )}
                 <div className="home-stat-num">
                   <Counter end={s.num} suffix={s.suf} started={statsVisible} />
                 </div>
@@ -95,6 +115,7 @@ export default function HomePage() {
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">01</span>
+          <div className="home-section-icon"><IconUser size={18} color="#2c3e3a" /></div>
           <h2 className="home-section-title">About</h2>
           <div className="home-section-line" />
         </div>
@@ -141,6 +162,7 @@ export default function HomePage() {
         <section className="home-section">
           <div className="home-section-header">
             <span className="home-section-num dark">02</span>
+            <div className="home-section-icon"><IconBook size={18} color="#8aa39e" /></div>
             <h2 className="home-section-title dark">Insights & Publications</h2>
             <div className="home-section-line dark" />
           </div>
@@ -179,6 +201,7 @@ export default function HomePage() {
         <section className="home-section">
           <div className="home-section-header-row">
             <div className="home-section-header-inline">
+              <div className="home-section-icon"><IconPen size={16} color="#2c3e3a" /></div>
               <div className="home-section-label">Recent Commentary</div>
               <div className="home-section-line short" />
             </div>
@@ -221,6 +244,7 @@ export default function HomePage() {
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">03</span>
+          <div className="home-section-icon"><IconGavel size={18} color="#2c3e3a" /></div>
           <h2 className="home-section-title">Case Law Laboratory</h2>
           <div className="home-section-line" />
         </div>
@@ -252,6 +276,7 @@ export default function HomePage() {
         <section className="home-section">
           <div className="home-section-header">
             <span className="home-section-num dark">04</span>
+            <div className="home-section-icon"><IconWrench size={18} color="#8aa39e" /></div>
             <h2 className="home-section-title dark">Tools</h2>
             <div className="home-section-line dark" />
           </div>
@@ -261,12 +286,16 @@ export default function HomePage() {
           </p>
           <div className="home-tools-grid">
             {tools.map(function (tool) {
+              var ToolIcon = getToolIcon(tool.component);
               return (
                 <Link
                   key={tool.slug}
                   href={"/tools/" + tool.slug}
                   className="home-tool-card"
                 >
+                  <div className="home-tool-icon">
+                    <ToolIcon size={20} color="#8aa39e" />
+                  </div>
                   <div className="home-tool-name">{tool.name}</div>
                   <div className="home-tool-sub">{tool.sub}</div>
                 </Link>
@@ -283,6 +312,7 @@ export default function HomePage() {
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">05</span>
+          <div className="home-section-icon"><IconBuilding size={18} color="#2c3e3a" /></div>
           <h2 className="home-section-title">Industry Intelligence</h2>
           <div className="home-section-line" />
         </div>
@@ -292,6 +322,7 @@ export default function HomePage() {
         </p>
         <div className="home-industries-grid" style={{ borderColor: '#eee' }}>
           {industries.map(function (ind) {
+            var IndIcon = getIndustryIcon(ind.name);
             return (
               <Link
                 key={ind.slug}
@@ -299,6 +330,9 @@ export default function HomePage() {
                 className="home-industry-card"
                 style={{ background: '#fafafa', borderColor: '#eee' }}
               >
+                <div className="home-industry-icon-wrap">
+                  <IndIcon size={24} color="#2c3e3a" />
+                </div>
                 <div className="home-industry-count" style={{ color: 'rgba(44,62,58,.4)' }}>
                   {ind.issues.length} Exposure Categories
                 </div>
@@ -318,6 +352,7 @@ export default function HomePage() {
         <section className="home-section">
           <div className="home-section-header">
             <span className="home-section-num">06</span>
+            <div className="home-section-icon"><IconBriefcase size={18} color="#2c3e3a" /></div>
             <h2 className="home-section-title">Select Matters</h2>
             <div className="home-section-line" />
           </div>
@@ -395,20 +430,17 @@ export default function HomePage() {
                 What Happens When You Call
               </div>
               <div className="home-contact-timeline">
-                {[
-                  ["Call", "Scope & deadlines"],
-                  ["24 hrs", "Preliminary assessment"],
-                  ["48 hrs", "Action plan with citations"],
-                  ["2 wks", "Carrier status report"],
-                ].map(function (pair, i) {
+                {timelineData.map(function (step, i) {
                   return (
                     <div key={i} className="home-contact-timeline-step">
-                      <div className="home-contact-timeline-dot" />
+                      <div className="home-contact-timeline-icon">
+                        <step.Icon size={16} color="#8aa39e" />
+                      </div>
                       <div className="home-contact-timeline-time">
-                        {pair[0]}
+                        {step.time}
                       </div>
                       <div className="home-contact-timeline-desc">
-                        {pair[1]}
+                        {step.desc}
                       </div>
                     </div>
                   );
