@@ -370,9 +370,13 @@ export default function ResourcePageClient({slug}) {
 
   if (!res) {
     return (
-      <div style={{fontFamily:"'Outfit',sans-serif",padding:"120px 48px",textAlign:"center"}}>
-        <h1>Resource Not Found</h1>
-        <Link href="/#Resources" style={{color:"#2c3e3a"}}>Back to all resources</Link>
+      <div className="page-wrap">
+        <SiteNav current="Resources" />
+        <div className="not-found">
+          <h1>Resource Not Found</h1>
+          <Link href="/resources">Back to all resources</Link>
+        </div>
+        <SiteFooter />
       </div>
     );
   }

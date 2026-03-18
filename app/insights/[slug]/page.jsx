@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -24,9 +25,9 @@ export default function InsightPage({ params }) {
     return (
       <div className="page-wrap">
         <SiteNav current="Insights" />
-        <div style={{ fontFamily: "'Outfit',sans-serif", padding: '120px 48px', textAlign: 'center' }}>
+        <div className="not-found">
           <h1>Publication Not Found</h1>
-          <Link href="/insights" style={{ color: '#2c3e3a' }}>Back to all publications</Link>
+          <Link href="/insights">Back to all publications</Link>
         </div>
         <SiteFooter />
       </div>
@@ -37,56 +38,54 @@ export default function InsightPage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Insights', url: 'https://www.arthurkaradzhyan.com/insights' },
+        { name: insight.title, url: 'https://www.arthurkaradzhyan.com/insights/' + params.slug }
+      ]} />
       <SiteNav current="Insights" />
 
-      <article style={{ maxWidth: 720, margin: '0 auto', padding: '80px 48px 120px' }}>
+      <article className="article-wrap">
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-          <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 3, textTransform: 'uppercase', color: '#2c3e3a' }}>
+          <span className="article-label" style={{ marginBottom: 0 }}>
             {insight.tag}
           </span>
           {insight.badge && (
-            <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 8, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', padding: '2px 6px', background: '#2c3e3a', color: '#fff' }}>
-              {insight.badge}
-            </span>
+            <span className="article-badge">{insight.badge}</span>
           )}
         </div>
 
-        <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 700, lineHeight: 1.25, marginBottom: 20, letterSpacing: -0.5 }}>
-          {insight.title}
-        </h1>
-
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 15, lineHeight: 1.8, color: '#888', marginBottom: 40, borderBottom: '1px solid #eee', paddingBottom: 40 }}>
-          {insight.desc}
-        </p>
+        <h1 className="article-title">{insight.title}</h1>
+        <p className="article-desc">{insight.desc}</p>
 
         {insight.tool && (
-          <div style={{ padding: '12px 16px', background: '#f0f5f4', border: '1px solid #e0e8e6', marginBottom: 40, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 9, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#2c3e3a' }}>Interactive Tool</span>
-            <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#888' }}>{insight.tool}</span>
-            <Link href="/tools" style={{ marginLeft: 'auto', color: '#2c3e3a', textDecoration: 'none', fontFamily: "'Outfit',sans-serif", fontSize: 11 }}>
+          <div className="article-tool-callout">
+            <span className="article-tool-label">Interactive Tool</span>
+            <span className="article-tool-name">{insight.tool}</span>
+            <Link href="/tools" className="article-tool-link">
               All Tools →
             </Link>
           </div>
         )}
 
-        <div style={{ fontSize: 17, lineHeight: 2, color: '#444' }}>
+        <div className="article-body">
           {paragraphs.map(function(p, i) {
-            return <p key={i} style={{ marginBottom: 24 }}>{p}</p>;
+            return <p key={i}>{p}</p>;
           })}
         </div>
 
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, color: '#bbb', fontStyle: 'italic', marginTop: 60, paddingTop: 24, borderTop: '1px solid #eee' }}>
+        <div className="article-disclaimer">
           For illustrative purposes only. This publication does not constitute legal advice. Prior results do not guarantee a similar outcome.
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 40, paddingTop: 24, borderTop: '1px solid #eee' }}>
+        <div className="article-nav">
           {insight.index > 0 ? (
-            <Link href={'/insights/' + insights[insight.index - 1].slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#2c3e3a', textDecoration: 'none' }}>
+            <Link href={'/insights/' + insights[insight.index - 1].slug} className="article-nav-link">
               ← Previous
             </Link>
           ) : <span />}
           {insight.index < insights.length - 1 ? (
-            <Link href={'/insights/' + insights[insight.index + 1].slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#2c3e3a', textDecoration: 'none' }}>
+            <Link href={'/insights/' + insights[insight.index + 1].slug} className="article-nav-link">
               Next →
             </Link>
           ) : <span />}

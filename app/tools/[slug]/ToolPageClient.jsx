@@ -32,9 +32,9 @@ export default function ToolPageClient({ slug }) {
     return (
       <div className="page-wrap">
         <SiteNav current="Tools" />
-        <div style={{ fontFamily: "'Outfit',sans-serif", padding: '120px 48px', textAlign: 'center' }}>
+        <div className="not-found">
           <h1>Tool Not Found</h1>
-          <Link href="/tools" style={{ color: '#2c3e3a' }}>Back to all tools</Link>
+          <Link href="/tools">Back to all tools</Link>
         </div>
         <SiteFooter />
       </div>
@@ -47,46 +47,53 @@ export default function ToolPageClient({ slug }) {
     <div className="page-wrap">
       <SiteNav current="Tools" />
 
-      {/* HEADER */}
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '60px 48px 0' }}>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 4, textTransform: 'uppercase', color: '#2c3e3a', marginBottom: 8 }}>
-          Interactive Tool
-        </div>
-        <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 36px)', fontWeight: 700, lineHeight: 1.25, marginBottom: 12 }}>
-          {tool.name}
-        </h1>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 14, lineHeight: 1.8, color: '#888', marginBottom: 8, maxWidth: 700 }}>
-          {tool.desc}
-        </p>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#bbb', marginBottom: 24 }}>
+      <div className="tool-detail-header">
+        <div className="article-label">Interactive Tool</div>
+        <h1 className="article-title">{tool.name}</h1>
+        <p className="tool-detail-desc">{tool.desc}</p>
+        <div className="tool-detail-privacy">
           All calculations run in your browser. No data is transmitted or stored.
         </div>
 
         <div
+          className="tool-detail-methodology"
           onClick={function() { setShowMethodology(!showMethodology); }}
-          style={{ padding: '12px 16px', background: '#f8faf9', border: '1px solid #e0e8e6', marginBottom: 24, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 700 }}
+          onKeyDown={function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setShowMethodology(!showMethodology);
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-expanded={showMethodology}
         >
-          <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#2c3e3a' }}>Methodology</span>
-          <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 16, color: '#2c3e3a', opacity: 0.4, transform: showMethodology ? 'rotate(45deg)' : 'rotate(0)', transition: 'transform .3s' }}>+</span>
+          <span className="tool-detail-methodology-label">Methodology</span>
+          <span
+            className="tool-detail-methodology-toggle"
+            style={{ transform: showMethodology ? 'rotate(45deg)' : 'rotate(0)' }}
+          >
+            +
+          </span>
         </div>
         {showMethodology && (
-          <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, lineHeight: 2, color: '#555', marginBottom: 32, padding: '20px 24px', background: '#f8faf9', border: '1px solid #e0e8e6', maxWidth: 700 }}>
+          <div className="tool-detail-methodology-body">
             {tool.methodology}
           </div>
         )}
 
         {(tool.relatedInsights.length > 0 || tool.relatedCases.length > 0) && (
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
+          <div className="tool-detail-related">
             {tool.relatedInsights.map(function(s, i) {
               return (
-                <Link key={'i' + i} href={'/insights/' + s} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#2c3e3a', textDecoration: 'none', padding: '6px 12px', border: '1px solid #2c3e3a' }}>
+                <Link key={'i' + i} href={'/insights/' + s} className="tool-detail-related-link primary">
                   Related Publication →
                 </Link>
               );
             })}
             {tool.relatedCases.map(function(s, i) {
               return (
-                <Link key={'c' + i} href={'/cases/' + s} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#999', textDecoration: 'none', padding: '6px 12px', border: '1px solid #eee' }}>
+                <Link key={'c' + i} href={'/cases/' + s} className="tool-detail-related-link muted">
                   Related Case →
                 </Link>
               );
@@ -95,24 +102,20 @@ export default function ToolPageClient({ slug }) {
         )}
       </div>
 
-      {/* TOOL */}
-      <div style={{ background: 'linear-gradient(160deg,#2c3e3a,#1e2d2a)', padding: '48px 48px 60px', borderTop: '1px solid #eee' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+      <div className="tool-detail-band">
+        <div className="tool-detail-band-inner">
           {ToolComponent && <ToolComponent />}
         </div>
       </div>
 
-      {/* OTHER TOOLS NAV */}
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 48px 80px' }}>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 4, textTransform: 'uppercase', color: '#2c3e3a', marginBottom: 16 }}>
-          Other Tools
-        </div>
-        <div className="home-tools-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+      <div className="tool-other-section">
+        <div className="tool-other-label">Other Tools</div>
+        <div className="tool-other-grid">
           {tools.filter(function(t) { return t.slug !== slug; }).map(function(t) {
             return (
-              <Link key={t.slug} href={'/tools/' + t.slug} style={{ padding: '14px 16px', border: '1px solid #eee', textDecoration: 'none', transition: 'all .2s', display: 'block' }}>
-                <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, fontWeight: 600, color: '#1a1a1a', marginBottom: 2 }}>{t.name}</div>
-                <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 9, color: '#999' }}>{t.sub}</div>
+              <Link key={t.slug} href={'/tools/' + t.slug} className="tool-other-card">
+                <div className="tool-other-name">{t.name}</div>
+                <div className="tool-other-sub">{t.sub}</div>
               </Link>
             );
           })}
@@ -120,7 +123,7 @@ export default function ToolPageClient({ slug }) {
       </div>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 48px 48px' }}>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, color: '#bbb', fontStyle: 'italic', paddingTop: 24, borderTop: '1px solid #eee' }}>
+        <div className="article-disclaimer" style={{ marginTop: 0 }}>
           For illustrative purposes only. This tool does not constitute legal advice.
         </div>
       </div>

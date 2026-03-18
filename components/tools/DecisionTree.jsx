@@ -10,8 +10,8 @@ function DecisionTree(){
   const steps=[
     {q:"Have you received a PAGA notice from the LWDA?",opts:[{label:"Yes",next:1},{label:"No — I want to prepare before one arrives",terminal:"prepare"}]},
     {q:"How many calendar days ago was the PAGA notice mailed to the LWDA?",opts:[{label:"0–15 days",next:2},{label:"16–33 days",next:3},{label:"34–60 days",next:4},{label:"61–65 days",next:5},{label:"Over 65 days",next:6}]},
-    {q:"How many employees did you have in the prior 12 months?",opts:[{label:"Under 100",terminal:"early_small"},{label:"100 or more",terminal:"early_large"}]},
-    {q:"How many employees did you have in the prior 12 months?",opts:[{label:"Under 100 — cure deadline is imminent",terminal:"cure_urgent"},{label:"100 or more",terminal:"mid_large"}]},
+    {q:"How many employees did you have in the prior 12 months? (You are still within the 33-day cure window.)",opts:[{label:"Under 100 — eligible for cure proposal",terminal:"early_small"},{label:"100 or more — not eligible for cure",terminal:"early_large"}]},
+    {q:"How many employees did you have in the prior 12 months? (The 33-day cure deadline is approaching.)",opts:[{label:"Under 100 — cure deadline is imminent",terminal:"cure_urgent"},{label:"100 or more — focus on 60-day remediation",terminal:"mid_large"}]},
     {q:"Have you already begun remediation steps (policy revisions, makeup payments, training)?",opts:[{label:"Yes — documenting everything",terminal:"remediation_active"},{label:"No — haven't started",terminal:"remediation_urgent"},{label:"Partially — some steps taken but not documented",terminal:"remediation_undocumented"}]},
     {q:"Has the LWDA indicated whether it will investigate?",opts:[{label:"LWDA declined or no response",terminal:"pre_litigation"},{label:"LWDA is investigating",terminal:"lwda_investigating"}]},
     {q:"Has the plaintiff filed a civil complaint?",opts:[{label:"Yes",next:7},{label:"Not yet",terminal:"waiting_complaint"}]},

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { commentary, getCommentaryBySlug, getAllCommentarySlugs } from '@/data/commentary';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -32,9 +33,13 @@ export default function CommentaryPage({ params }) {
 
   if (!item) {
     return (
-      <div style={{ fontFamily: "'Outfit',sans-serif", padding: '120px 48px', textAlign: 'center' }}>
-        <h1>Commentary Not Found</h1>
-        <Link href="/commentary" style={{ color: '#2c3e3a' }}>Back to all commentary</Link>
+      <div className="page-wrap">
+        <SiteNav current="Commentary" />
+        <div className="not-found">
+          <h1>Commentary Not Found</h1>
+          <Link href="/commentary">Back to all commentary</Link>
+        </div>
+        <SiteFooter />
       </div>
     );
   }
@@ -43,57 +48,50 @@ export default function CommentaryPage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Commentary', url: 'https://www.arthurkaradzhyan.com/commentary' },
+        { name: item.title, url: 'https://www.arthurkaradzhyan.com/commentary/' + params.slug }
+      ]} />
       <SiteNav current="Commentary" />
 
-      <article style={{ maxWidth: 680, margin: '0 auto', padding: '80px 48px 120px' }}>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 500, letterSpacing: 3, textTransform: 'uppercase', color: '#999', marginBottom: 16 }}>
-          {formatDate(item.date)}
-        </div>
+      <article className="article-wrap narrow">
+        <div className="article-label-muted">{formatDate(item.date)}</div>
 
-        <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 34px)', fontWeight: 700, lineHeight: 1.3, marginBottom: 20, letterSpacing: -0.3 }}>
+        <h1 className="article-title" style={{ fontSize: 'clamp(24px, 3.5vw, 34px)' }}>
           {item.title}
         </h1>
 
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 14, lineHeight: 1.8, color: '#888', marginBottom: 40, paddingBottom: 32, borderBottom: '1px solid #eee' }}>
-          {item.summary}
-        </p>
+        <p className="article-desc">{item.summary}</p>
 
-        <div style={{ fontSize: 16, lineHeight: 2, color: '#444' }}>
+        <div className="article-body sm">
           {paragraphs.map(function(p, i) {
             return <p key={i} style={{ marginBottom: 20 }}>{p}</p>;
           })}
         </div>
 
-        {/* TAGS */}
         {item.tags && item.tags.length > 0 && (
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 40, paddingTop: 24, borderTop: '1px solid #eee' }}>
+          <div className="article-tags">
             {item.tags.map(function(tag, i) {
-              return (
-                <span key={i} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 9, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#2c3e3a', padding: '4px 10px', background: '#f0f5f4', border: '1px solid #e0e8e6' }}>
-                  {tag}
-                </span>
-              );
+              return <span key={i} className="article-tag">{tag}</span>;
             })}
           </div>
         )}
 
-        {/* RELATED */}
         {((item.relatedInsights && item.relatedInsights.length > 0) || (item.relatedCases && item.relatedCases.length > 0)) && (
-          <div style={{ marginTop: 24 }}>
-            <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 9, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#999', marginBottom: 10 }}>
-              Related
-            </div>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="article-related">
+            <div className="article-related-label">Related</div>
+            <div className="article-related-links">
               {item.relatedInsights && item.relatedInsights.map(function(slug, i) {
                 return (
-                  <Link key={'i' + i} href={'/insights/' + slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#2c3e3a', textDecoration: 'none', padding: '8px 14px', border: '1px solid #2c3e3a' }}>
+                  <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">
                     Full Publication →
                   </Link>
                 );
               })}
               {item.relatedCases && item.relatedCases.map(function(slug, i) {
                 return (
-                  <Link key={'c' + i} href={'/cases/' + slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#999', textDecoration: 'none', padding: '8px 14px', border: '1px solid #eee' }}>
+                  <Link key={'c' + i} href={'/cases/' + slug} className="article-related-link muted">
                     Case Analysis →
                   </Link>
                 );
@@ -102,20 +100,18 @@ export default function CommentaryPage({ params }) {
           </div>
         )}
 
-        {/* DISCLAIMER */}
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, color: '#bbb', fontStyle: 'italic', marginTop: 48, paddingTop: 24, borderTop: '1px solid #eee' }}>
+        <div className="article-disclaimer">
           This commentary is for informational purposes only and does not constitute legal advice.
         </div>
 
-        {/* PREV/NEXT */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 32, paddingTop: 24, borderTop: '1px solid #eee' }}>
+        <div className="article-nav">
           {item.index > 0 ? (
-            <Link href={'/commentary/' + commentary[item.index - 1].slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#2c3e3a', textDecoration: 'none' }}>
+            <Link href={'/commentary/' + commentary[item.index - 1].slug} className="article-nav-link">
               ← Previous
             </Link>
           ) : <span />}
           {item.index < commentary.length - 1 ? (
-            <Link href={'/commentary/' + commentary[item.index + 1].slug} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 11, color: '#2c3e3a', textDecoration: 'none' }}>
+            <Link href={'/commentary/' + commentary[item.index + 1].slug} className="article-nav-link">
               Next →
             </Link>
           ) : <span />}

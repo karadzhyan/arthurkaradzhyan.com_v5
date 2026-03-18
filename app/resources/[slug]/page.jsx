@@ -1,4 +1,5 @@
 import { getBuiltResourceSlugs, getResourceBySlug } from '@/data/resources';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import ResourcePageClient from './ResourcePageClient';
 
 export function generateStaticParams() {
@@ -20,5 +21,17 @@ export function generateMetadata({ params }) {
 }
 
 export default function ResourcePage({ params }) {
-  return <ResourcePageClient slug={params.slug} />;
+  var res = getResourceBySlug(params.slug);
+  return (
+    <>
+      {res && (
+        <BreadcrumbSchema items={[
+          { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+          { name: 'Resources', url: 'https://www.arthurkaradzhyan.com/resources' },
+          { name: res.title, url: 'https://www.arthurkaradzhyan.com/resources/' + params.slug }
+        ]} />
+      )}
+      <ResourcePageClient slug={params.slug} />
+    </>
+  );
 }

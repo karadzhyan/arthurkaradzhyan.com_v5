@@ -12,10 +12,11 @@ export default function SiteFooter() {
         <div className="site-footer-top">
           {[
             { label: "About", href: "/about" },
-            { label: "Tools", href: "/tools" },
             { label: "Insights", href: "/insights" },
-            { label: "Industries", href: "/industries" },
             { label: "Cases", href: "/cases" },
+            { label: "Tools", href: "/tools" },
+            { label: "Industries", href: "/industries" },
+            { label: "Matters", href: "/matters" },
             { label: "Commentary", href: "/commentary" },
             { label: "Resources", href: "/resources" },
             { label: "Contact", href: "/#contact" },

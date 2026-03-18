@@ -4,6 +4,8 @@ import S from "../S";
 
 function WageStmtCheck(){
   const [checks,setChecks]=useState({});
+  const [empCount,setEmpCount]=useState(50);
+  const [ppCount,setPpCount]=useState(26);
 
   const elements=[
     {id:"gross",num:"(1)",label:"Gross wages earned",desc:"Total compensation earned during the pay period, before deductions. Must include overtime, bonuses, commissions, and meal/rest premiums (post-Naranjo).",risk:"high",note:"If meal/rest premiums are missing, this triggers an independent § 226 violation per Naranjo — separate from the underlying meal/rest violation."},
@@ -24,7 +26,6 @@ function WageStmtCheck(){
   const unchecked=elements.filter(e=>checks[e.id]===undefined);
   const riskColors={high:"#dc3545",medium:"#CC8800",low:"#198754"};
 
-  const empCount=50;const ppCount=26;
   const penaltyPerDeficient=100; // subsequent rate
   const maxPerEmployee=4000;
   const estimatedPenalty=Math.min(deficient.length*empCount*ppCount*penaltyPerDeficient, empCount*maxPerEmployee);
@@ -35,6 +36,16 @@ function WageStmtCheck(){
       <S fontSize={10} fontWeight={500} letterSpacing={4} textTransform="uppercase" color="#2c3e3a" marginBottom={8}>Interactive · Wage Statement Compliance Checker</S>
       <S fontSize={12} color="#999" marginBottom={24}>The nine elements required by Labor Code § 226(a). Click each item to mark it as compliant or deficient. Deficient items generate independent PAGA penalty exposure at $50/$100 per employee per pay period (max $4,000 per employee).</S>
 
+      <div style={{display:"flex",gap:24,marginBottom:20,flexWrap:"wrap"}}>
+        <div>
+          <S fontSize={9} fontWeight={600} letterSpacing={2} textTransform="uppercase" color="#2c3e3a" marginBottom={4}>Aggrieved Employees</S>
+          <input type="number" min={1} max={5000} value={empCount} onChange={e=>setEmpCount(Math.max(1,parseInt(e.target.value)||1))} style={{fontFamily:"'Outfit',sans-serif",fontSize:14,padding:"8px 12px",border:"1px solid #e0e0e0",width:100,fontVariantNumeric:"tabular-nums"}} aria-label="Number of aggrieved employees"/>
+        </div>
+        <div>
+          <S fontSize={9} fontWeight={600} letterSpacing={2} textTransform="uppercase" color="#2c3e3a" marginBottom={4}>Pay Periods</S>
+          <input type="number" min={1} max={52} value={ppCount} onChange={e=>setPpCount(Math.max(1,parseInt(e.target.value)||1))} style={{fontFamily:"'Outfit',sans-serif",fontSize:14,padding:"8px 12px",border:"1px solid #e0e0e0",width:80,fontVariantNumeric:"tabular-nums"}} aria-label="Number of pay periods"/>
+        </div>
+      </div>
       <S fontSize={11} fontWeight={500} color="#555" marginBottom={12}>Mark each element as compliant or deficient using the buttons.</S>
 
       <div style={{marginBottom:24}}>
@@ -85,7 +96,7 @@ function WageStmtCheck(){
         <div style={{padding:16,background:"#fafafa",textAlign:"center",borderTop:"3px solid #2c3e3a"}}>
           <S fontSize={10} fontWeight={600} color="#999" marginBottom={4}>Est. § 226 Penalty</S>
           <S fontSize={20} fontWeight={700} color="#2c3e3a">{deficient.length>0?`$${estimatedPenalty.toLocaleString()}`:"$0"}</S>
-          <S fontSize={9} color="#bbb">50 emp × 26 pp × ${penaltyPerDeficient}</S>
+          <S fontSize={9} color="#bbb">{empCount} emp × {ppCount} pp × ${penaltyPerDeficient}</S>
         </div>
       </div>
 
@@ -114,7 +125,7 @@ function WageStmtCheck(){
       </div>}
 
       <div style={{fontFamily:"'Outfit',sans-serif",fontSize:10,color:"#2c3e3a",marginBottom:8,display:"flex",alignItems:"center",gap:6,cursor:"pointer"}} onClick={()=>{const el=document.getElementById("section-insights");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}}><span style={{fontWeight:600,letterSpacing:1,textTransform:"uppercase"}}>Read the Analysis</span><span style={{color:"#999"}}>The Naranjo Cascade — see how wage statement deficiencies create derivative penalty exposure →</span></div>
-      <S fontSize={10} color="#bbb" fontStyle="italic">For illustrative purposes only. Lab. Code § 226(a)(1)-(9) (nine required elements); § 226(e) ($50 initial / $100 subsequent, max $4,000 per employee). Scienter requirement: 'knowing and intentional' violation. Naranjo v. Spectrum Security (2022) 13 Cal.5th 93 (premiums on wage statements). Estimated penalties assume 50 employees and 26 pay periods; adjust for actual population.</S>
+      <S fontSize={10} color="#bbb" fontStyle="italic">For illustrative purposes only. Lab. Code § 226(a)(1)-(9) (nine required elements); § 226(e) ($50 initial / $100 subsequent, max $4,000 per employee). Scienter requirement: 'knowing and intentional' violation. Naranjo v. Spectrum Security (2022) 13 Cal.5th 93 (premiums on wage statements). Estimated penalties based on user-configured employee count and pay periods.</S>
     </div>
   );
 }
