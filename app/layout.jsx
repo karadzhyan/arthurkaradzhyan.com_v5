@@ -1,4 +1,5 @@
 import './globals.css';
+import BackToTop from '@/components/BackToTop';
 
 export const metadata = {
   title: 'Arthur Karadzhyan | PAGA Defense · Employment Litigation · California',
@@ -127,6 +128,7 @@ export default function RootLayout({ children }) {
         <div id="main-content">
           {children}
         </div>
+        <BackToTop />
       </body>
     </html>
   );

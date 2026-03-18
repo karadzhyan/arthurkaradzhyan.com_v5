@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Counter from "@/components/Counter";
 import ContactForm from "@/components/ContactForm";
-import BackToTop from "@/components/BackToTop";
 import { insights } from "@/data/insights";
 import { caseLaw } from "@/data/caseLaw";
 import { commentary } from "@/data/commentary";
@@ -413,7 +412,6 @@ export default function HomePage() {
       </section>
 
       <SiteFooter />
-      <BackToTop />
     </div>
   );
 }
