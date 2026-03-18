@@ -7,6 +7,7 @@ function DerivativeMapper(){
   const [empCount,setEmpCount]=useState(50);
   const [ppCount,setPpCount]=useState(26);
   const [separatedPct,setSeparatedPct]=useState(30);
+  const [dailyWage,setDailyWage]=useState(200);
   const fmt=(n)=>n>=1000000?`$${(n/1000000).toFixed(2)}M`:n>=1000?`$${Math.round(n).toLocaleString()}`:`$${Math.round(n)}`;
 
   const chains={
@@ -17,7 +18,7 @@ function DerivativeMapper(){
         {code:"§ 226.7",label:"Meal Period Premium",type:"wage",amount:"1 hour at regular rate",perUnit:"per violation",calc:(e,p)=>e*p*25,note:"Premium is a WAGE per Kirby — not recoverable as PAGA penalty. But it triggers every downstream penalty.",color:"#CC8800"},
         {code:"§ 2699(f)(2)",label:"PAGA Default Penalty",type:"penalty",amount:"$200 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*200,note:"The actual PAGA penalty for the meal period violation itself. This IS recoverable.",color:"#2c3e3a"},
         {code:"§ 226(a)/(e)",label:"Wage Statement Penalty (Naranjo)",type:"penalty",amount:"$100 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*100,note:"If the premium wasn't included on the wage statement, that's an independent § 226 violation. Naranjo v. Spectrum Security (2022) 13 Cal.5th 93.",color:"#dc3545"},
-        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep)=>Math.round(e*(sep/100))*30*200,note:"If the premium wasn't paid at separation, § 203 waiting time penalties apply. Only affects separated employees. Willfulness defense available under Mamika.",color:"#8B0000"},
+        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep,dw)=>Math.round(e*(sep/100))*30*dw,note:"If the premium wasn't paid at separation, § 203 waiting time penalties apply. Only affects separated employees. Willfulness defense available under Mamika.",color:"#8B0000"},
       ]
     },
     rest:{
@@ -27,7 +28,7 @@ function DerivativeMapper(){
         {code:"§ 226.7",label:"Rest Period Premium",type:"wage",amount:"1 hour at regular rate",perUnit:"per violation",calc:(e,p)=>e*p*20,note:"Same framework as meal premiums — wage, not penalty. Triggers the same derivative chain.",color:"#CC8800"},
         {code:"§ 2699(f)(2)",label:"PAGA Default Penalty",type:"penalty",amount:"$200 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*200,note:"The PAGA penalty for the rest period violation.",color:"#2c3e3a"},
         {code:"§ 226(a)/(e)",label:"Wage Statement Penalty (Naranjo)",type:"penalty",amount:"$100 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*100,note:"If the premium wasn't itemized on the wage statement, independent § 226 violation.",color:"#dc3545"},
-        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep)=>Math.round(e*(sep/100))*30*200,note:"Applies to separated employees whose premiums weren't paid at termination.",color:"#8B0000"},
+        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep,dw)=>Math.round(e*(sep/100))*30*dw,note:"Applies to separated employees whose premiums weren't paid at termination.",color:"#8B0000"},
       ]
     },
     overtime:{
@@ -47,14 +48,14 @@ function DerivativeMapper(){
         {code:"§ 226.7",label:"Premium Underpayment (Ferra gap)",type:"wage",amount:"Difference between regular rate and base rate",perUnit:"per violation",calc:(e,p)=>e*p*15,note:"The gap between what was paid (base rate premium) and what should have been paid (regular rate premium). This is a wage, not a penalty.",color:"#CC8800"},
         {code:"§ 2699(f)(2)",label:"PAGA Default Penalty",type:"penalty",amount:"$200 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*200,note:"Penalty for the incorrect premium calculation.",color:"#2c3e3a"},
         {code:"§ 226(a)/(e)",label:"Wage Statement Penalty",type:"penalty",amount:"$100 subsequent",perUnit:"per employee/pay period",calc:(e,p)=>e*p*100,note:"If the wage statement shows a premium at the base rate instead of the regular rate, the hourly rate shown is incorrect — § 226(a)(9) requires 'all applicable hourly rates.'",color:"#dc3545"},
-        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep)=>Math.round(e*(sep/100))*30*200,note:"If the underpaid premium differential wasn't included in final pay, § 203 applies to separated employees.",color:"#8B0000"},
+        {code:"§ 203",label:"Waiting Time Penalty",type:"penalty",amount:"Up to 30 days' wages",perUnit:"per separated employee",calc:(e,p,sep,dw)=>Math.round(e*(sep/100))*30*dw,note:"If the underpaid premium differential wasn't included in final pay, § 203 applies to separated employees.",color:"#8B0000"},
       ]
     },
   };
 
   const chain=chains[trigger];
-  const totalPenalties=chain.nodes.filter(n=>n.type==="penalty").reduce((s,n)=>s+n.calc(empCount,ppCount,separatedPct),0);
-  const totalWages=chain.nodes.filter(n=>n.type==="wage").reduce((s,n)=>s+n.calc(empCount,ppCount,separatedPct),0);
+  const totalPenalties=chain.nodes.filter(n=>n.type==="penalty").reduce((s,n)=>s+n.calc(empCount,ppCount,separatedPct,dailyWage),0);
+  const totalWages=chain.nodes.filter(n=>n.type==="wage").reduce((s,n)=>s+n.calc(empCount,ppCount,separatedPct,dailyWage),0);
 
   return(
     <div style={{background:"#fff",border:"1px solid #e0e0e0",padding:"40px 40px 28px",position:"relative",overflow:"hidden",marginTop:32}}>
@@ -71,16 +72,19 @@ function DerivativeMapper(){
       </div>
 
       {/* PARAMETERS */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:16,marginBottom:28}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:16,marginBottom:28}}>
         <div><S fontSize={11} fontWeight={500} color="#555" marginBottom={6}>Employees</S>
           <input type="range" min={5} max={300} value={empCount} onChange={e=>setEmpCount(+e.target.value)} style={{width:"100%",accentColor:"#2c3e3a"}}/>
           <S fontSize={16} fontWeight={600} color="#2c3e3a">{empCount}</S></div>
         <div><S fontSize={11} fontWeight={500} color="#555" marginBottom={6}>Pay Periods</S>
           <input type="range" min={1} max={52} value={ppCount} onChange={e=>setPpCount(+e.target.value)} style={{width:"100%",accentColor:"#2c3e3a"}}/>
           <S fontSize={16} fontWeight={600} color="#2c3e3a">{ppCount}</S></div>
-        <div><S fontSize={11} fontWeight={500} color="#555" marginBottom={6}>Separated Employees (%)</S>
+        <div><S fontSize={11} fontWeight={500} color="#555" marginBottom={6}>Separated (%)</S>
           <input type="range" min={0} max={100} value={separatedPct} onChange={e=>setSeparatedPct(+e.target.value)} style={{width:"100%",accentColor:"#2c3e3a"}}/>
-          <S fontSize={16} fontWeight={600} color="#2c3e3a">{separatedPct}% <span style={{fontSize:11,color:"#999"}}>({Math.round(empCount*(separatedPct/100))} employees)</span></S></div>
+          <S fontSize={16} fontWeight={600} color="#2c3e3a">{separatedPct}% <span style={{fontSize:11,color:"#999"}}>({Math.round(empCount*(separatedPct/100))} emp)</span></S></div>
+        <div><S fontSize={11} fontWeight={500} color="#555" marginBottom={6}>Avg Daily Wage (§ 203)</S>
+          <input type="range" min={100} max={800} step={10} value={dailyWage} onChange={e=>setDailyWage(+e.target.value)} style={{width:"100%",accentColor:"#2c3e3a"}}/>
+          <S fontSize={16} fontWeight={600} color="#2c3e3a">${dailyWage}</S></div>
       </div>
 
       {/* CASCADE VISUALIZATION */}
