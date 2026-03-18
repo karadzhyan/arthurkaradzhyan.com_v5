@@ -16,13 +16,15 @@ There are no tests, no linter, and no CI pipeline. The build succeeding (`next b
 
 ## Architecture
 
-- **Static site**: `next.config.js` sets `output: 'export'`. Every page is pre-rendered at build time.
-- **Homepage** (`app/page.jsx`): Large client component (~102KB). Manages navigation, scroll tracking, section visibility, tool state, accordion expansion. All in one file.
-- **Content pages**: SSG via `generateStaticParams()` pulling from data files. Routes: `/insights/[slug]`, `/cases/[slug]`, `/industries/[slug]`, `/tools/[slug]`, `/commentary/[slug]`.
-- **Interactive tools** (`components/tools/`): 8 client components — PAGA Calc, Regular Rate Calc, Cap Qualifier, SOL Calc, Recoverability Checker, Derivative Mapper, Decision Tree, Wage Statement Checker.
-- **Data layer** (`data/`): Plain JS files exporting arrays of objects. Content lives here, not in a CMS.
-- **Styling**: Single `app/globals.css` file. Fonts: Libre Baskerville (serif, body) + Outfit (sans-serif, UI).
-- **SEO**: Schema.org JSON-LD (Attorney type) in layout, `sitemap.xml`, `robots.txt`.
+- **Static site**: `next.config.js` sets `output: 'export'`. All 57 pages are pre-rendered at build time.
+- **Homepage** (`app/page.jsx`): Slim landing page with preview cards linking to dedicated section pages. Client component for Counter animation and IntersectionObserver on stats.
+- **Index pages**: `/tools`, `/insights`, `/cases`, `/industries`, `/matters`, `/about`, `/resources` — server components showing full content grids. Each links to individual sub-pages.
+- **Content sub-pages**: SSG via `generateStaticParams()`. Routes: `/insights/[slug]`, `/cases/[slug]`, `/industries/[slug]`, `/tools/[slug]`, `/commentary/[slug]`, `/resources/[slug]`.
+- **Shared components**: `SiteNav` (client, sticky nav with mobile hamburger) and `SiteFooter` (client, includes privacy modal) used across all pages.
+- **Interactive tools** (`components/tools/`): 8 client components loaded only on `/tools/[slug]` pages, not on homepage.
+- **Data layer** (`data/`): Plain JS files exporting arrays — `insights.js`, `caseLaw.js`, `industries.js`, `tools.js`, `commentary.js`, `matters.js`, `resources.js`. Content lives here, not in a CMS.
+- **Styling**: Single `app/globals.css` file. Mobile-first responsive with breakpoints at 480px, 768px, 900px. Fonts: Libre Baskerville (serif, body) + Outfit (sans-serif, UI).
+- **SEO**: Schema.org JSON-LD (Attorney type) in layout, `sitemap.xml` with all routes, `robots.txt`. Each index page has `generateMetadata`.
 
 ## Content workflow
 
