@@ -146,7 +146,7 @@ export default function HomePage() {
             <div className="home-section-line dark" />
           </div>
           <p className="home-section-intro dark">
-            Eight interactive analytical tools. All calculations run in your
+            {tools.length} interactive analytical tools. All calculations run in your
             browser.
           </p>
           <div className="home-tools-grid">
