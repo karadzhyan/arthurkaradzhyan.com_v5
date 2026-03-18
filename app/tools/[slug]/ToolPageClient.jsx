@@ -58,7 +58,14 @@ export default function ToolPageClient({ slug }) {
         <div
           className="tool-detail-methodology"
           onClick={function() { setShowMethodology(!showMethodology); }}
+          onKeyDown={function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setShowMethodology(!showMethodology);
+            }
+          }}
           role="button"
+          tabIndex={0}
           aria-expanded={showMethodology}
         >
           <span className="tool-detail-methodology-label">Methodology</span>

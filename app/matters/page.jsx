@@ -34,7 +34,14 @@ export default function MattersPage() {
                 onClick={function () {
                   setExpanded(isOpen ? null : i);
                 }}
+                onKeyDown={function (e) {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setExpanded(isOpen ? null : i);
+                  }
+                }}
                 role="button"
+                tabIndex={0}
                 aria-expanded={isOpen}
               >
                 <div className="matter-top">
