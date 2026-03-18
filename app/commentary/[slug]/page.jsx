@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { commentary, getCommentaryBySlug, getAllCommentarySlugs } from '@/data/commentary';
+import SiteNav from '@/components/SiteNav';
+import SiteFooter from '@/components/SiteFooter';
 
 export function generateStaticParams() {
   return getAllCommentarySlugs().map(function(slug) { return { slug: slug }; });
@@ -40,15 +42,8 @@ export default function CommentaryPage({ params }) {
   var paragraphs = item.content.split('\n').filter(function(p) { return p.trim(); });
 
   return (
-    <div style={{ fontFamily: "'Libre Baskerville',Georgia,serif", color: '#1a1a1a', background: '#fff', minHeight: '100vh' }}>
-      <nav style={{ padding: '22px 48px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link href="/" style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, fontWeight: 500, letterSpacing: 6, textTransform: 'uppercase', color: '#1a1a1a', textDecoration: 'none' }}>
-          Arthur Karadzhyan
-        </Link>
-        <Link href="/commentary" style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#999', textDecoration: 'none' }}>
-          ← All Commentary
-        </Link>
-      </nav>
+    <div className="page-wrap">
+      <SiteNav current="Commentary" />
 
       <article style={{ maxWidth: 680, margin: '0 auto', padding: '80px 48px 120px' }}>
         <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, fontWeight: 500, letterSpacing: 3, textTransform: 'uppercase', color: '#999', marginBottom: 16 }}>
@@ -127,14 +122,7 @@ export default function CommentaryPage({ params }) {
         </div>
       </article>
 
-      <div style={{ padding: '24px 48px', textAlign: 'center', borderTop: '1px solid #eee', background: '#fafafa' }}>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 10, color: '#999', letterSpacing: 2 }}>
-          © {new Date().getFullYear()} Arthur Karadzhyan · Los Angeles, California
-        </div>
-        <div style={{ fontFamily: "'Outfit',sans-serif", fontSize: 9, color: '#999', letterSpacing: 1, marginTop: 6 }}>
-          Attorney Advertising · Prior results do not guarantee a similar outcome · This website does not constitute legal advice
-        </div>
-      </div>
+      <SiteFooter />
     </div>
   );
 }

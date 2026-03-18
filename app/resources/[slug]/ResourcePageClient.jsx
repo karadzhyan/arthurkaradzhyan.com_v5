@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { getResourceBySlug } from "@/data/resources";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 var S = function(p) { return <div style={{fontFamily:"'Outfit',sans-serif",...p}}>{p.children}</div>; };
 
@@ -378,11 +380,8 @@ export default function ResourcePageClient({slug}) {
   var isReform = !!res.tabs;
 
   return (
-    <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",color:"#1a1a1a",background:"#fff",minHeight:"100vh"}}>
-      <nav style={{padding:"22px 48px",borderBottom:"1px solid #eee",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <Link href="/" style={{fontFamily:"'Outfit',sans-serif",fontSize:13,fontWeight:500,letterSpacing:6,textTransform:"uppercase",color:"#1a1a1a",textDecoration:"none"}}>Arthur Karadzhyan</Link>
-        <Link href="/#Resources" style={{fontFamily:"'Outfit',sans-serif",fontSize:10,letterSpacing:3,textTransform:"uppercase",color:"#999",textDecoration:"none"}}>← All Resources</Link>
-      </nav>
+    <div className="page-wrap">
+      <SiteNav current="Resources" />
 
       {/* HEADER */}
       <div style={{maxWidth:900,margin:"0 auto",padding:"60px 48px 0"}}>
@@ -401,10 +400,7 @@ export default function ResourcePageClient({slug}) {
         <S fontSize={10} color="#bbb" fontStyle="italic" style={{paddingTop:24,borderTop:"1px solid #eee"}}>{res.footer}</S>
       </div>}
 
-      <div style={{padding:"24px 48px",textAlign:"center",borderTop:"1px solid #eee",background:"#fafafa"}}>
-        <S fontSize={10} color="#999" letterSpacing={2}>© {new Date().getFullYear()} Arthur Karadzhyan · Los Angeles, California</S>
-        <S fontSize={9} color="#999" letterSpacing={1} style={{marginTop:6}}>Attorney Advertising · Prior results do not guarantee a similar outcome · This website does not constitute legal advice</S>
-      </div>
+      <SiteFooter />
     </div>
   );
 }
