@@ -141,9 +141,9 @@ var industriesRaw = [
       "CDPH staffing ratio changes that affect meal period scheduling constraints at client facilities.",
       "Legislative proposals affecting healthcare staffing agency liability for client facility working conditions."
     ],
-    relatedTools: ["sol-calculator", "paga-penalty-estimator"],
+    relatedTools: ["statute-of-limitations-calculator", "paga-penalty-estimator"],
     relatedInsights: ["statistical-sampling-in-wage-and-hour-defense-building-a-duran-compliant-framewo"],
-    relatedMatters: ["Healthcare Staffing Agency — Novel Theory"]
+    relatedMatters: []
   },
   {
     name: "Solar & Energy",
@@ -269,7 +269,7 @@ var industriesRaw = [
     ],
     relatedTools: ["paga-penalty-estimator", "derivative-penalty-mapper"],
     relatedInsights: ["drafting-paga-settlement-approval-motions-after-moniz-a-practitioner-s-framework"],
-    relatedMatters: ["Agricultural Employer — PAGA Settlement Approval"]
+    relatedMatters: []
   }
 ];
 
