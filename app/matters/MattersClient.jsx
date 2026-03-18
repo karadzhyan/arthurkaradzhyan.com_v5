@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -69,7 +70,17 @@ export default function MattersClient() {
                         </div>
                       </div>
                     )}
-                    <div className="matter-result">{m.result}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginTop: 16 }}>
+                      <div className="matter-result">{m.result}</div>
+                      <Link
+                        href={"/matters/" + m.slug}
+                        className="article-nav-link"
+                        onClick={function(e) { e.stopPropagation(); }}
+                        style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}
+                      >
+                        Read Full Matter →
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>

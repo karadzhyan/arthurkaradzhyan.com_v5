@@ -32,14 +32,14 @@ export var resources = [
   { slug: "commission-plan-audit-checklist", title: "Commission Plan Audit Checklist", subtitle: "Sciborski Forfeiture and § 2751 Compliance", cardDesc: "Timing analysis framework for commission payment structures. Identifies forfeiture exposure for departed employees with pending deals, § 2751 written agreement requirements, and regular rate inclusion methodology.", placeholder: true },
 ];
 
-// Helper: get all resources for homepage grid
+// Helper: get all resources for homepage grid (only built-out resources)
 export function getAllResourceCards() {
-  return resources.map(function(r) {
+  return resources.filter(function(r) { return !r.placeholder; }).map(function(r) {
     return {
       title: r.title,
       sub: r.subtitle,
       desc: r.cardDesc,
-      url: r.placeholder ? null : '/resources/' + r.slug,
+      url: '/resources/' + r.slug,
     };
   });
 }

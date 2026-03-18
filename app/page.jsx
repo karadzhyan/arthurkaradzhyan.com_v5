@@ -317,12 +317,12 @@ export default function HomePage() {
         <div className="home-matters-grid">
           {matters.slice(0, 4).map(function (m) {
             return (
-              <div key={m.slug} className="home-matter-card">
+              <Link key={m.slug} href={"/matters/" + m.slug} className="home-matter-card" style={{ textDecoration: 'none', display: 'block' }}>
                 <div className="home-matter-cat">{m.cat}</div>
                 <div className="home-matter-title">{m.title}</div>
                 <div className="home-matter-short">{m.short}</div>
                 <div className="home-matter-result">{m.result}</div>
-              </div>
+              </Link>
             );
           })}
         </div>
