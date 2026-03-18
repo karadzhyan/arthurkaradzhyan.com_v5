@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { commentary, getCommentaryBySlug, getAllCommentarySlugs } from '@/data/commentary';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -47,6 +48,11 @@ export default function CommentaryPage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Commentary', url: 'https://www.arthurkaradzhyan.com/commentary' },
+        { name: item.title, url: 'https://www.arthurkaradzhyan.com/commentary/' + params.slug }
+      ]} />
       <SiteNav current="Commentary" />
 
       <article className="article-wrap narrow">

@@ -1,4 +1,5 @@
 import { getAllToolSlugs, getToolBySlug } from '@/data/tools';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import ToolPageClient from './ToolPageClient';
 
 export function generateStaticParams() {
@@ -20,5 +21,17 @@ export function generateMetadata({ params }) {
 }
 
 export default function ToolPage({ params }) {
-  return <ToolPageClient slug={params.slug} />;
+  var tool = getToolBySlug(params.slug);
+  return (
+    <>
+      {tool && (
+        <BreadcrumbSchema items={[
+          { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+          { name: 'Tools', url: 'https://www.arthurkaradzhyan.com/tools' },
+          { name: tool.name, url: 'https://www.arthurkaradzhyan.com/tools/' + params.slug }
+        ]} />
+      )}
+      <ToolPageClient slug={params.slug} />
+    </>
+  );
 }

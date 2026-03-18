@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { caseLaw, getCaseBySlug, getAllCaseSlugs } from '@/data/caseLaw';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -35,6 +36,11 @@ export default function CasePage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Cases', url: 'https://www.arthurkaradzhyan.com/cases' },
+        { name: caseItem.case, url: 'https://www.arthurkaradzhyan.com/cases/' + params.slug }
+      ]} />
       <SiteNav current="Cases" />
 
       <article className="article-wrap wide">

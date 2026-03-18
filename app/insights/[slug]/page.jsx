@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -37,6 +38,11 @@ export default function InsightPage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Insights', url: 'https://www.arthurkaradzhyan.com/insights' },
+        { name: insight.title, url: 'https://www.arthurkaradzhyan.com/insights/' + params.slug }
+      ]} />
       <SiteNav current="Insights" />
 
       <article className="article-wrap">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/industries';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -35,6 +36,11 @@ export default function IndustryPage({ params }) {
 
   return (
     <div className="page-wrap">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.arthurkaradzhyan.com' },
+        { name: 'Industries', url: 'https://www.arthurkaradzhyan.com/industries' },
+        { name: ind.name, url: 'https://www.arthurkaradzhyan.com/industries/' + params.slug }
+      ]} />
       <SiteNav current="Industries" />
 
       <div className="article-industry-header">
