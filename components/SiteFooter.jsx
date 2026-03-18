@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import S from "@/components/S";
 
 export default function SiteFooter() {
@@ -8,6 +9,24 @@ export default function SiteFooter() {
   return (
     <>
       <div className="site-footer">
+        <div className="site-footer-top">
+          {[
+            { label: "About", href: "/about" },
+            { label: "Tools", href: "/tools" },
+            { label: "Insights", href: "/insights" },
+            { label: "Industries", href: "/industries" },
+            { label: "Cases", href: "/cases" },
+            { label: "Commentary", href: "/commentary" },
+            { label: "Resources", href: "/resources" },
+            { label: "Contact", href: "/#contact" },
+          ].map(function (item) {
+            return (
+              <Link key={item.label} href={item.href} className="site-footer-nav-link">
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
         <div className="site-footer-copy">
           © {new Date().getFullYear()} Arthur Karadzhyan · Los Angeles,
           California

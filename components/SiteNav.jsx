@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 var NAV_ITEMS = [
@@ -16,10 +16,28 @@ var NAV_ITEMS = [
 
 export default function SiteNav({ current }) {
   var [menu, setMenu] = useState(false);
+  var [scrolled, setScrolled] = useState(false);
+
+  useEffect(function () {
+    function handleScroll() {
+      setScrolled(window.scrollY > 20);
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return function () { window.removeEventListener("scroll", handleScroll); };
+  }, []);
+
+  useEffect(function () {
+    if (menu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return function () { document.body.style.overflow = ""; };
+  }, [menu]);
 
   return (
     <>
-      <nav className="site-nav">
+      <nav className={"site-nav" + (scrolled ? " scrolled" : "")}>
         <div className="site-nav-in">
           <Link href="/" className="site-nav-logo">
             Arthur Karadzhyan
@@ -54,6 +72,13 @@ export default function SiteNav({ current }) {
       </nav>
       {menu && (
         <div className="site-nav-mobile">
+          <button
+            className="site-nav-mobile-close"
+            onClick={function () { setMenu(false); }}
+            aria-label="Close menu"
+          >
+            ×
+          </button>
           {NAV_ITEMS.map(function (item) {
             return (
               <Link

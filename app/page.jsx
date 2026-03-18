@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Counter from "@/components/Counter";
+import ContactForm from "@/components/ContactForm";
+import BackToTop from "@/components/BackToTop";
 import { insights } from "@/data/insights";
 import { caseLaw } from "@/data/caseLaw";
 import { commentary } from "@/data/commentary";
@@ -55,13 +57,13 @@ export default function HomePage() {
             <a href="#contact" className="btn-primary">
               Get in Touch
             </a>
-            <Link href="/insights" className="btn-outline">
-              Read Insights
+            <Link href="/tools" className="btn-outline">
+              Explore Tools
             </Link>
           </div>
           <div className="home-hero-breadcrumb">
-            ANALYTICAL PLATFORM · 8 INTERACTIVE TOOLS · 12 PUBLICATIONS · 12
-            CASE LAW ANALYSES · 6 INDUSTRY PROFILES · COMMENTARY
+            Analytical Platform · 8 Interactive Tools · {insights.length} Publications · {caseLaw.length}
+            {" "}Case Law Analyses · {industries.length} Industry Profiles · Commentary
           </div>
         </div>
       </section>
@@ -194,7 +196,7 @@ export default function HomePage() {
           })}
         </div>
         <Link href="/insights" className="home-section-link">
-          All 12 Publications →
+          All {insights.length} Publications →
         </Link>
       </section>
 
@@ -284,7 +286,7 @@ export default function HomePage() {
           <div className="home-section-line" />
         </div>
         <p className="home-section-intro">
-          Twelve decisions that define PAGA defense practice.
+          {caseLaw.length} decisions that define PAGA defense practice.
         </p>
         <div className="home-cases-grid">
           {caseLaw.slice(0, 6).map(function (c) {
@@ -302,7 +304,7 @@ export default function HomePage() {
           })}
         </div>
         <Link href="/cases" className="home-section-link">
-          All 12 Case Analyses →
+          All {caseLaw.length} Case Analyses →
         </Link>
       </section>
 
@@ -351,6 +353,7 @@ export default function HomePage() {
                 notice.
               </div>
             </div>
+            <ContactForm />
           </div>
           <div className="home-contact-right">
             <h4 className="home-contact-label">Email</h4>
@@ -410,6 +413,7 @@ export default function HomePage() {
       </section>
 
       <SiteFooter />
+      <BackToTop />
     </div>
   );
 }
