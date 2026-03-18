@@ -1,4 +1,8 @@
 import Link from 'next/link';
+import { tools } from '@/data/tools';
+import { insights } from '@/data/insights';
+import { caseLaw } from '@/data/caseLaw';
+import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -36,7 +40,7 @@ export default function AboutPage() {
             </div>
 
             <p>I built this practice on the plaintiff side — litigating wage-and-hour class actions on behalf of employees before transitioning to defense. That foundation isn't background. It's the operating system. I evaluate claims the way opposing counsel evaluates them, anticipate certification arguments before they're filed, and identify the pressure points that actually move mediations.</p>
-            <p>The eight interactive tools, twelve publications, and twelve case law analyses on this site aren't marketing. They are the methodology, made visible.</p>
+            <p>The interactive tools, publications, and case law analyses on this site aren't marketing. They are the methodology, made visible.</p>
 
             <h3 className="about-section-title">Practice Trajectory</h3>
             <p>I started on the plaintiff side — litigating wage-and-hour class actions at a Los Angeles firm that prosecuted meal-and-rest, overtime, and off-the-clock claims against mid-market and enterprise employers. I learned how plaintiff's counsel evaluates cases, prices risk, builds class certification motions, and approaches mediation.</p>
@@ -60,7 +64,7 @@ export default function AboutPage() {
             <div className="about-sidebar-section">
               <h4 className="about-sidebar-heading">On This Site</h4>
               <div className="about-stat-grid">
-                {[['8', 'Tools'], ['12', 'Publications'], ['12', 'Case Analyses'], ['6', 'Industries']].map(function (pair, i) {
+                {[[String(tools.length), 'Tools'], [String(insights.length), 'Publications'], [String(caseLaw.length), 'Case Analyses'], [String(industries.length), 'Industries']].map(function (pair, i) {
                   return (
                     <div key={i} className="about-stat-item">
                       <div className="about-stat-num">{pair[0]}</div>
