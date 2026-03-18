@@ -1,14 +1,17 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Counter({ end, suffix, started }) {
-  var [v, setV] = useState(0);
+  var n = parseInt(end);
+  var [v, setV] = useState(n);
+  var hasAnimated = useRef(false);
 
   useEffect(function () {
-    if (!started) return;
-    var n = parseInt(end);
-    var step = Math.max(1, Math.ceil(n / 60));
+    if (!started || hasAnimated.current) return;
+    hasAnimated.current = true;
+    setV(0);
     var c = 0;
+    var step = Math.max(1, Math.ceil(n / 60));
     var t = setInterval(function () {
       c += step;
       if (c >= n) {
@@ -19,7 +22,7 @@ export default function Counter({ end, suffix, started }) {
       }
     }, 20);
     return function () { clearInterval(t); };
-  }, [started, end]);
+  }, [started, n]);
 
   return <>{v.toLocaleString()}{suffix || ''}</>;
 }

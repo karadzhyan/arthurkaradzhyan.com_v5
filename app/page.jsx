@@ -56,12 +56,12 @@ export default function HomePage() {
             <a href="#contact" className="btn-primary">
               Get in Touch
             </a>
-            <Link href="/tools" className="btn-outline">
-              Explore Tools
+            <Link href="/insights" className="btn-outline">
+              Read Insights
             </Link>
           </div>
           <div className="home-hero-breadcrumb">
-            Analytical Platform · 8 Interactive Tools · {insights.length} Publications · {caseLaw.length}
+            Analytical Platform · {tools.length} Interactive Tools · {insights.length} Publications · {caseLaw.length}
             {" "}Case Law Analyses · {industries.length} Industry Profiles · Commentary
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ABOUT PREVIEW */}
+      {/* 01 — ABOUT */}
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">01</span>
@@ -136,68 +136,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TOOLS PREVIEW */}
+      {/* 02 — INSIGHTS */}
       <div className="home-dark-band">
         <section className="home-section">
           <div className="home-section-header">
             <span className="home-section-num dark">02</span>
-            <h2 className="home-section-title dark">Tools</h2>
+            <h2 className="home-section-title dark">Insights & Publications</h2>
             <div className="home-section-line dark" />
           </div>
           <p className="home-section-intro dark">
-            {tools.length} interactive analytical tools. All calculations run in your
-            browser.
+            {insights.length} publications. Each one addresses a specific
+            analytical framework or case law development in PAGA defense.
           </p>
-          <div className="home-tools-grid">
-            {tools.map(function (tool) {
+          <div className="home-insights-grid">
+            {insights.slice(0, 6).map(function (ins) {
               return (
                 <Link
-                  key={tool.slug}
-                  href={"/tools/" + tool.slug}
-                  className="home-tool-card"
+                  key={ins.slug}
+                  href={"/insights/" + ins.slug}
+                  className="home-insight-card"
+                  style={{ borderColor: 'rgba(255,255,255,.08)', background: 'rgba(255,255,255,.03)' }}
                 >
-                  <div className="home-tool-name">{tool.name}</div>
-                  <div className="home-tool-sub">{tool.sub}</div>
+                  <div className="home-insight-tag" style={{ color: '#8aa39e' }}>{ins.tag}</div>
+                  <div className="home-insight-title" style={{ color: '#fff' }}>{ins.title}</div>
+                  <div className="home-insight-desc" style={{ color: 'rgba(255,255,255,.45)' }}>
+                    {ins.desc.length > 120
+                      ? ins.desc.slice(0, 120) + "..."
+                      : ins.desc}
+                  </div>
                 </Link>
               );
             })}
           </div>
-          <Link href="/tools" className="home-section-link dark">
-            View All Tools →
+          <Link href="/insights" className="home-section-link dark">
+            All {insights.length} Publications →
           </Link>
         </section>
       </div>
-
-      {/* INSIGHTS PREVIEW */}
-      <section className="home-section">
-        <div className="home-section-header">
-          <span className="home-section-num">03</span>
-          <h2 className="home-section-title">Insights & Publications</h2>
-          <div className="home-section-line" />
-        </div>
-        <div className="home-insights-grid">
-          {insights.slice(0, 6).map(function (ins) {
-            return (
-              <Link
-                key={ins.slug}
-                href={"/insights/" + ins.slug}
-                className="home-insight-card"
-              >
-                <div className="home-insight-tag">{ins.tag}</div>
-                <div className="home-insight-title">{ins.title}</div>
-                <div className="home-insight-desc">
-                  {ins.desc.length > 120
-                    ? ins.desc.slice(0, 120) + "..."
-                    : ins.desc}
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-        <Link href="/insights" className="home-section-link">
-          All {insights.length} Publications →
-        </Link>
-      </section>
 
       {/* COMMENTARY */}
       <div className="home-light-band">
@@ -242,45 +217,10 @@ export default function HomePage() {
         </section>
       </div>
 
-      {/* INDUSTRIES PREVIEW */}
-      <div className="home-dark-band">
-        <section className="home-section">
-          <div className="home-section-header">
-            <span className="home-section-num dark">04</span>
-            <h2 className="home-section-title dark">Industry Intelligence</h2>
-            <div className="home-section-line dark" />
-          </div>
-          <p className="home-section-intro dark">
-            Every industry has a structural vulnerability that generic defense
-            strategies miss.
-          </p>
-          <div className="home-industries-grid">
-            {industries.map(function (ind) {
-              return (
-                <Link
-                  key={ind.slug}
-                  href={"/industries/" + ind.slug}
-                  className="home-industry-card"
-                >
-                  <div className="home-industry-count">
-                    {ind.issues.length} Exposure Categories
-                  </div>
-                  <div className="home-industry-name">{ind.name}</div>
-                  <div className="home-industry-metric">{ind.metric}</div>
-                </Link>
-              );
-            })}
-          </div>
-          <Link href="/industries" className="home-section-link dark">
-            View All Industries →
-          </Link>
-        </section>
-      </div>
-
-      {/* CASES PREVIEW */}
+      {/* 03 — CASE LAW */}
       <section className="home-section">
         <div className="home-section-header">
-          <span className="home-section-num">05</span>
+          <span className="home-section-num">03</span>
           <h2 className="home-section-title">Case Law Laboratory</h2>
           <div className="home-section-line" />
         </div>
@@ -307,29 +247,97 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* MATTERS PREVIEW */}
+      {/* 04 — TOOLS */}
+      <div className="home-dark-band">
+        <section className="home-section">
+          <div className="home-section-header">
+            <span className="home-section-num dark">04</span>
+            <h2 className="home-section-title dark">Tools</h2>
+            <div className="home-section-line dark" />
+          </div>
+          <p className="home-section-intro dark">
+            {tools.length} interactive analytical tools. All calculations run in your
+            browser.
+          </p>
+          <div className="home-tools-grid">
+            {tools.map(function (tool) {
+              return (
+                <Link
+                  key={tool.slug}
+                  href={"/tools/" + tool.slug}
+                  className="home-tool-card"
+                >
+                  <div className="home-tool-name">{tool.name}</div>
+                  <div className="home-tool-sub">{tool.sub}</div>
+                </Link>
+              );
+            })}
+          </div>
+          <Link href="/tools" className="home-section-link dark">
+            View All Tools →
+          </Link>
+        </section>
+      </div>
+
+      {/* 05 — INDUSTRIES */}
       <section className="home-section">
         <div className="home-section-header">
-          <span className="home-section-num">06</span>
-          <h2 className="home-section-title">Select Matters</h2>
+          <span className="home-section-num">05</span>
+          <h2 className="home-section-title">Industry Intelligence</h2>
           <div className="home-section-line" />
         </div>
-        <div className="home-matters-grid">
-          {matters.slice(0, 4).map(function (m) {
+        <p className="home-section-intro">
+          Every industry has a structural vulnerability that generic defense
+          strategies miss.
+        </p>
+        <div className="home-industries-grid" style={{ borderColor: '#eee' }}>
+          {industries.map(function (ind) {
             return (
-              <Link key={m.slug} href={"/matters/" + m.slug} className="home-matter-card" style={{ textDecoration: 'none', display: 'block' }}>
-                <div className="home-matter-cat">{m.cat}</div>
-                <div className="home-matter-title">{m.title}</div>
-                <div className="home-matter-short">{m.short}</div>
-                <div className="home-matter-result">{m.result}</div>
+              <Link
+                key={ind.slug}
+                href={"/industries/" + ind.slug}
+                className="home-industry-card"
+                style={{ background: '#fafafa', borderColor: '#eee' }}
+              >
+                <div className="home-industry-count" style={{ color: 'rgba(44,62,58,.4)' }}>
+                  {ind.issues.length} Exposure Categories
+                </div>
+                <div className="home-industry-name" style={{ color: '#1a1a1a' }}>{ind.name}</div>
+                <div className="home-industry-metric" style={{ color: '#2c3e3a', borderTopColor: '#eee' }}>{ind.metric}</div>
               </Link>
             );
           })}
         </div>
-        <Link href="/matters" className="home-section-link">
-          All {matters.length} Matters →
+        <Link href="/industries" className="home-section-link">
+          View All Industries →
         </Link>
       </section>
+
+      {/* 06 — MATTERS */}
+      <div className="home-light-band">
+        <section className="home-section">
+          <div className="home-section-header">
+            <span className="home-section-num">06</span>
+            <h2 className="home-section-title">Select Matters</h2>
+            <div className="home-section-line" />
+          </div>
+          <div className="home-matters-grid">
+            {matters.slice(0, 4).map(function (m) {
+              return (
+                <Link key={m.slug} href={"/matters/" + m.slug} className="home-matter-card" style={{ textDecoration: 'none', display: 'block' }}>
+                  <div className="home-matter-cat">{m.cat}</div>
+                  <div className="home-matter-title">{m.title}</div>
+                  <div className="home-matter-short">{m.short}</div>
+                  <div className="home-matter-result">{m.result}</div>
+                </Link>
+              );
+            })}
+          </div>
+          <Link href="/matters" className="home-section-link">
+            All {matters.length} Matters →
+          </Link>
+        </section>
+      </div>
 
       {/* CONTACT */}
       <section className="home-contact" id="contact">
