@@ -498,19 +498,45 @@ var industriesRaw = [
         statute: "Lab. Code §§ 201-203",
         analysis: "Agricultural operations with seasonal workforces face particular final pay timing exposure. Section 201 requires that employees who are discharged receive all wages immediately. Section 202 requires that employees who resign receive wages within 72 hours (or immediately if 72 hours' notice is given). Seasonal workers whose employment ends at the conclusion of a harvest season present a characterization question: is the end of the season a 'discharge' (immediate payment required) or a 'resignation' (72-hour window)? Most agricultural employers treat it as neither, paying final wages on the next regular payday — which may violate both sections. Each late final payment generates § 203 waiting time penalty exposure of up to 30 days of the employee's daily wages.",
         defenseStrategy: "Establish a clear policy for seasonal employment termination characterization and final pay timing. Implement same-day or next-day final pay procedures for seasonal workers at the end of each growing season. Document the policy and its implementation."
+      },
+      {
+        name: "Field Sanitation and Rest Area Requirements",
+        statute: "Cal/OSHA T8 § 3457; Lab. Code § 6712",
+        analysis: "Cal/OSHA field sanitation regulations require agricultural employers to provide toilet facilities within a quarter-mile walk or five-minute travel time of each employee's work area, hand-washing facilities with soap and single-use towels, and drinking water that is suitably cool and in sufficient quantity. Rest areas must be shaded when temperatures exceed 80 degrees, with enough space for the number of employees on rest at any given time. In remote agricultural fields, compliance with these requirements is logistically challenging — portable facilities must be transported, maintained, and repositioned as crews move through different sections of the operation. Violations are PAGA-actionable under section 6712's private right of action for health and safety violations, and they are among the most common Cal/OSHA citations in agriculture.",
+        defenseStrategy: "Audit field sanitation compliance at all active work locations. Document the placement and maintenance schedule for portable toilets, hand-washing stations, and shade structures. Establish a protocol for repositioning facilities as crews move between work areas. Maintain compliance records with dates and photographic documentation suitable for penalty cap qualification."
+      },
+      {
+        name: "Labor Contractor Joint Employment Liability",
+        statute: "Martinez v. Combs (2012) 49 Cal.4th 35; Lab. Code § 2810.3",
+        analysis: "Agricultural operations that use labor contractors to supply field workers face joint employer liability under both Martinez v. Combs and section 2810.3. Under Martinez, the grower may satisfy one or more of the three alternative employment tests — exercise of control, suffer or permit to work, or engage — even when the labor contractor handles all payroll and HR functions. Under section 2810.3, a client employer that obtains workers from a labor contractor shares liability for the labor contractor's failure to pay wages, provide workers' compensation coverage, or comply with health and safety requirements. The grower's exposure is compounded when the labor contractor lacks the resources to satisfy a PAGA judgment — the grower becomes the deep pocket for violations committed by the contractor's payroll and scheduling systems.",
+        defenseStrategy: "Document the operational control allocation between the grower and each labor contractor. Build a matrix showing which entity controls hiring, scheduling, work pace, field conditions, payroll, and HR functions. Audit the labor contractor's payroll and compliance systems — the grower's exposure is directly proportional to the contractor's compliance failures. Implement contractual indemnification provisions and compliance verification procedures."
+      },
+      {
+        name: "Agricultural Overtime Phase-Out Under AB 1066",
+        statute: "AB 1066; Lab. Code § 857",
+        analysis: "AB 1066 phased out the agricultural overtime exemption over a multi-year schedule, bringing agricultural workers to parity with non-agricultural overtime standards. As of January 1, 2022, agricultural workers at employers with 26 or more employees are entitled to overtime after 8 hours in a day and 40 hours in a week — the same standard as all other California workers. Many agricultural operations have not fully adapted to this change operationally. Harvest schedules, weather-dependent work patterns, and production quotas frequently result in workdays exceeding 8 hours — and if the payroll system has not been updated to calculate daily overtime on the non-agricultural standard, every affected pay period generates overtime underpayment exposure. The transition from weekly-only overtime to daily overtime represents a fundamental change in how agricultural payroll must be calculated.",
+        defenseStrategy: "Verify that the payroll system calculates overtime on a daily basis (after 8 hours) rather than a weekly-only basis. Audit payroll output for the period following the AB 1066 transition date applicable to the employer's size. If the system was not updated at the correct date, calculate the overtime underpayment for each affected employee and build the exposure model around the transition date."
+      },
+      {
+        name: "Crew Leader and Foreman Exempt Classification",
+        statute: "Lab. Code § 515; IWC Wage Order 14, § 1(A)",
+        analysis: "Crew leaders and foremen in agricultural operations are frequently classified as exempt under the executive exemption, but the classification often fails because the individual spends more than 50% of working time performing the same field work as the crew members they supervise. A crew leader who picks alongside the crew, operates machinery alongside other workers, or performs field tasks when the crew is shorthanded is performing non-exempt production work. The executive exemption requires that exempt duties — managing the enterprise or a customarily recognized department, directing the work of two or more employees, and exercising discretion and independent judgment in hiring, firing, and disciplinary decisions — occupy more than 50% of working time. In agricultural operations where the crew leader is a working supervisor rather than a full-time manager, the exemption frequently fails.",
+        defenseStrategy: "Conduct a duties analysis for all crew leaders and foremen classified as exempt. Document the actual time allocation between supervisory and field production tasks using contemporaneous observation or time studies rather than job descriptions. If the classification is defensible, build the documentation. If the 50% threshold is not met, reclassify prospectively and calculate historical overtime exposure."
       }
     ],
-    authorities: ["Lab. Code § 226.2 (piece-rate compensation)", "AB 1066 (agricultural overtime phase-out)", "Estrada v. Royalty Carpet Mills (2024) 15 Cal.5th 582", "Moniz v. Adecco USA (2021) 72 Cal.App.5th 56"],
+    authorities: ["Lab. Code § 226.2 (piece-rate compensation)", "AB 1066 (agricultural overtime phase-out)", "Estrada v. Royalty Carpet Mills (2024) 15 Cal.5th 582", "Moniz v. Adecco USA (2021) 72 Cal.App.5th 56", "Martinez v. Combs (2012) 49 Cal.4th 35", "Lab. Code § 2810.3 (client employer liability)", "Cal/OSHA T8 § 3457 (field sanitation)"],
     defenseStrategies: [
       "Implement § 226.2-compliant payroll procedures for all piece-rate workers. This is the single highest-priority compliance action for any agricultural employer.",
       "Build the heat illness prevention compliance record — shade, water, rest, training — with dated documentation suitable for penalty cap qualification.",
       "Establish final pay timing procedures for seasonal workforce transitions that comply with §§ 201-202 regardless of whether the separation is characterized as discharge or resignation.",
-      "For PAGA settlement positioning, apply the Moniz three-part purpose test and the Kullar investigation standard to demonstrate the adequacy of the settlement investigation — the Premium Packing motion provides the analytical template."
+      "For PAGA settlement positioning, apply the Moniz three-part purpose test and the Kullar investigation standard to demonstrate the adequacy of the settlement investigation — the Premium Packing motion provides the analytical template.",
+      "Audit the labor contractor relationship under Martinez v. Combs and § 2810.3 — the grower's exposure depends on both the allocation of operational control and the contractor's compliance record. Document both."
     ],
     monitoring: [
       "Cal/OSHA heat illness prevention regulation updates and enforcement activity targeting agricultural operations.",
       "AB 1066 agricultural overtime phase-out implementation — employer compliance rates and enforcement actions.",
-      "Development of the joint employer PAGA penalty allocation doctrine for grower/labor contractor arrangements."
+      "Development of the joint employer PAGA penalty allocation doctrine for grower/labor contractor arrangements.",
+      "Evolving enforcement of field sanitation requirements at remote agricultural worksites — Cal/OSHA inspection frequency and citation patterns."
     ],
     relatedTools: ["paga-penalty-estimator", "derivative-penalty-mapper"],
     relatedInsights: ["drafting-paga-settlement-approval-motions-after-moniz-a-practitioner-s-framework"],
