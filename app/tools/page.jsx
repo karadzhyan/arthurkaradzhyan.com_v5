@@ -15,7 +15,7 @@ export var metadata = {
   },
 };
 
-/* Tool phase categorization for visual badges */
+/* Tool phase categorization */
 var toolPhases = {
   "PagaCalc": { phase: "Analysis", color: "#2c3e3a" },
   "RegRateCalc": { phase: "Analysis", color: "#2c3e3a" },
@@ -50,7 +50,6 @@ export default function ToolsIndex() {
           {tools.map(function (tool) {
             var ToolIcon = getToolIcon(tool.component);
             var phaseInfo = toolPhases[tool.component] || { phase: "Analysis", color: "#2c3e3a" };
-            var refCount = (tool.relatedInsights ? tool.relatedInsights.length : 0) + (tool.relatedCases ? tool.relatedCases.length : 0);
 
             return (
               <Link
@@ -58,31 +57,22 @@ export default function ToolsIndex() {
                 href={'/tools/' + tool.slug}
                 className="tool-index-card"
               >
-                {/* Top row: icon + phase badge + ref count */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                  <div style={{ opacity: 0.6 }}>
-                    <ToolIcon size={28} color="#2c3e3a" />
+                <div className="tool-card-top">
+                  <div className="tool-card-icon-wrap" style={{ '--phase-color': phaseInfo.color }}>
+                    <ToolIcon size={24} color={phaseInfo.color} />
                   </div>
-                  <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-                    <span style={{
-                      fontFamily: 'Outfit,sans-serif', fontSize: '7px', fontWeight: 600, letterSpacing: '1.5px',
-                      color: phaseInfo.color, background: phaseInfo.color + '10', border: '1px solid ' + phaseInfo.color + '20',
-                      padding: '2px 8px', borderRadius: '10px', textTransform: 'uppercase'
-                    }}>{phaseInfo.phase}</span>
-                    {refCount > 0 && (
-                      <span style={{
-                        fontFamily: 'Outfit,sans-serif', fontSize: '8px', fontWeight: 600,
-                        color: '#999', background: 'rgba(44,62,58,0.04)', padding: '2px 6px', borderRadius: '2px'
-                      }}>{refCount} refs</span>
-                    )}
-                  </div>
+                  <span className="tool-card-phase" style={{
+                    color: phaseInfo.color,
+                    borderColor: phaseInfo.color + '30',
+                    background: phaseInfo.color + '08'
+                  }}>{phaseInfo.phase}</span>
                 </div>
 
-                <div className="tool-index-id">{String(tool.id + 1).padStart(2, '0')}</div>
+                <div className="tool-card-number">{String(tool.id + 1).padStart(2, '0')}</div>
                 <h2 className="tool-index-name">{tool.name}</h2>
                 <div className="tool-index-sub">{tool.sub}</div>
-                <p className="tool-index-desc">{tool.desc.length > 180 ? tool.desc.slice(0, 180) + '...' : tool.desc}</p>
-                <div className="tool-index-cta">Open Tool →</div>
+                <p className="tool-index-desc">{tool.desc.length > 160 ? tool.desc.slice(0, 160) + '…' : tool.desc}</p>
+                <div className="tool-index-cta">Open Tool <span className="tool-cta-arrow">→</span></div>
               </Link>
             );
           })}
