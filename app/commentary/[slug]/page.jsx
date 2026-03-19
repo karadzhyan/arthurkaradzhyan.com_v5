@@ -13,10 +13,10 @@ export function generateMetadata({ params }) {
   if (!item) return { title: 'Not Found' };
   return {
     title: item.title + ' | Arthur Karadzhyan',
-    description: item.summary,
+    description: item.bottomLine || item.summary,
     openGraph: {
       title: item.title,
-      description: item.summary,
+      description: item.bottomLine || item.summary,
       type: 'article',
     },
   };
@@ -62,6 +62,14 @@ export default function CommentaryPage({ params }) {
           {item.title}
         </h1>
 
+        {/* LEVEL 0: THE ANSWER — bottom line leads */}
+        {item.bottomLine && (
+          <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
+            {item.bottomLine}
+          </div>
+        )}
+
+        {/* LEVEL 1: FRAMING — the context that makes the answer meaningful */}
         <p className="article-desc">{item.summary}</p>
 
         <div className="article-body sm">

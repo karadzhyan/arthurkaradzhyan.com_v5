@@ -53,6 +53,19 @@ export default function MatterPage({ params }) {
 
         <p className="article-desc">{matter.short}</p>
 
+        {/* LEVEL 0: THE ANSWER — result leads */}
+        <div className="matter-result" style={{ marginTop: 16, marginBottom: 24 }}>
+          {matter.result}
+        </div>
+
+        {/* LEVEL 1: KEY TAKEAWAY — the transferable insight */}
+        {matter.keyTakeaway && (
+          <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
+            {matter.keyTakeaway}
+          </div>
+        )}
+
+        {/* LEVEL 2: SUPPORTING NARRATIVE */}
         <div className="article-body">
           <p>{matter.full}</p>
         </div>
@@ -68,9 +81,38 @@ export default function MatterPage({ params }) {
           </div>
         )}
 
-        <div className="matter-result" style={{ marginTop: 32 }}>
-          {matter.result}
-        </div>
+        {/* LEVEL 3: EVIDENCE — methodology and authorities */}
+        {matter.techniques && matter.techniques.length > 0 && (
+          <div style={{ marginTop: 32 }}>
+            <div className="article-section-label lg">Methodology</div>
+            <div className="ind-issues-grid">
+              {matter.techniques.map(function(t, i) {
+                return (
+                  <div key={i} className="ind-issue-item">
+                    <div className="ind-issue-num">{i + 1}</div>
+                    <div className="ind-issue-text">{t}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {matter.statutes && matter.statutes.length > 0 && (
+          <div style={{ marginTop: 32 }}>
+            <div className="article-section-label lg">Governing Authorities</div>
+            <div className="ind-authorities-list">
+              {matter.statutes.map(function(s, i) {
+                return (
+                  <div key={i} className="ind-authority-item">
+                    <div className="ind-authority-num">{i + 1}</div>
+                    <div className="ind-authority-text">{s}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="article-disclaimer">
           This matter description is for illustrative purposes only. Details have been generalized to protect client confidentiality. Prior results do not guarantee a similar outcome.

@@ -11,6 +11,10 @@ import { industries } from "@/data/industries";
 import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import PenaltyScaleViz from "@/components/PenaltyScaleViz";
+import ReformTrajectoryChart from "@/components/viz/ReformTrajectoryChart";
+import DualTrackComparison from "@/components/viz/DualTrackComparison";
+import IndustryHeatMap from "@/components/viz/IndustryHeatMap";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -48,9 +52,11 @@ export default function HomePage() {
           </div>
           <div className="home-hero-line" />
           <div className="home-hero-desc">
-            Defending employers in PAGA representative actions, wage-and-hour
-            class actions, workplace investigations, and complex employment
-            litigation across California.
+            Most PAGA defense is reactive. I do it differently — every matter starts
+            with a quantitative exposure model that disaggregates penalties by
+            violation category, strips non-recoverable categories, and produces
+            three scenarios: plaintiff maximum, data-driven realistic, and defense
+            best case.
           </div>
           <div className="home-hero-cta">
             <a href="#contact" className="btn-primary">
@@ -66,6 +72,16 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* PENALTY SCALE — How one violation compounds */}
+      <div style={{
+        background: "linear-gradient(180deg, #1e2d2a, #1a1a1a)",
+        borderTop: "1px solid rgba(138,163,158,.15)",
+      }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+          <PenaltyScaleViz />
+        </div>
+      </div>
 
       {/* STATS */}
       <div className="home-stats" ref={statsRef}>
@@ -91,6 +107,14 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* REFORM TRAJECTORY + DUAL-TRACK CHARTS */}
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 24px 0" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <ReformTrajectoryChart />
+          <DualTrackComparison />
+        </div>
+      </div>
+
       {/* 01 — ABOUT */}
       <section className="home-section">
         <div className="home-section-header">
@@ -101,10 +125,11 @@ export default function HomePage() {
         <div className="home-about-grid">
           <div className="home-about-text">
             <p>
-              Most PAGA defense is reactive. I do it differently. Every matter
-              starts with a quantitative exposure model that disaggregates
-              penalties by violation category, strips non-recoverable categories,
-              and produces three scenarios.
+              The analytical methodology has been adopted firm-wide and has
+              reduced claimed exposure by more than 60% in multiple matters.
+              Temporal bifurcation, derivative penalty mapping, and forensic
+              regular rate analysis convert inflated PAGA demands into
+              defensible settlement authority ranges.
             </p>
             <div className="home-pullquote">
               <div className="home-pullquote-text">
@@ -160,9 +185,9 @@ export default function HomePage() {
                   <div className="home-insight-tag" style={{ color: '#8aa39e' }}>{ins.tag}</div>
                   <div className="home-insight-title" style={{ color: '#fff' }}>{ins.title}</div>
                   <div className="home-insight-desc" style={{ color: 'rgba(255,255,255,.45)' }}>
-                    {ins.desc.length > 120
-                      ? ins.desc.slice(0, 120) + "..."
-                      : ins.desc}
+                    {(ins.bottomLine || ins.desc).length > 120
+                      ? (ins.bottomLine || ins.desc).slice(0, 120) + "..."
+                      : (ins.bottomLine || ins.desc)}
                   </div>
                 </Link>
               );
@@ -206,9 +231,9 @@ export default function HomePage() {
                     </div>
                     <div className="home-commentary-title">{item.title}</div>
                     <div className="home-commentary-summary">
-                      {item.summary.length > 140
-                        ? item.summary.slice(0, 140) + "..."
-                        : item.summary}
+                      {(item.bottomLine || item.summary).length > 140
+                        ? (item.bottomLine || item.summary).slice(0, 140) + "..."
+                        : (item.bottomLine || item.summary)}
                     </div>
                   </Link>
                 );
@@ -290,6 +315,9 @@ export default function HomePage() {
           Every industry has a structural vulnerability that generic defense
           strategies miss.
         </p>
+        <div style={{ marginBottom: 32 }}>
+          <IndustryHeatMap />
+        </div>
         <div className="home-industries-grid" style={{ borderColor: '#eee' }}>
           {industries.map(function (ind) {
             return (

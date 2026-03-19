@@ -13,8 +13,8 @@ export function generateMetadata({ params }) {
   if (!caseItem) return { title: 'Not Found' };
   return {
     title: caseItem.case + ' — ' + caseItem.issue + ' | Arthur Karadzhyan',
-    description: caseItem.preview || ('Defense-side analysis of ' + caseItem.case + ' ' + caseItem.cite),
-    openGraph: { title: caseItem.case + ' — Defense Analysis', description: caseItem.issue, type: 'article' },
+    description: caseItem.holding,
+    openGraph: { title: caseItem.case + ' — Defense Analysis', description: caseItem.holding, type: 'article' },
   };
 }
 

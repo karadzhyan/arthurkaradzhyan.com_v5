@@ -3,6 +3,11 @@ import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights'
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import TwoHotelsDiagram from '@/components/viz/TwoHotelsDiagram';
+import ReformRoadmapFlow from '@/components/viz/ReformRoadmapFlow';
+import RecoverabilityMatrix from '@/components/viz/RecoverabilityMatrix';
+import NaranjoCascadeFull from '@/components/viz/NaranjoCascadeFull';
+import SamplingFunnel from '@/components/viz/SamplingFunnel';
 
 export function generateStaticParams() {
   return getAllInsightSlugs().map(function(slug) { return { slug: slug }; });
@@ -13,8 +18,8 @@ export function generateMetadata({ params }) {
   if (!insight) return { title: 'Not Found' };
   return {
     title: insight.title + ' | Arthur Karadzhyan',
-    description: insight.desc,
-    openGraph: { title: insight.title, description: insight.desc, type: 'article' },
+    description: insight.bottomLine || insight.desc,
+    openGraph: { title: insight.title, description: insight.bottomLine || insight.desc, type: 'article' },
   };
 }
 
@@ -56,6 +61,15 @@ export default function InsightPage({ params }) {
         </div>
 
         <h1 className="article-title">{insight.title}</h1>
+
+        {/* LEVEL 0: THE ANSWER — bottom line leads */}
+        {insight.bottomLine && (
+          <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
+            {insight.bottomLine}
+          </div>
+        )}
+
+        {/* LEVEL 1: FRAMING — the context that makes the answer meaningful */}
         <p className="article-desc">{insight.desc}</p>
 
         {insight.tool && (
@@ -67,6 +81,13 @@ export default function InsightPage({ params }) {
             </Link>
           </div>
         )}
+
+        {/* Conditional diagrams for specific articles */}
+        {params.slug.indexOf('two-hotels') !== -1 && <TwoHotelsDiagram />}
+        {params.slug.indexOf('ab-2288') !== -1 && <ReformRoadmapFlow />}
+        {params.slug.indexOf('recoverable-vs-non-recoverable') !== -1 && <RecoverabilityMatrix />}
+        {params.slug.indexOf('naranjo-cascade') !== -1 && <NaranjoCascadeFull />}
+        {params.slug.indexOf('statistical-sampling') !== -1 && <SamplingFunnel />}
 
         <div className="article-body">
           {paragraphs.map(function(p, i) {

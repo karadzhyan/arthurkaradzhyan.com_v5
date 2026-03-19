@@ -31,8 +31,7 @@ export default function AboutPage() {
       <div className="page-body">
         <div className="about-layout">
           <div className="about-text">
-            <p>Most PAGA defense is reactive. A notice arrives, counsel answers, discovery happens, and someone negotiates a number at mediation. The exposure model — if one exists — is a back-of-the-envelope calculation based on blanket assumptions. The result: settlements driven by plaintiff's framing, not by the actual data.</p>
-            <p>I do it differently. Every matter starts with a quantitative exposure model that disaggregates penalties by violation category, applies per-category violation rates derived from actual time records and payroll data, strips non-recoverable categories under the ZB, N.A. and Kirby frameworks, and produces three scenarios — plaintiff maximum, data-driven realistic, and defense best case.</p>
+            <p>Every matter starts with a quantitative exposure model that disaggregates penalties by violation category, applies per-category violation rates derived from actual time records and payroll data, strips non-recoverable categories under the ZB, N.A. and Kirby frameworks, and produces three scenarios — plaintiff maximum, data-driven realistic, and defense best case. The methodology has been adopted firm-wide and has reduced claimed exposure by more than 60% in multiple matters.</p>
 
             <div className="about-pullquote">
               <div className="about-pullquote-text">&ldquo;Among the strongest declarations I have reviewed in my career.&rdquo;</div>
@@ -40,7 +39,7 @@ export default function AboutPage() {
             </div>
 
             <p>I built this practice on the plaintiff side — litigating wage-and-hour class actions on behalf of employees before transitioning to defense. That foundation isn't background. It's the operating system. I evaluate claims the way opposing counsel evaluates them, anticipate certification arguments before they're filed, and identify the pressure points that actually move mediations.</p>
-            <p>The interactive tools, publications, and case law analyses on this site aren't marketing. They are the methodology, made visible.</p>
+            <p>Most PAGA defense is reactive — a notice arrives, counsel answers, discovery happens, and someone negotiates a number at mediation. The exposure model, if one exists, is a back-of-the-envelope calculation based on blanket assumptions. The result: settlements driven by plaintiff's framing, not by the actual data. The interactive tools, publications, and case law analyses on this site are the alternative — the methodology, made visible.</p>
 
             <h3 className="about-section-title">Practice Trajectory</h3>
             <p>I started on the plaintiff side — litigating wage-and-hour class actions at a Los Angeles firm that prosecuted meal-and-rest, overtime, and off-the-clock claims against mid-market and enterprise employers. I learned how plaintiff's counsel evaluates cases, prices risk, builds class certification motions, and approaches mediation.</p>

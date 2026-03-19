@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import DemandWaterfall from "../viz/DemandWaterfall";
 
 function RecoverCheck(){
   const [selected,setSelected]=useState(null);
@@ -88,6 +89,8 @@ function RecoverCheck(){
           <S fontSize={12} color="#888">of plaintiff's demand is non-recoverable through PAGA</S>
           <S fontSize={11} color="#999" marginTop={8}>Savings from applying ZB, N.A. and Kirby: {fmt(plaintiffTotal-correctTotal)}</S>
         </div>
+        {/* WATERFALL CHART */}
+        <DemandWaterfall items={items} empCount={empCount} ppCount={ppCount} />
       </div>}
 
       {/* CATEGORY ANALYSIS MODE */}

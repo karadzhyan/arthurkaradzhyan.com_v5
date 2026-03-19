@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import SOLZoneDiagram from "../viz/SOLZoneDiagram";
 
 function SOLCalc(){
   const [noticeDate,setNoticeDate]=useState(new Date().toISOString().split("T")[0]);
@@ -27,6 +28,9 @@ function SOLCalc(){
           <input type="date" value={noticeDate} onChange={e=>setNoticeDate(e.target.value)} style={{fontFamily:"'Outfit',sans-serif",fontSize:14,padding:"10px 14px",border:"1px solid #ddd",outline:"none"}}/></div>
         <button onClick={()=>setShowTimeline(!showTimeline)} style={{fontFamily:"'Outfit',sans-serif",fontSize:11,padding:"10px 16px",border:"1px solid "+(showTimeline?"#2c3e3a":"#ddd"),background:showTimeline?"#2c3e3a":"#fff",color:showTimeline?"#fff":"#888",cursor:"pointer",marginBottom:1}}>{showTimeline?"✓ ":""}Visual Timeline</button>
       </div>
+      {/* SOL ZONE DIAGRAM */}
+      <SOLZoneDiagram noticeDate={noticeDate} />
+
       {showTimeline&&<div style={{marginBottom:28,padding:20,background:"#fafafa",border:"1px solid #eee"}}>
         <S fontSize={10} fontWeight={600} letterSpacing={3} textTransform="uppercase" color="#2c3e3a" marginBottom={16}>Lookback Period Timeline</S>
         <div style={{display:"flex",marginBottom:8,justifyContent:"space-between"}}>
