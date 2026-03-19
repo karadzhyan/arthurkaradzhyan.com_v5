@@ -74,6 +74,24 @@ export default function IndustryPage({ params }) {
       ]} />
       <SiteNav current="Industries" />
 
+      {ind.datePublished && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": ind.name + ' — PAGA Defense & Employment Litigation',
+              "description": ind.headline,
+              "author": { "@type": "Person", "name": "Arthur Karadzhyan" },
+              "datePublished": ind.datePublished,
+              "dateModified": ind.dateModified || ind.datePublished,
+              "publisher": { "@type": "Person", "name": "Arthur Karadzhyan" }
+            })
+          }}
+        />
+      )}
+
       {/* ── Header ──────────────────────────────────────────── */}
       <div className="article-industry-header">
         <div className="article-industry-header-inner">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { commentary, getCommentaryBySlug, getAllCommentarySlugs } from '@/data/commentary';
+import { industries } from '@/data/industries';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
@@ -55,6 +56,22 @@ export default function CommentaryPage({ params }) {
       ]} />
       <SiteNav current="Commentary" />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": item.title,
+            "description": item.summary,
+            "author": { "@type": "Person", "name": "Arthur Karadzhyan" },
+            "datePublished": item.date,
+            "dateModified": item.date,
+            "publisher": { "@type": "Person", "name": "Arthur Karadzhyan" }
+          })
+        }}
+      />
+
       <article className="article-wrap narrow">
         <div className="article-label-muted">{formatDate(item.date)}</div>
 
@@ -78,27 +95,43 @@ export default function CommentaryPage({ params }) {
           </div>
         )}
 
-        {((item.relatedInsights && item.relatedInsights.length > 0) || (item.relatedCases && item.relatedCases.length > 0)) && (
-          <div className="article-related">
-            <div className="article-related-label">Related</div>
-            <div className="article-related-links">
-              {item.relatedInsights && item.relatedInsights.map(function(slug, i) {
-                return (
-                  <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">
-                    Full Publication →
-                  </Link>
-                );
-              })}
-              {item.relatedCases && item.relatedCases.map(function(slug, i) {
-                return (
-                  <Link key={'c' + i} href={'/cases/' + slug} className="article-related-link muted">
-                    Case Analysis →
-                  </Link>
-                );
-              })}
+        {(function() {
+          var hasInsights = item.relatedInsights && item.relatedInsights.length > 0;
+          var hasCases = item.relatedCases && item.relatedCases.length > 0;
+          var relIndustries = (item.relatedIndustries || []).map(function(slug) {
+            return industries.find(function(ind) { return ind.slug === slug; });
+          }).filter(Boolean);
+          var hasIndustries = relIndustries.length > 0;
+          if (!hasInsights && !hasCases && !hasIndustries) return null;
+          return (
+            <div className="article-related">
+              <div className="article-related-label">Related on This Site</div>
+              <div className="article-related-links">
+                {hasInsights && item.relatedInsights.map(function(slug, i) {
+                  return (
+                    <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">
+                      Full Publication →
+                    </Link>
+                  );
+                })}
+                {hasCases && item.relatedCases.map(function(slug, i) {
+                  return (
+                    <Link key={'c' + i} href={'/cases/' + slug} className="article-related-link muted">
+                      Case Analysis →
+                    </Link>
+                  );
+                })}
+                {relIndustries.map(function(ind) {
+                  return (
+                    <Link key={'ind-' + ind.slug} href={'/industries/' + ind.slug} className="article-related-link muted">
+                      {ind.name} — Industry Profile →
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         <div className="article-disclaimer">
           This commentary is for informational purposes only and does not constitute legal advice.

@@ -8,6 +8,7 @@ import { caseLaw } from "@/data/caseLaw";
 import { commentary } from "@/data/commentary";
 import { tools } from "@/data/tools";
 import { industries } from "@/data/industries";
+import { frameworks } from "@/data/frameworks";
 import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -61,7 +62,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="home-hero-breadcrumb">
-            Analytical Platform · {tools.length} Interactive Tools · {insights.length} Publications · {caseLaw.length}
+            Analytical Platform · {tools.length} Interactive Tools · {frameworks.length} Defense Frameworks · {insights.length} Publications · {caseLaw.length}
             {" "}Case Law Analyses · {industries.length} Industry Profiles · Commentary
           </div>
         </div>
@@ -279,10 +280,44 @@ export default function HomePage() {
         </section>
       </div>
 
-      {/* 05 — INDUSTRIES */}
+      {/* 05 — FRAMEWORKS */}
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">05</span>
+          <h2 className="home-section-title">Defense Frameworks</h2>
+          <div className="home-section-line" />
+        </div>
+        <p className="home-section-intro">
+          {frameworks.length} universal analytical frameworks that apply to every
+          PAGA matter regardless of industry.
+        </p>
+        <div className="home-industries-grid" style={{ borderColor: '#eee' }}>
+          {frameworks.map(function (fw) {
+            return (
+              <Link
+                key={fw.slug}
+                href={"/frameworks/" + fw.slug}
+                className="home-industry-card"
+                style={{ background: '#fafafa', borderColor: '#eee' }}
+              >
+                <div className="home-industry-count" style={{ color: 'rgba(44,62,58,.4)' }}>
+                  Universal Methodology
+                </div>
+                <div className="home-industry-name" style={{ color: '#1a1a1a' }}>{fw.name}</div>
+                <div className="home-industry-metric" style={{ color: '#2c3e3a', borderTopColor: '#eee' }}>{fw.subtitle}</div>
+              </Link>
+            );
+          })}
+        </div>
+        <Link href="/frameworks" className="home-section-link">
+          View All Frameworks →
+        </Link>
+      </section>
+
+      {/* 06 — INDUSTRIES */}
+      <section className="home-section">
+        <div className="home-section-header">
+          <span className="home-section-num">06</span>
           <h2 className="home-section-title">Industry Intelligence</h2>
           <div className="home-section-line" />
         </div>
@@ -317,7 +352,7 @@ export default function HomePage() {
       <div className="home-light-band">
         <section className="home-section">
           <div className="home-section-header">
-            <span className="home-section-num">06</span>
+            <span className="home-section-num">07</span>
             <h2 className="home-section-title">Select Matters</h2>
             <div className="home-section-line" />
           </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { industries, crossIndustryPatterns, universalFrameworks } from '@/data/industries';
+import { industries, crossIndustryPatterns } from '@/data/industries';
+import { frameworks } from '@/data/frameworks';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -188,24 +189,34 @@ export default function IndustriesIndex() {
         </div>
 
         <div className="frameworks-grid">
-          {universalFrameworks.map(function (fw, i) {
+          {frameworks.map(function (fw, i) {
             return (
-              <div key={fw.id} className="framework-card">
+              <Link
+                key={fw.id}
+                href={'/frameworks/' + fw.slug}
+                className="framework-card"
+                style={{ cursor: 'pointer', textDecoration: 'none' }}
+              >
                 <div className="framework-num">{i + 1}</div>
                 <div className="framework-content">
                   <div className="framework-name">{fw.name}</div>
                   {fw.subtitle && <div className="framework-subtitle">{fw.subtitle}</div>}
-                  <p className="framework-desc">{fw.description}</p>
+                  <p className="framework-desc">{fw.headline}</p>
                   <div className="framework-applies">
                     <span className="framework-applies-label">Applies to</span>
-                    {fw.applicability}
+                    {fw.applicability.length > 160
+                      ? fw.applicability.slice(0, 160) + '...'
+                      : fw.applicability}
                   </div>
                   <div className="framework-insight">
                     <span className="framework-insight-label">Key Insight</span>
                     {fw.keyInsight}
                   </div>
+                  <div style={{ marginTop: 16, fontFamily: 'Outfit, sans-serif', fontSize: 13, letterSpacing: '0.03em', color: '#4a7c6f' }}>
+                    Read Framework →
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -15,6 +15,7 @@ export default function SiteFooter() {
             { label: "Insights", href: "/insights" },
             { label: "Cases", href: "/cases" },
             { label: "Tools", href: "/tools" },
+            { label: "Frameworks", href: "/frameworks" },
             { label: "Industries", href: "/industries" },
             { label: "Matters", href: "/matters" },
             { label: "Commentary", href: "/commentary" },

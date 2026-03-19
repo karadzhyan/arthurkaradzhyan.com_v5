@@ -176,7 +176,10 @@ var industriesRaw = [
     ],
     relatedTools: ["paga-penalty-estimator", "regular-rate-calculator"],
     relatedInsights: ["the-two-hotels-framework-temporal-bifurcation-in-paga-penalty-analysis"],
-    relatedMatters: ["Multi-Property Hotel Operator"]
+    relatedMatters: ["Multi-Property Hotel Operator"],
+    relatedCases: ["donohue-v-amn-services-inc", "brinker-restaurant-corp-v-superior-court", "ferra-v-loews-hollywood-hotel-inc"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   },
   {
     name: "Automotive (Dealerships)",
@@ -248,7 +251,10 @@ var industriesRaw = [
     ],
     relatedTools: ["regular-rate-calculator", "paga-penalty-estimator"],
     relatedInsights: ["commission-forfeiture-after-sciborski-the-liability-theory-nobody-s-raising", "the-regular-rate-problem-why-every-commission-plan-in-california-is-a-ticking-cl"],
-    relatedMatters: ["Luxury Dealership — Commissions"]
+    relatedMatters: ["Luxury Dealership — Commissions"],
+    relatedCases: ["ferra-v-loews-hollywood-hotel-inc", "alvarado-v-dart-container-corp-of-california"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   },
   {
     name: "Healthcare & Staffing",
@@ -321,7 +327,10 @@ var industriesRaw = [
     ],
     relatedTools: ["statute-of-limitations-calculator", "paga-penalty-estimator"],
     relatedInsights: ["statistical-sampling-in-wage-and-hour-defense-building-a-duran-compliant-framewo"],
-    relatedMatters: []
+    relatedMatters: [],
+    relatedCases: ["estrada-v-royalty-carpet-mills-inc", "donohue-v-amn-services-inc"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   },
   {
     name: "Solar & Energy",
@@ -394,7 +403,10 @@ var industriesRaw = [
     ],
     relatedTools: ["regular-rate-calculator", "paga-penalty-estimator"],
     relatedInsights: ["ab-2288-sb-92-a-defense-side-roadmap-to-the-2024-paga-reforms"],
-    relatedMatters: []
+    relatedMatters: [],
+    relatedCases: ["estrada-v-royalty-carpet-mills-inc"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   },
   {
     name: "Technology & Startups",
@@ -467,7 +479,10 @@ var industriesRaw = [
     ],
     relatedTools: ["wage-statement-compliance-checker", "recoverability-checker"],
     relatedInsights: [],
-    relatedMatters: ["Dissolved Fashion Startup"]
+    relatedMatters: ["Dissolved Fashion Startup"],
+    relatedCases: ["naranjo-v-spectrum-security-services-inc"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   },
   {
     name: "Agriculture",
@@ -540,7 +555,10 @@ var industriesRaw = [
     ],
     relatedTools: ["paga-penalty-estimator", "derivative-penalty-mapper"],
     relatedInsights: ["drafting-paga-settlement-approval-motions-after-moniz-a-practitioner-s-framework"],
-    relatedMatters: []
+    relatedMatters: [],
+    relatedCases: ["donohue-v-amn-services-inc", "estrada-v-royalty-carpet-mills-inc", "duran-v-u-s-bank-national-assn"],
+    datePublished: "2026-01-15",
+    dateModified: "2026-03-19"
   }
 ];
 
