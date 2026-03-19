@@ -9,6 +9,9 @@ import { commentary } from "@/data/commentary";
 import { tools } from "@/data/tools";
 import { industries } from "@/data/industries";
 import { matters } from "@/data/matters";
+import PenaltyCascade from "@/components/PenaltyCascade";
+import ExposureRange from "@/components/ExposureRange";
+import CaseLawTimeline from "@/components/CaseLawTimeline";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -136,6 +139,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ANALYTICAL FRAMEWORK */}
+      <div className="home-light-band">
+        <section className="home-section">
+          <div className="home-section-header">
+            <span className="home-section-num">—</span>
+            <h2 className="home-section-title">How the Analysis Works</h2>
+            <div className="home-section-line" />
+          </div>
+          <p className="home-section-intro">
+            Every PAGA demand inflates exposure by conflating wages with penalties
+            and ignoring recoverability limits. The analytical framework
+            disaggregates, corrects, and repositions.
+          </p>
+          <div className="home-analytics-grid">
+            <div className="home-analytics-panel">
+              <div className="home-analytics-panel-label">
+                Derivative Penalty Cascade
+              </div>
+              <PenaltyCascade />
+            </div>
+            <div className="home-analytics-panel">
+              <div className="home-analytics-panel-label">
+                Three-Scenario Exposure Model
+              </div>
+              <ExposureRange />
+            </div>
+          </div>
+        </section>
+      </div>
+
       {/* 02 — INSIGHTS */}
       <div className="home-dark-band">
         <section className="home-section">
@@ -225,23 +258,10 @@ export default function HomePage() {
           <div className="home-section-line" />
         </div>
         <p className="home-section-intro">
-          {caseLaw.length} decisions that define PAGA defense practice.
+          {caseLaw.length} decisions that define PAGA defense practice — and how the
+          landscape shifted with each one.
         </p>
-        <div className="home-cases-grid">
-          {caseLaw.slice(0, 6).map(function (c) {
-            return (
-              <Link
-                key={c.slug}
-                href={"/cases/" + c.slug}
-                className="home-case-card"
-              >
-                <div className="home-case-issue">{c.issue}</div>
-                <div className="home-case-name">{c.case}</div>
-                <div className="home-case-cite">{c.cite}</div>
-              </Link>
-            );
-          })}
-        </div>
+        <CaseLawTimeline />
         <Link href="/cases" className="home-section-link">
           All {caseLaw.length} Case Analyses →
         </Link>

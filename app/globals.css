@@ -650,6 +650,93 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media(max-width:480px){.tool-other-grid{grid-template-columns:1fr}}
 
 /* ============================================
+   HOMEPAGE — PENALTY CASCADE DIAGRAM
+   ============================================ */
+.cascade-wrap{max-width:600px}
+.cascade-trigger{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(220,53,69,.06);border:1px solid rgba(220,53,69,.15);border-left:4px solid #dc3545}
+.cascade-trigger-icon{width:32px;height:32px;background:#dc3545;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cascade-trigger-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#dc3545}
+.cascade-trigger-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:#1a1a1a}
+.cascade-connector{display:flex;flex-direction:column;align-items:center;height:32px;position:relative}
+.cascade-connector-line{width:2px;height:20px;background:#ddd}
+.cascade-connector-branch{width:80%;height:1px;background:#ddd;position:relative}
+.cascade-connector-branch::before,.cascade-connector-branch::after{content:'';position:absolute;top:-1px;width:2px;height:12px;background:#ddd}
+.cascade-connector-branch::before{left:0}
+.cascade-connector-branch::after{right:0}
+.cascade-streams{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cascade-stream{padding:14px 16px;border:1px solid #eee;border-left:3px solid;position:relative}
+.cascade-stream-dot{width:6px;height:6px;position:absolute;top:-4px;left:50%;transform:translateX(-50%)}
+.cascade-stream-statute{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;color:#999}
+.cascade-stream-label{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;margin-top:2px}
+.cascade-stream-amount{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#2c3e3a;margin-top:6px}
+.cascade-stream-type{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;display:inline-block;padding:2px 6px;border:1px solid;margin-top:6px}
+.cascade-stream-note{font-family:'Outfit',sans-serif;font-size:9px;color:#aaa;margin-top:4px}
+.cascade-total{margin-top:12px;padding:16px 20px;background:#f8faf9;border:1px solid #e0e8e6}
+.cascade-total-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:6px}
+.cascade-total-math{font-family:'Outfit',sans-serif;font-size:12px;color:#888}
+.cascade-total-result{font-family:'Outfit',sans-serif;font-size:13px;color:#444;margin-top:4px}
+.cascade-total-result strong{color:#2c3e3a;font-size:16px}
+.cascade-cite{font-family:'Outfit',sans-serif;font-size:9px;color:#bbb;margin-top:10px;letter-spacing:0.5px}
+
+@media(max-width:480px){
+  .cascade-streams{grid-template-columns:1fr}
+  .cascade-connector-branch{display:none}
+}
+
+/* ============================================
+   HOMEPAGE — EXPOSURE RANGE CHART
+   ============================================ */
+.exposure-wrap{max-width:600px}
+.exposure-chart{margin-bottom:24px}
+.exposure-row{margin-bottom:20px}
+.exposure-row:last-child{margin-bottom:0}
+.exposure-row-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.exposure-row-label{font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;color:#666}
+.exposure-row-amount{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.5px}
+.exposure-bar-track{height:8px;background:#f0f0f0;position:relative;overflow:hidden}
+.exposure-bar-fill{height:100%;transition:width 1s ease-out}
+.exposure-row-detail{font-family:'Outfit',sans-serif;font-size:10px;color:#aaa;margin-top:4px}
+.exposure-reductions{padding:20px 24px;background:#f8faf9;border:1px solid #e0e8e6}
+.exposure-reductions-title{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:14px}
+.exposure-reduction{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #eee}
+.exposure-reduction:last-child{border-bottom:none}
+.exposure-reduction-pct{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#2c3e3a;min-width:44px;flex-shrink:0}
+.exposure-reduction-label{font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:#444}
+.exposure-reduction-ref{font-family:'Outfit',sans-serif;font-size:10px;color:#999;font-style:italic}
+.exposure-note{font-family:'Outfit',sans-serif;font-size:9px;color:#bbb;margin-top:12px;letter-spacing:0.5px}
+
+/* ============================================
+   HOMEPAGE — CASE LAW TIMELINE
+   ============================================ */
+.timeline-wrap{max-width:100%}
+.timeline-track{position:relative}
+.timeline-node{display:flex;gap:20px;margin-bottom:0}
+.timeline-node:last-child{margin-bottom:0}
+.timeline-node-marker{display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0}
+.timeline-node-dot{width:10px;height:10px;border-radius:50%;background:#2c3e3a;flex-shrink:0;position:relative;z-index:1}
+.timeline-node-pending .timeline-node-dot{background:#CC8800;animation:pulse 2s ease-in-out infinite}
+.timeline-node-line{width:2px;flex:1;background:#e0e0e0;min-height:20px}
+.timeline-node-content{flex:1;padding-bottom:20px}
+.timeline-node:last-child .timeline-node-content{padding-bottom:0}
+.timeline-node-year{font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;color:#2c3e3a;letter-spacing:1px}
+.timeline-node-pending .timeline-node-year{color:#CC8800}
+.timeline-node-shift{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-top:1px}
+.timeline-node-cases{font-family:'Outfit',sans-serif;font-size:13px;color:#1a1a1a;margin-top:4px}
+.timeline-case-link{color:#2c3e3a;text-decoration:none;font-weight:600;font-style:italic;transition:opacity .2s}
+.timeline-case-link:hover{opacity:.6}
+.timeline-case-name{font-weight:600;font-style:italic}
+.timeline-node-desc{font-family:'Outfit',sans-serif;font-size:11px;color:#888;margin-top:2px;line-height:1.5}
+
+/* HOMEPAGE — ANALYTICS SECTION */
+.home-analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+.home-analytics-panel{}
+.home-analytics-panel-label{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:16px}
+
+@media(max-width:768px){
+  .home-analytics-grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* ============================================
    PRINT STYLES
    ============================================ */
 @media print{
