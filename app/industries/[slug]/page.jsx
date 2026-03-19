@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { industries, getIndustryBySlug, getAllIndustrySlugs, crossIndustryPatterns } from '@/data/industries';
 import { insights } from '@/data/insights';
 import { tools } from '@/data/tools';
+import { matters } from '@/data/matters';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
@@ -28,6 +29,11 @@ function getInsightTitle(slug) {
 function getToolName(slug) {
   var found = tools.find(function(t) { return t.slug === slug; });
   return found ? found.name : 'Interactive Tool';
+}
+
+function getMatterSlug(title) {
+  var found = matters.find(function(m) { return m.title === title; });
+  return found ? found.slug : null;
 }
 
 function getIndustryName(slug) {
@@ -185,6 +191,14 @@ export default function IndustryPage({ params }) {
                   <div key={pattern.id} className="article-cross-pattern-item">
                     <div className="article-cross-pattern-name">{pattern.name}</div>
                     <p className="article-cross-pattern-summary">{pattern.summary}</p>
+                    <div className="article-cross-pattern-authority">
+                      <span className="article-cross-pattern-also-label">Key Authority: </span>
+                      {pattern.keyAuthority}
+                    </div>
+                    <div className="article-cross-pattern-defense">
+                      <span className="article-cross-pattern-also-label">Defense Angle: </span>
+                      {pattern.defenseAngle}
+                    </div>
                     <div className="article-cross-pattern-also">
                       <span className="article-cross-pattern-also-label">Also affects: </span>
                       {otherIndustries.map(function(slug, i) {
@@ -261,6 +275,10 @@ export default function IndustryPage({ params }) {
               return <Link key={'t' + i} href={'/tools/' + slug} className="article-related-link muted">{getToolName(slug)} →</Link>;
             })}
             {ind.relatedMatters && ind.relatedMatters.length > 0 && ind.relatedMatters.map(function(matter, i) {
+              var matterSlug = getMatterSlug(matter);
+              if (matterSlug) {
+                return <Link key={'m' + i} href={'/matters/' + matterSlug} className="article-related-link muted">{matter} →</Link>;
+              }
               return <span key={'m' + i} className="article-related-link muted" style={{ cursor: 'default' }}>{matter}</span>;
             })}
             <Link href="/industries" className="article-related-link muted">All Industries →</Link>

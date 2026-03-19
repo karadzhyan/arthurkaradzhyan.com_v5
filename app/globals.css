@@ -636,7 +636,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-cross-pattern-item:hover{box-shadow:0 4px 16px rgba(44,62,58,.05)}
 .article-cross-pattern-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:8px}
 .article-cross-pattern-summary{font-family:'Outfit',sans-serif;font-size:12px;line-height:1.8;color:#888;margin-bottom:12px}
-.article-cross-pattern-also{font-family:'Outfit',sans-serif;font-size:11px;color:#999}
+.article-cross-pattern-authority,.article-cross-pattern-defense{font-family:'Outfit',sans-serif;font-size:11px;line-height:1.7;color:#666;margin-bottom:8px}
+.article-cross-pattern-also{font-family:'Outfit',sans-serif;font-size:11px;color:#999;margin-top:12px;padding-top:10px;border-top:1px solid #f0f0f0}
 .article-cross-pattern-also-label{font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:9px;color:rgba(44,62,58,.4)}
 .article-cross-pattern-link{color:#2c3e3a;text-decoration:none;font-weight:500;transition:opacity .3s}
 .article-cross-pattern-link:hover{opacity:.6}
