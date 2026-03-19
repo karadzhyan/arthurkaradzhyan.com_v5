@@ -17,6 +17,15 @@ import {
   IconBarChart, IconTrendUp, IconScale,
   getToolIcon, getIndustryIcon,
 } from "@/components/Icons";
+import HeroDashboard from "@/components/visuals/HeroDashboard";
+import PenaltyCascade from "@/components/visuals/PenaltyCascade";
+import ExposureModel from "@/components/visuals/ExposureModel";
+import PenaltyMath from "@/components/visuals/PenaltyMath";
+import ReformTimeline from "@/components/visuals/ReformTimeline";
+import DefenseFlowchart from "@/components/visuals/DefenseFlowchart";
+import IndustryHeatmap from "@/components/visuals/IndustryHeatmap";
+import RecoverabilityMatrix from "@/components/visuals/RecoverabilityMatrix";
+import CaseLawTimeline from "@/components/visuals/CaseLawTimeline";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -48,7 +57,7 @@ export default function HomePage() {
       {/* HERO */}
       <section className="home-hero">
         <div className="home-hero-panel">
-          <img src="/hero-pattern.svg" alt="" className="home-hero-panel-img" aria-hidden="true" />
+          <HeroDashboard />
         </div>
         <div className="home-hero-content">
           <div className="home-hero-stat">10,098</div>
@@ -155,6 +164,12 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* Methodology visualizations */}
+        <div className="home-viz-section">
+          <PenaltyMath />
+          <ExposureModel />
+        </div>
       </section>
 
       {/* 02 — INSIGHTS */}
@@ -193,6 +208,10 @@ export default function HomePage() {
           <Link href="/insights" className="home-section-link dark">
             All {insights.length} Publications →
           </Link>
+
+          <div className="home-viz-dark">
+            <PenaltyCascade />
+          </div>
         </section>
       </div>
 
@@ -269,6 +288,10 @@ export default function HomePage() {
         <Link href="/cases" className="home-section-link">
           All {caseLaw.length} Case Analyses →
         </Link>
+
+        <div className="home-viz-section">
+          <CaseLawTimeline />
+        </div>
       </section>
 
       {/* 04 — TOOLS */}
@@ -305,8 +328,20 @@ export default function HomePage() {
           <Link href="/tools" className="home-section-link dark">
             View All Tools →
           </Link>
+
+          <div className="home-viz-dark">
+            <ReformTimeline />
+            <DefenseFlowchart />
+          </div>
         </section>
       </div>
+
+      {/* RECOVERABILITY ANALYSIS */}
+      <section className="home-section">
+        <div className="home-viz-section">
+          <RecoverabilityMatrix />
+        </div>
+      </section>
 
       {/* 05 — INDUSTRIES */}
       <section className="home-section">
@@ -345,6 +380,10 @@ export default function HomePage() {
         <Link href="/industries" className="home-section-link">
           View All Industries →
         </Link>
+
+        <div className="home-viz-section">
+          <IndustryHeatmap />
+        </div>
       </section>
 
       {/* 06 — MATTERS */}

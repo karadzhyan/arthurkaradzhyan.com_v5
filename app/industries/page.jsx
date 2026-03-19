@@ -3,6 +3,7 @@ import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import { getIndustryIcon } from '@/components/Icons';
+import IndustriesPageViz from '@/components/visuals/IndustriesPageViz';
 
 export var metadata = {
   title: 'Industry Intelligence — PAGA Defense by Sector | Arthur Karadzhyan',
@@ -69,6 +70,8 @@ export default function IndustriesIndex() {
             );
           })}
         </div>
+
+        <IndustriesPageViz />
 
         <div className="page-essay">
           <h3 className="page-essay-title">Why Industry-Specific Analysis</h3>

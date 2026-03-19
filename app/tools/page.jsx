@@ -3,6 +3,7 @@ import { tools } from '@/data/tools';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import { getToolIcon } from '@/components/Icons';
+import ToolsPageViz from '@/components/visuals/ToolsPageViz';
 
 export var metadata = {
   title: 'Interactive Tools — PAGA Defense Analytics | Arthur Karadzhyan',
@@ -51,6 +52,8 @@ export default function ToolsIndex() {
             );
           })}
         </div>
+
+        <ToolsPageViz />
 
         <div className="page-primer">
           <div className="page-primer-label">New to PAGA?</div>
