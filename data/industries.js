@@ -140,19 +140,39 @@ var industriesRaw = [
         statute: "Lab. Code §§ 510, 1194",
         analysis: "The Troester v. Starbucks decision effectively eliminated the federal de minimis doctrine for California wage claims, meaning that pre-shift setup tasks (logging into POS systems, counting cash drawers, pre-shift meetings) and post-shift closing tasks (cleaning, restocking, end-of-day reports) that take 5–10 minutes per shift are compensable. In hospitality operations with hundreds of employees each performing these tasks daily, the aggregate exposure is substantial — and it compounds across every pay period in the PAGA statutory period.",
         defenseStrategy: "Audit clock-in and clock-out procedures to identify systematic gaps between arrival and first clock punch. Implement pre-shift clock-in requirements and post-shift sign-off procedures. If historical exposure exists, quantify it precisely for settlement positioning — blanket assumptions from plaintiff's counsel will overstate the actual time."
+      },
+      {
+        name: "Room Attendant Piece-Rate and Non-Productive Time",
+        statute: "Lab. Code § 226.2",
+        analysis: "Room attendants compensated on a per-room or per-floor basis are piece-rate employees subject to section 226.2's separate-compensation requirements. This means the hotel must separately calculate and pay rest period time at a regular rate derived from the piece-rate earnings — not at minimum wage, but at the actual piece-rate regular rate. Non-productive time (waiting for room assignments, attending meetings, traveling between floors) must also be separately compensated at no less than the applicable minimum wage. Most hotel payroll systems do not distinguish between productive and non-productive time for housekeeping staff, creating systematic underpayment. The wage statement must separately identify each compensation component — a requirement that virtually no legacy hotel payroll system satisfies.",
+        defenseStrategy: "Audit the compensation structure for all housekeeping positions paid on a per-room or per-task basis. Verify whether the payroll system separately calculates rest period compensation at the piece-rate regular rate and identifies non-productive time compensation on the wage statement. Implement system updates to achieve § 226.2 compliance and quantify any historical underpayment for exposure modeling."
+      },
+      {
+        name: "Manager and Supervisor Overtime Exemption",
+        statute: "Lab. Code §§ 510, 515; IWC Wage Order 5, § 1(A)",
+        analysis: "The executive exemption requires that the employee spend more than 50% of working time on exempt duties — managing the enterprise or a customarily recognized department, directing the work of two or more employees, and exercising discretion and independent judgment. In hospitality, the line between exempt managerial work and non-exempt production work is blurred: a restaurant manager who regularly works the floor during rush periods, a hotel front desk supervisor who checks in guests during peak times, or a housekeeping manager who cleans rooms when short-staffed is performing non-exempt duties that may push the time allocation below 50%. The salary basis test adds a second vulnerability — managers paid a salary but subject to deductions for partial-day absences or performance-based reductions may lose the exemption entirely.",
+        defenseStrategy: "Conduct a duties analysis for every position classified as exempt under the executive exemption. Document the actual allocation of time between managerial and production tasks using contemporaneous records — not job descriptions. For positions where the 50% threshold is borderline, implement workload redistribution and supervisory staffing adjustments to ensure the exemption is defensible."
+      },
+      {
+        name: "Alternative Workweek Schedules in Housekeeping and Laundry",
+        statute: "Lab. Code § 511; IWC Wage Order 5, § 3(B)",
+        analysis: "Hotels implementing 4/10 or 3/12 schedules for housekeeping, laundry, and maintenance departments must comply with the four-step DIR election process — the same process that creates catastrophic retroactive exposure in the solar industry. The exposure is compounded in hospitality because housekeeping departments experience high turnover, meaning that employees hired after the original election may not have voted in the election and may not have received the required written disclosure. Whether these post-election hires are covered by the existing AWS or must participate in a new election is an unresolved question that creates ongoing compliance risk.",
+        defenseStrategy: "Audit all active alternative workweek elections for strict compliance with each procedural step. Verify that post-election hires received written disclosure and were informed of the alternative schedule. If procedural deficiencies exist, conduct a new compliant election immediately to limit prospective exposure. Calculate the retroactive overtime exposure from any invalid AWS period."
       }
     ],
-    authorities: ["Donohue v. AMN Services (2021) 11 Cal.5th 58", "Brinker Restaurant Corp. v. Superior Court (2012) 53 Cal.4th 1004", "Augustus v. ABM Security Services (2016) 2 Cal.5th 257", "Troester v. Starbucks Corp. (2018) 5 Cal.5th 829"],
+    authorities: ["Donohue v. AMN Services (2021) 11 Cal.5th 58", "Brinker Restaurant Corp. v. Superior Court (2012) 53 Cal.4th 1004", "Augustus v. ABM Security Services (2016) 2 Cal.5th 257", "Troester v. Starbucks Corp. (2018) 5 Cal.5th 829", "Lab. Code § 226.2 (piece-rate compensation)", "Lab. Code § 511 (alternative workweek schedules)"],
     defenseStrategies: [
       "Deploy the 'Two Hotels' temporal bifurcation framework — disaggregate Legacy Period violation rates from Remedied Period rates using PMS system logs, overtime reduction metrics, and electronic meal period attestation data.",
       "Challenge the Donohue presumption with affirmative evidence of meal period provision: on-duty meal period agreements, electronic attestation records, and supervisor training documentation demonstrating that the policy was to provide, not merely schedule, compliant meal periods.",
       "Pursue manageability limitations under § 2699(p) for multi-property operators where each property has different staffing levels, scheduling practices, and operational constraints — a unified PAGA claim across 12 hotel properties with different general managers and different HR practices is analytically unmanageable.",
-      "Position for the 15% penalty cap by documenting pre-notice compliance efforts: meal period policy revisions, supervisor training with attendance records, payroll audit reports, and electronic timekeeping system implementation."
+      "Position for the 15% penalty cap by documenting pre-notice compliance efforts: meal period policy revisions, supervisor training with attendance records, payroll audit reports, and electronic timekeeping system implementation.",
+      "Audit piece-rate compliance for housekeeping departments under § 226.2 — this is the most commonly overlooked exposure category in hospitality because employers do not recognize per-room pay as piece-rate compensation subject to separate non-productive time and rest period compensation requirements."
     ],
     monitoring: [
       "Pending DLSE guidance on service charge distribution for mandatory hotel and banquet service charges.",
       "Legislative proposals affecting predictive scheduling requirements for hospitality workers in California.",
-      "Evolving treatment of on-duty meal period agreements in hospitality settings — no published appellate decision has addressed whether the 'nature of the work' prerequisite is satisfied for hotel front desk employees during overnight shifts."
+      "Evolving treatment of on-duty meal period agreements in hospitality settings — no published appellate decision has addressed whether the 'nature of the work' prerequisite is satisfied for hotel front desk employees during overnight shifts.",
+      "Application of § 226.2 piece-rate requirements to per-room housekeeping compensation — limited published authority on whether per-room pay structures constitute piece-rate under the statute."
     ],
     relatedTools: ["paga-penalty-estimator", "regular-rate-calculator"],
     relatedInsights: ["the-two-hotels-framework-temporal-bifurcation-in-paga-penalty-analysis"],
