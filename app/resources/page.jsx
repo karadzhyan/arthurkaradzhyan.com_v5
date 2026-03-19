@@ -26,7 +26,7 @@ export default function ResourcesIndex() {
           <h1 className="page-title">Resources</h1>
           <p className="page-desc">
             Operational tools and reference materials for California employment
-            defense. Resources marked with → are available to view.
+            defense. Sixteen practice-grade frameworks, checklists, and reference guides.
           </p>
         </div>
       </div>
