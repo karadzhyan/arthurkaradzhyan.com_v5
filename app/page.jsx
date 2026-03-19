@@ -185,9 +185,9 @@ export default function HomePage() {
                   <div className="home-insight-tag" style={{ color: '#8aa39e' }}>{ins.tag}</div>
                   <div className="home-insight-title" style={{ color: '#fff' }}>{ins.title}</div>
                   <div className="home-insight-desc" style={{ color: 'rgba(255,255,255,.45)' }}>
-                    {ins.desc.length > 120
-                      ? ins.desc.slice(0, 120) + "..."
-                      : ins.desc}
+                    {(ins.bottomLine || ins.desc).length > 120
+                      ? (ins.bottomLine || ins.desc).slice(0, 120) + "..."
+                      : (ins.bottomLine || ins.desc)}
                   </div>
                 </Link>
               );
@@ -231,9 +231,9 @@ export default function HomePage() {
                     </div>
                     <div className="home-commentary-title">{item.title}</div>
                     <div className="home-commentary-summary">
-                      {item.summary.length > 140
-                        ? item.summary.slice(0, 140) + "..."
-                        : item.summary}
+                      {(item.bottomLine || item.summary).length > 140
+                        ? (item.bottomLine || item.summary).slice(0, 140) + "..."
+                        : (item.bottomLine || item.summary)}
                     </div>
                   </Link>
                 );

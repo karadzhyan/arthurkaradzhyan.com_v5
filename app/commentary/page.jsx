@@ -126,7 +126,7 @@ export default function CommentaryIndex() {
                 </div>
                 <div className="commentary-body">
                   <div className="commentary-title">{item.title}</div>
-                  <div className="commentary-summary">{item.summary}</div>
+                  <div className="commentary-summary">{item.bottomLine || item.summary}</div>
                   <div className="commentary-tags">
                     {item.tags && item.tags.map(function(tag, j) {
                       return <span key={j} className="commentary-tag">{tag}</span>;

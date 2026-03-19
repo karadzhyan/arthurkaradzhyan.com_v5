@@ -46,7 +46,7 @@ export default function InsightsIndex() {
                   )}
                 </div>
                 <h2 className="insight-index-title">{ins.title}</h2>
-                <p className="insight-index-desc">{ins.desc}</p>
+                <p className="insight-index-desc">{ins.bottomLine || ins.desc}</p>
                 {ins.tool && (
                   <div className="insight-index-tool">
                     Interactive Tool: {ins.tool.split('—')[0].trim()}
