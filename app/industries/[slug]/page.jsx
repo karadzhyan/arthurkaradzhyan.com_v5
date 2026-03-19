@@ -3,11 +3,12 @@ import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/indus
 import { insights } from '@/data/insights';
 import { tools } from '@/data/tools';
 import { caseLaw } from '@/data/caseLaw';
+import { matters } from '@/data/matters';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import IndustryExposureProfile from '@/components/industries/IndustryExposureProfile';
-import ExposureCategoryChart from '@/components/industries/ExposureCategoryChart';
+
 import DefenseStrategyFlow from '@/components/industries/DefenseStrategyFlow';
 import HospitalityShiftExposure from '@/components/industries/HospitalityShiftExposure';
 import DonohueCascade from '@/components/industries/DonohueCascade';
@@ -195,12 +196,6 @@ export default function IndustryPage({ params }) {
           </>
         )}
 
-        {/* EXPOSURE CATEGORY CHART */}
-        <section style={{ marginBottom: 32 }}>
-          <div className="article-section-label lg">Exposure Category Complexity</div>
-          <ExposureCategoryChart categories={ind.exposureCategories} />
-        </section>
-
         {/* EXPOSURE CATEGORIES DETAIL */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories — Analysis & Defense</div>
@@ -279,6 +274,18 @@ export default function IndustryPage({ params }) {
         <section style={{ marginBottom: 40, marginTop: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>
           <div className="article-related-grid">
+            {ind.relatedMatters && ind.relatedMatters.length > 0 && ind.relatedMatters.map(function(matterName, i) {
+              var match = matters.find(function(m) { return m.title === matterName; });
+              if (!match) return null;
+              return (
+                <Link key={'m' + i} href={'/matters/' + match.slug} className="article-related-card article-related-card-matter">
+                  <div className="article-related-type">Matter Experience</div>
+                  <div className="article-related-title">{match.title}</div>
+                  <div className="article-related-desc">{match.short}</div>
+                  {match.result && <div className="article-related-result">{match.result}</div>}
+                </Link>
+              );
+            })}
             {ind.relatedInsights && ind.relatedInsights.map(function(insightSlug, i) {
               var match = insights.find(function(ins) { return ins.slug === insightSlug; });
               return (

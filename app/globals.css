@@ -660,7 +660,10 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-related-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(44,62,58,.06);border-left-color:#4a7a6f}
 .article-related-card-tool{border-left-color:#CC8800}
 .article-related-card-tool:hover{border-left-color:#b85c00}
+.article-related-card-matter{border-left-color:#8aa39e}
+.article-related-card-matter:hover{border-left-color:#2c3e3a}
 .article-related-type{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px}
+.article-related-result{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;color:#2c3e3a;margin-top:6px;padding-top:6px;border-top:1px solid #f0f0f0}
 .article-related-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.4;margin-bottom:4px}
 .article-related-desc{font-family:'Outfit',sans-serif;font-size:10px;color:#888;line-height:1.5}
 
