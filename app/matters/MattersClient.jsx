@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { matters } from "@/data/matters";
+import MattersOutcomeStrip from "@/components/MattersOutcomeStrip";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -24,6 +25,7 @@ export default function MattersClient() {
       </div>
 
       <div className="page-body">
+        <MattersOutcomeStrip />
         <div className="matters-grid">
           {matters.map(function (m, i) {
             var isOpen = expanded === i;
