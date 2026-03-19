@@ -3,6 +3,7 @@ import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/indus
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import ExposureProfileChart from '@/components/ExposureProfileChart';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -73,6 +74,10 @@ export default function IndustryPage({ params }) {
             {ind.structuralVulnerability.split('\n').filter(function(p) { return p.trim(); }).map(function(p, i) { return <p key={i}>{p}</p>; })}
           </div>
         </section>
+
+        {ind.name === 'Hospitality' && (
+          <ExposureProfileChart />
+        )}
 
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories</div>

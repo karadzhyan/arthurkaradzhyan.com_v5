@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import RegularRateFormulaDiagram from "../RegularRateFormulaDiagram";
 
 function RegRateCalc(){
   const [base,setBase]=useState(17);
@@ -62,6 +63,9 @@ function RegRateCalc(){
       <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,#2c3e3a,#4a7a6f)"}}/>
       <S fontSize={10} fontWeight={500} letterSpacing={4} textTransform="uppercase" color="#2c3e3a" marginBottom={8}>Interactive · Regular Rate Calculator</S>
       <S fontSize={12} color="#999" marginBottom={24}>Calculates the correct regular rate under Ferra and Alvarado. Shows the gap between what was likely paid and what should have been paid, with PAGA extrapolation.</S>
+
+      {/* FORMULA DIAGRAM */}
+      <RegularRateFormulaDiagram />
 
       {/* SCENARIO PRESETS */}
       <S fontSize={11} fontWeight={500} color="#555" marginBottom={8}>Pre-Loaded Industry Scenarios</S>

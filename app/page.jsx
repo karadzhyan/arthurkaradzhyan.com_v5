@@ -11,6 +11,7 @@ import { industries } from "@/data/industries";
 import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import PenaltyScaleViz from "@/components/PenaltyScaleViz";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -66,6 +67,16 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* PENALTY SCALE — How one violation compounds */}
+      <div style={{
+        background: "linear-gradient(180deg, #1e2d2a, #1a1a1a)",
+        borderTop: "1px solid rgba(138,163,158,.15)",
+      }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+          <PenaltyScaleViz />
+        </div>
+      </div>
 
       {/* STATS */}
       <div className="home-stats" ref={statsRef}>

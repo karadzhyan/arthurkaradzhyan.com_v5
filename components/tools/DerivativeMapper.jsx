@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import DerivativeCascadeDiagram from "../DerivativeCascadeDiagram";
 
 function DerivativeMapper(){
   const [trigger,setTrigger]=useState("meal");
@@ -62,6 +63,9 @@ function DerivativeMapper(){
       <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,#2c3e3a,#4a7a6f)"}}/>
       <S fontSize={10} fontWeight={500} letterSpacing={4} textTransform="uppercase" color="#2c3e3a" marginBottom={8}>Interactive · Derivative Penalty Mapper</S>
       <S fontSize={12} color="#999" marginBottom={24}>One violation triggers a cascade of derivative penalties. This tool maps the chain from a single underlying violation through every downstream penalty it generates — showing how PAGA exposure multiplies.</S>
+
+      {/* CASCADE DIAGRAM */}
+      <DerivativeCascadeDiagram trigger={trigger} />
 
       {/* TRIGGER SELECTION */}
       <S fontSize={11} fontWeight={500} color="#555" marginBottom={8}>Triggering Violation</S>
