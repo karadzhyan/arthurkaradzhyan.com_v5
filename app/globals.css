@@ -946,6 +946,129 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media(max-width:480px){.vmx-grid{grid-template-columns:1fr 1fr}}
 
 /* ============================================
+   HOMEPAGE — TOOL WORKFLOW
+   ============================================ */
+.workflow{max-width:700px}
+.workflow-phases{}
+.workflow-phase{margin-bottom:0}
+.workflow-phase-header{padding:8px 0 8px 16px;border-left:3px solid;margin-bottom:8px}
+.workflow-phase-num{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px}
+.workflow-phase-label{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:#1a1a1a}
+.workflow-phase-tools{display:flex;flex-direction:column;gap:6px;margin-left:20px}
+.workflow-tool{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1px solid #eee;text-decoration:none;transition:all .3s}
+.workflow-tool:hover{border-color:#2c3e3a;transform:translateX(4px);box-shadow:0 2px 12px rgba(44,62,58,.06)}
+.workflow-tool-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.workflow-tool-name{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#1a1a1a}
+.workflow-tool-desc{font-family:'Outfit',sans-serif;font-size:10px;color:#999}
+.workflow-connector{display:flex;flex-direction:column;align-items:center;height:24px;margin:4px 0 4px 10px}
+.workflow-connector-line{width:2px;flex:1}
+.workflow-connector-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid}
+.workflow-note{font-family:'Outfit',sans-serif;font-size:11px;color:#888;line-height:1.7;margin-top:20px;padding:14px 16px;background:#f8faf9;border:1px solid #e0e8e6}
+
+/* ============================================
+   HOMEPAGE — DEFENSE LIFECYCLE
+   ============================================ */
+.lifecycle{max-width:700px}
+.lifecycle-track{}
+.lifecycle-phase{display:flex;gap:20px}
+.lifecycle-marker{display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0}
+.lifecycle-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;position:relative;z-index:1}
+.lifecycle-line{width:2px;flex:1;background:#e0e0e0}
+.lifecycle-content{flex:1;padding-bottom:28px}
+.lifecycle-phase:last-child .lifecycle-content{padding-bottom:0}
+.lifecycle-header{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.lifecycle-day{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px}
+.lifecycle-deadline{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#CC8800;padding:2px 8px;background:rgba(204,136,0,.06);border:1px solid rgba(204,136,0,.15)}
+.lifecycle-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:8px}
+.lifecycle-actions{display:flex;flex-direction:column;gap:4px}
+.lifecycle-action{display:flex;gap:8px;align-items:flex-start;font-family:'Outfit',sans-serif;font-size:11px;color:#666;line-height:1.5}
+.lifecycle-action-bullet{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.lifecycle-bottom{margin-top:24px;padding:20px 24px;background:#f8faf9;border:1px solid #e0e8e6}
+.lifecycle-bottom-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:14px}
+.lifecycle-deadlines{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.lifecycle-dl-item{text-align:center}
+.lifecycle-dl-days{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;line-height:1}
+.lifecycle-dl-text{font-family:'Outfit',sans-serif;font-size:9px;color:#888;margin-top:4px;line-height:1.4}
+
+@media(max-width:768px){
+  .lifecycle-deadlines{grid-template-columns:1fr 1fr;gap:12px}
+}
+
+/* ============================================
+   HOMEPAGE — DOCTRINE MAP
+   ============================================ */
+.doctrine-map{max-width:100%}
+.doctrine-map-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.doctrine-map-table{width:100%;border-collapse:collapse;min-width:750px}
+.doctrine-th{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#999;padding:10px 8px;text-align:center;border-bottom:2px solid #eee}
+.doctrine-th-case{text-align:left;min-width:80px}
+.doctrine-th-year{text-align:center;min-width:40px}
+.doctrine-row{border-bottom:1px solid #f0f0f0;transition:background .2s}
+.doctrine-row:hover{background:rgba(44,62,58,.02)}
+.doctrine-row-pending{background:rgba(204,136,0,.03)}
+.doctrine-td{padding:8px;text-align:center;vertical-align:middle}
+.doctrine-td-case{text-align:left}
+.doctrine-td-year{font-family:'Outfit',sans-serif;font-size:10px;color:#999;text-align:center}
+.doctrine-td-cell{min-width:60px;transition:transform .15s}
+.doctrine-cell-dot{width:8px;height:8px;border-radius:50%;margin:0 auto}
+.doctrine-case-link{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#2c3e3a;text-decoration:none;font-style:italic;transition:opacity .2s}
+.doctrine-case-link:hover{opacity:.6}
+.doctrine-case-name{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#1a1a1a;font-style:italic}
+.doctrine-map-legend{display:flex;gap:20px;margin-top:16px}
+.doctrine-legend-item{display:flex;align-items:center;gap:6px}
+.doctrine-legend-swatch{width:14px;height:10px;flex-shrink:0}
+.doctrine-legend-label{font-family:'Outfit',sans-serif;font-size:10px;color:#888}
+
+/* ============================================
+   HOMEPAGE — MATTER OUTCOMES
+   ============================================ */
+.outcomes{max-width:100%}
+.outcomes-bar{display:flex;height:16px;gap:2px;margin-bottom:16px;overflow:hidden}
+.outcomes-bar-segment{transition:width .8s ease-out;min-width:4px}
+.outcomes-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px}
+.outcomes-legend-item{display:flex;gap:8px;align-items:flex-start}
+.outcomes-legend-swatch{width:10px;height:10px;flex-shrink:0;margin-top:2px}
+.outcomes-legend-label{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#1a1a1a;line-height:1.3}
+.outcomes-legend-count{font-weight:400;color:#999}
+.outcomes-legend-desc{font-family:'Outfit',sans-serif;font-size:9px;color:#999;margin-top:1px}
+.outcomes-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 24px;background:#f8faf9;border:1px solid #e0e8e6}
+.outcomes-metric{text-align:center}
+.outcomes-metric-num{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#2c3e3a;line-height:1}
+.outcomes-metric-label{font-family:'Outfit',sans-serif;font-size:9px;color:#888;margin-top:4px;white-space:pre-line;line-height:1.4}
+
+@media(max-width:768px){
+  .outcomes-legend{grid-template-columns:1fr 1fr}
+  .outcomes-metrics{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.outcomes-legend{grid-template-columns:1fr}}
+
+/* ============================================
+   HOMEPAGE — COMPLIANCE SCORECARD
+   ============================================ */
+.scorecard{max-width:100%}
+.scorecard-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.scorecard-summary-item{text-align:center;padding:16px;background:#fafafa;border:1px solid #eee}
+.scorecard-summary-num{font-family:'Outfit',sans-serif;font-size:32px;font-weight:700;color:#2c3e3a;line-height:1}
+.scorecard-summary-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-top:4px}
+.scorecard-categories{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scorecard-category{padding:20px;border:1px solid #eee}
+.scorecard-cat-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #eee}
+.scorecard-cat-icon{width:28px;height:28px;background:#2c3e3a;color:#fff;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.scorecard-cat-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;flex:1}
+.scorecard-cat-count{font-family:'Outfit',sans-serif;font-size:9px;color:#999}
+.scorecard-items{}
+.scorecard-item{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #f5f5f5}
+.scorecard-item:last-child{border-bottom:none}
+.scorecard-item-check{width:12px;height:12px;border:1.5px solid #ddd;flex-shrink:0}
+.scorecard-item-text{font-family:'Outfit',sans-serif;font-size:11px;color:#555;flex:1;line-height:1.4}
+.scorecard-item-weight{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border:1px solid;flex-shrink:0}
+.scorecard-cite{font-family:'Outfit',sans-serif;font-size:9px;color:#bbb;margin-top:14px;letter-spacing:0.5px}
+
+@media(max-width:768px){
+  .scorecard-categories{grid-template-columns:1fr}
+}
+
+/* ============================================
    PRINT STYLES
    ============================================ */
 @media print{

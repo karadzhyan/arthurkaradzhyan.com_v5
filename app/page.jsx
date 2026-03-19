@@ -20,6 +20,11 @@ import SOLTimeline from "@/components/SOLTimeline";
 import PenaltyCapFlow from "@/components/PenaltyCapFlow";
 import RegularRateWaterfall from "@/components/RegularRateWaterfall";
 import ViolationMultiplier from "@/components/ViolationMultiplier";
+import ToolWorkflow from "@/components/ToolWorkflow";
+import DefenseLifecycle from "@/components/DefenseLifecycle";
+import DoctrineMap from "@/components/DoctrineMap";
+import MatterOutcomes from "@/components/MatterOutcomes";
+import ComplianceScorecard from "@/components/ComplianceScorecard";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -163,7 +168,22 @@ export default function HomePage() {
         </section>
       </div>
 
+      {/* DEFENSE LIFECYCLE */}
+      <section className="home-section">
+        <div className="home-section-header">
+          <span className="home-section-num">—</span>
+          <h2 className="home-section-title">Defense Lifecycle</h2>
+          <div className="home-section-line" />
+        </div>
+        <p className="home-section-intro">
+          From PAGA notice to resolution — every phase has a deadline, every
+          deadline has a strategic consequence.
+        </p>
+        <DefenseLifecycle />
+      </section>
+
       {/* ANALYTICAL FRAMEWORK — PENALTY CASCADE + EXPOSURE MODEL */}
+      <div className="home-light-band">
       <section className="home-section">
         <div className="home-section-header">
           <span className="home-section-num">—</span>
@@ -190,6 +210,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* VIOLATION MULTIPLIER MATRIX */}
       <div className="home-dark-band">
@@ -378,6 +399,22 @@ export default function HomePage() {
         </Link>
       </section>
 
+      {/* DOCTRINE MAP */}
+      <div className="home-light-band">
+        <section className="home-section">
+          <div className="home-section-header">
+            <span className="home-section-num">—</span>
+            <h2 className="home-section-title">Doctrine Matrix</h2>
+            <div className="home-section-line" />
+          </div>
+          <p className="home-section-intro">
+            Which case governs which doctrine. Read across to see the legal
+            foundation for each area of PAGA defense.
+          </p>
+          <DoctrineMap />
+        </section>
+      </div>
+
       {/* 04 — TOOLS */}
       <div className="home-dark-band">
         <section className="home-section">
@@ -409,6 +446,21 @@ export default function HomePage() {
           </Link>
         </section>
       </div>
+
+      {/* TOOL WORKFLOW */}
+      <section className="home-section">
+        <div className="home-section-header">
+          <span className="home-section-num">—</span>
+          <h2 className="home-section-title">Analytical Workflow</h2>
+          <div className="home-section-line" />
+        </div>
+        <p className="home-section-intro">
+          The recommended sequence. Each phase feeds the next — triage
+          determines scope, quantification produces raw numbers, reduction
+          applies the legal framework.
+        </p>
+        <ToolWorkflow />
+      </section>
 
       {/* 05 — INDUSTRY HEATMAP */}
       <section className="home-section">
@@ -450,6 +502,33 @@ export default function HomePage() {
           <Link href="/matters" className="home-section-link">
             All {matters.length} Matters →
           </Link>
+        </section>
+      </div>
+
+      {/* MATTER OUTCOMES */}
+      <section className="home-section">
+        <div className="home-section-header">
+          <span className="home-section-num">—</span>
+          <h2 className="home-section-title">Outcome Distribution</h2>
+          <div className="home-section-line" />
+        </div>
+        <MatterOutcomes />
+      </section>
+
+      {/* COMPLIANCE SCORECARD */}
+      <div className="home-light-band">
+        <section className="home-section">
+          <div className="home-section-header">
+            <span className="home-section-num">—</span>
+            <h2 className="home-section-title">Compliance Readiness</h2>
+            <div className="home-section-line" />
+          </div>
+          <p className="home-section-intro">
+            The documentation framework for penalty cap qualification. {" "}
+            18 elements across 4 categories — the difference between 15%
+            and 100% of penalties.
+          </p>
+          <ComplianceScorecard />
         </section>
       </div>
 
