@@ -18,8 +18,8 @@ export function generateMetadata({ params }) {
   if (!insight) return { title: 'Not Found' };
   return {
     title: insight.title + ' | Arthur Karadzhyan',
-    description: insight.desc,
-    openGraph: { title: insight.title, description: insight.desc, type: 'article' },
+    description: insight.bottomLine || insight.desc,
+    openGraph: { title: insight.title, description: insight.bottomLine || insight.desc, type: 'article' },
   };
 }
 

@@ -13,10 +13,10 @@ export function generateMetadata({ params }) {
   if (!item) return { title: 'Not Found' };
   return {
     title: item.title + ' | Arthur Karadzhyan',
-    description: item.summary,
+    description: item.bottomLine || item.summary,
     openGraph: {
       title: item.title,
-      description: item.summary,
+      description: item.bottomLine || item.summary,
       type: 'article',
     },
   };
