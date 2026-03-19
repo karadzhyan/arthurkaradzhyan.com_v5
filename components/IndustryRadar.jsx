@@ -1,6 +1,8 @@
 /*
  * IndustryRadar — spider/radar chart comparing 6 industries across 5 exposure axes.
  * Used on /industries index page. Server component, pure SVG.
+ * Enhanced with numerical scores at vertices, highest-risk annotations,
+ * overall risk ratings, and composite scores.
  */
 
 export default function IndustryRadar() {
@@ -14,8 +16,8 @@ export default function IndustryRadar() {
     { name: 'Agriculture', color: '#555', scores: [75, 85, 35, 45, 40] },
   ];
 
-  var W = 480, H = 300;
-  var cx = 210, cy = 150, maxR = 110;
+  var W = 480, H = 360;
+  var cx = 210, cy = 160, maxR = 110;
   var angleStep = (2 * Math.PI) / axes.length;
   var startAngle = -Math.PI / 2;
 
@@ -26,14 +28,21 @@ export default function IndustryRadar() {
   /* Grid rings */
   var rings = [25, 50, 75, 100];
 
-  /* Build polygon paths for each industry */
-  function polyPath(scores) {
-    return scores.map(function (s, i) {
-      var a = startAngle + i * angleStep;
-      var r = (s / 100) * maxR;
-      var p = polar(a, r);
-      return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
-    }).join(' ') + ' Z';
+  /* Risk rating based on composite */
+  function riskRating(scores) {
+    var avg = scores.reduce(function (a, b) { return a + b; }, 0) / scores.length;
+    if (avg >= 65) return { label: 'HIGH', color: '#dc3545' };
+    if (avg >= 55) return { label: 'ELEVATED', color: '#CC8800' };
+    return { label: 'MODERATE', color: '#4a7a6f' };
+  }
+
+  /* Find highest risk axis index for each industry */
+  function highestRiskIdx(scores) {
+    var maxIdx = 0;
+    for (var i = 1; i < scores.length; i++) {
+      if (scores[i] > scores[maxIdx]) maxIdx = i;
+    }
+    return maxIdx;
   }
 
   return (
@@ -53,8 +62,15 @@ export default function IndustryRadar() {
             return p.x.toFixed(1) + ',' + p.y.toFixed(1);
           }).join(' ');
           return (
-            <polygon key={pct} points={pts}
-              fill="none" stroke="#e8e8e8" strokeWidth={0.75} />
+            <g key={pct}>
+              <polygon points={pts}
+                fill="none" stroke="#e8e8e8" strokeWidth={0.75} />
+              {/* Ring value label */}
+              <text x={cx + 4} y={cy - (pct / 100) * maxR + 3}
+                fontFamily="'Outfit',sans-serif" fontSize={6} fill="#ddd">
+                {pct}
+              </text>
+            </g>
           );
         })}
 
@@ -91,39 +107,86 @@ export default function IndustryRadar() {
           );
         })}
 
-        {/* Industry dots at vertices */}
+        {/* Industry dots at vertices with numerical scores */}
         {industries.map(function (ind) {
+          var hrIdx = highestRiskIdx(ind.scores);
           return ind.scores.map(function (s, j) {
             var a = startAngle + j * angleStep;
             var p = polar(a, (s / 100) * maxR);
+            var isHighest = j === hrIdx;
             return (
-              <circle key={ind.name + j} cx={p.x} cy={p.y} r={2}
-                fill={ind.color} opacity={0.7} />
+              <g key={ind.name + j}>
+                <circle cx={p.x} cy={p.y} r={isHighest ? 3.5 : 2}
+                  fill={ind.color} opacity={isHighest ? 0.9 : 0.7} />
+                {/* Score label at vertex */}
+                <text x={p.x} y={p.y - 5} textAnchor="middle"
+                  fontFamily="'Outfit',sans-serif" fontSize={6} fontWeight={isHighest ? 700 : 500}
+                  fill={ind.color} opacity={isHighest ? 0.9 : 0.5}>
+                  {s}
+                </text>
+                {/* Highest risk annotation */}
+                {isHighest && (
+                  <g>
+                    <circle cx={p.x} cy={p.y} r={6}
+                      fill="none" stroke={ind.color} strokeWidth={0.75} strokeDasharray="2 1" opacity={0.4} />
+                  </g>
+                )}
+              </g>
             );
           });
         })}
 
-        {/* Legend */}
+        {/* Legend with risk ratings and composite scores */}
         {industries.map(function (ind, i) {
-          var lx = 360, ly = 40 + i * 38;
+          var lx = 350, ly = 28 + i * 50;
+          var composite = Math.round(ind.scores.reduce(function (a, b) { return a + b; }, 0) / ind.scores.length);
+          var rating = riskRating(ind.scores);
+          var hrIdx = highestRiskIdx(ind.scores);
           return (
             <g key={'leg' + i}>
+              {/* Color line */}
               <line x1={lx} y1={ly + 2} x2={lx + 20} y2={ly + 2}
                 stroke={ind.color} strokeWidth={2.5} opacity={0.6} />
+
+              {/* Industry name */}
               <text x={lx + 28} y={ly + 5}
                 fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#333">
                 {ind.name}
               </text>
+
+              {/* Risk rating badge */}
+              <rect x={lx + 28} y={ly + 9} width={38} height={11} rx={5.5}
+                fill={rating.color} opacity={0.12} stroke={rating.color} strokeWidth={0.5} />
+              <text x={lx + 47} y={ly + 17} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={6} fontWeight={700}
+                fill={rating.color} letterSpacing={0.5}>
+                {rating.label}
+              </text>
+
+              {/* Composite score */}
+              <text x={lx + 72} y={ly + 17}
+                fontFamily="'Outfit',sans-serif" fontSize={7} fill="#999">
+                Composite: {composite}
+              </text>
+
               {/* Mini bar showing total exposure score */}
-              <rect x={lx + 28} y={ly + 10} width={ind.scores.reduce(function(a,b){return a+b;},0)/5 * 0.9} height={4} rx={2}
+              <rect x={lx + 28} y={ly + 23} width={composite * 0.9} height={4} rx={2}
                 fill={ind.color} opacity={0.3} />
-              <text x={lx + 28 + ind.scores.reduce(function(a,b){return a+b;},0)/5 * 0.9 + 6} y={ly + 15}
-                fontFamily="'Outfit',sans-serif" fontSize={7} fill="#bbb">
-                {Math.round(ind.scores.reduce(function(a,b){return a+b;},0)/5)}
+
+              {/* Highest risk axis label */}
+              <text x={lx + 28 + composite * 0.9 + 6} y={ly + 27}
+                fontFamily="'Outfit',sans-serif" fontSize={6} fill="#bbb">
+                Peak: {axes[hrIdx]}
               </text>
             </g>
           );
         })}
+
+        {/* Footer note */}
+        <text x={W / 2} y={H - 6} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7} fill="#ccc">
+          Scores 0–100 · Composite = average across 5 axes · Dashed ring = highest risk vertex
+        </text>
       </svg>
     </div>
   );

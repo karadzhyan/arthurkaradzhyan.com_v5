@@ -44,27 +44,36 @@ export default function HomePage() {
           </div>
           {/* PAGA filing volume sparkline — DIR filing data */}
           {/* PLACEHOLDER VALUES — verify against DIR PAGA Filing Data before publishing */}
-          <div style={{ maxWidth: 300, margin: '4px 0 12px', opacity: 0.7 }}>
-            <svg viewBox="0 0 300 64" width="100%" style={{ display: 'block' }}>
+          <div style={{ maxWidth: 340, margin: '4px 0 12px', opacity: 0.7 }}>
+            <svg viewBox="0 0 340 110" width="100%" style={{ display: 'block' }}>
               {(function () {
                 /* Year: 2017-2025, values are PLACEHOLDER estimates pending DIR verification */
                 var data = [3742, 4218, 4980, 3856, 4612, 5686, 6320, 7940, 10098];
-                var labels = ['17', '18', '19', '20', '21', '22', '23', '24', '25'];
+                var labels = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'];
                 var max = Math.max.apply(null, data);
                 var min = Math.min.apply(null, data);
-                var padT = 6, padB = 16, plotH = 64 - padT - padB;
-                var stepX = 300 / (data.length - 1);
+                var padT = 18, padB = 28, padL = 6, padR = 6;
+                var plotH = 110 - padT - padB;
+                var plotW = 340 - padL - padR;
+                var stepX = plotW / (data.length - 1);
 
                 var pts = data.map(function (v, i) {
                   return {
-                    x: i * stepX,
+                    x: padL + i * stepX,
                     y: padT + plotH - ((v - min) / (max - min)) * plotH,
+                    val: v,
                   };
                 });
                 var linePath = pts.map(function (p, i) {
                   return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
                 }).join(' ');
-                var areaPath = linePath + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (64 - padB) + ' L0,' + (64 - padB) + ' Z';
+                var areaPath = linePath + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (110 - padB) + ' L' + padL + ',' + (110 - padB) + ' Z';
+
+                /* YoY changes */
+                var yoyChanges = data.map(function (v, i) {
+                  if (i === 0) return null;
+                  return Math.round(((v - data[i - 1]) / data[i - 1]) * 100);
+                });
 
                 return (
                   <>
@@ -74,17 +83,60 @@ export default function HomePage() {
                         <stop offset="100%" stopColor="#8aa39e" stopOpacity="0.03" />
                       </linearGradient>
                     </defs>
+                    {/* 2024 reform marker */}
+                    <line x1={pts[7].x} y1={padT - 4} x2={pts[7].x} y2={110 - padB}
+                      stroke="#dc3545" strokeWidth="0.75" strokeDasharray="2 2" opacity="0.4" />
+                    <text x={pts[7].x} y={padT - 7} textAnchor="middle"
+                      fontFamily="'Outfit',sans-serif" fontSize="6" fill="#dc3545" letterSpacing="0.5" opacity="0.7">
+                      REFORM
+                    </text>
+                    {/* COVID dip marker */}
+                    <text x={pts[3].x} y={pts[3].y + 14} textAnchor="middle"
+                      fontFamily="'Outfit',sans-serif" fontSize="5.5" fill="#CC8800" opacity="0.6">
+                      COVID
+                    </text>
                     <path d={areaPath} fill="url(#spark-fill)" />
                     <path d={linePath} fill="none" stroke="#8aa39e" strokeWidth="1.5" />
-                    <circle cx={pts[pts.length - 1].x} cy={pts[pts.length - 1].y} r="3" fill="#2c3e3a" />
+                    {/* Data point dots */}
+                    {pts.map(function (p, i) {
+                      var isLast = i === pts.length - 1;
+                      var isMax = p.val === max;
+                      return (
+                        <g key={'dot' + i}>
+                          <circle cx={p.x} cy={p.y} r={isLast ? 3.5 : isMax ? 2.5 : 1.5}
+                            fill={isLast ? '#2c3e3a' : '#8aa39e'} opacity={isLast ? 1 : 0.6} />
+                          {/* Value labels for key points */}
+                          {(i === 0 || i === 3 || i === 5 || isLast) && (
+                            <text x={p.x} y={p.y - 6} textAnchor="middle"
+                              fontFamily="'Outfit',sans-serif" fontSize="6.5"
+                              fontWeight={isLast ? '700' : '400'}
+                              fill={isLast ? '#2c3e3a' : '#888'}>
+                              {(p.val / 1000).toFixed(1) + 'K'}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })}
+                    {/* YoY change for last point */}
+                    <text x={pts[pts.length - 1].x + 2} y={pts[pts.length - 1].y + 10}
+                      fontFamily="'Outfit',sans-serif" fontSize="6" fontWeight="600"
+                      fill="#dc3545">
+                      +27% YoY
+                    </text>
+                    {/* Year labels */}
                     {pts.map(function (p, i) {
                       return (
-                        <text key={i} x={p.x} y={64 - 3} textAnchor="middle"
-                          fontFamily="'Outfit',sans-serif" fontSize="7" fill="#999" fillOpacity="0.7">
-                          {labels[i]}
+                        <text key={i} x={p.x} y={110 - 10} textAnchor="middle"
+                          fontFamily="'Outfit',sans-serif" fontSize="6.5" fill="#999" fillOpacity="0.7">
+                          {labels[i].slice(2)}
                         </text>
                       );
                     })}
+                    {/* CAGR annotation */}
+                    <text x={340 / 2} y={110 - 2} textAnchor="middle"
+                      fontFamily="'Outfit',sans-serif" fontSize="6" fill="#bbb">
+                      8-year CAGR: 13.2% · 170% cumulative growth since 2017
+                    </text>
                   </>
                 );
               })()}

@@ -4,6 +4,9 @@
  *
  * THE screenshot visual. A GC forwards this to their CEO.
  * Client component for IntersectionObserver animation.
+ *
+ * Enhanced with cumulative percentage annotations, documentation requirements,
+ * employee share comparison, and prominent spanning annotation.
  */
 "use client";
 import { useEffect, useRef, useState } from "react";
@@ -37,8 +40,17 @@ export default function ReformWaterfall() {
     { label: 'Per Employee\nRecovery', value: 47.78, display: '$47.78', color: '#198754', detail: '÷ 50 employees' },
   ];
 
-  var W = 640, H = 320;
-  var padL = 50, padR = 40, padT = 50, padB = 70;
+  /* Cumulative percentage reductions from baseline */
+  var cumulativeReductions = [
+    '',
+    '-90.9%',
+    '-98.6%',
+    '-99.5%',
+    '-99.99%',
+  ];
+
+  var W = 640, H = 400;
+  var padL = 50, padR = 40, padT = 70, padB = 90;
   var plotW = W - padL - padR;
   var plotH = H - padT - padB;
   var barW = plotW / steps.length - 12;
@@ -50,6 +62,9 @@ export default function ReformWaterfall() {
     var logVal = Math.log10(Math.max(val, 40));
     return ((logVal - logMin) / (logMax - logMin)) * plotH;
   }
+
+  /* Documentation requirements for 15% cap */
+  var docItems = ['Written policies', 'Training records', 'Supervisor ack', 'Payroll audits'];
 
   return (
     <div
@@ -73,6 +88,32 @@ export default function ReformWaterfall() {
         Meal period category · 50 employees · 26 pay periods · 35% violation rate
       </div>
       <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        {/* Prominent spanning annotation: From $500K to $47.78 */}
+        <line x1={padL + barW / 2} y1={padT - 38} x2={padL + 4 * (plotW / steps.length) + 6 + barW / 2} y2={padT - 38}
+          stroke="#2c3e3a" strokeWidth={1} opacity={0.4} />
+        <polygon
+          points={
+            (padL + barW / 2 + 2) + "," + (padT - 41) + " " +
+            (padL + barW / 2 + 2) + "," + (padT - 35) + " " +
+            (padL + barW / 2 - 3) + "," + (padT - 38)
+          }
+          fill="#2c3e3a" opacity={0.4} />
+        <polygon
+          points={
+            (padL + 4 * (plotW / steps.length) + 6 + barW / 2 - 2) + "," + (padT - 41) + " " +
+            (padL + 4 * (plotW / steps.length) + 6 + barW / 2 - 2) + "," + (padT - 35) + " " +
+            (padL + 4 * (plotW / steps.length) + 6 + barW / 2 + 3) + "," + (padT - 38)
+          }
+          fill="#2c3e3a" opacity={0.4} />
+        <text x={W / 2} y={padT - 44} textAnchor="middle"
+          fontFamily="'Libre Baskerville',serif" fontSize={10} fontWeight={700} fill="#2c3e3a">
+          From $500K to $47.78
+        </text>
+        <text x={W / 2} y={padT - 32} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7} fill="#888" letterSpacing={1}>
+          {'>'} 99.99% REDUCTION
+        </text>
+
         {/* Background grid lines */}
         {[100, 1000, 10000, 100000, 500000].map(function (v) {
           var y = padT + plotH - barHeight(v);
@@ -108,7 +149,7 @@ export default function ReformWaterfall() {
             );
           }
 
-          /* Reduction arrow */
+          /* Reduction arrow with cumulative percentage */
           var arrow = null;
           if (i > 0) {
             var prevBarH = barHeight(steps[i - 1].value);
@@ -119,10 +160,17 @@ export default function ReformWaterfall() {
               <g>
                 <line x1={arrowX} y1={prevBarY + 4} x2={arrowX} y2={y - 4}
                   stroke="#dc3545" strokeWidth={0.75} opacity={0.4} />
-                <text x={arrowX + barW / 2 + 4} y={(prevBarY + y) / 2 + 3}
-                  fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+                {/* Step reduction */}
+                <text x={arrowX + barW / 2 + 4} y={(prevBarY + y) / 2 - 1}
+                  fontFamily="'Outfit',sans-serif" fontSize={7.5} fontWeight={600}
                   fill="#dc3545" opacity={0.6}>
                   -{reduction}%
+                </text>
+                {/* Cumulative reduction */}
+                <text x={arrowX + barW / 2 + 4} y={(prevBarY + y) / 2 + 9}
+                  fontFamily="'Outfit',sans-serif" fontSize={6.5} fontWeight={700}
+                  fill="#2c3e3a" opacity={0.5}>
+                  {cumulativeReductions[i]}
                 </text>
               </g>
             );
@@ -167,6 +215,30 @@ export default function ReformWaterfall() {
                 fontFamily="'Outfit',sans-serif" fontSize={7} fill="#bbb">
                 {step.detail}
               </text>
+
+              {/* Documentation requirements under the 15% cap bar (index 2) */}
+              {i === 2 && (
+                <g>
+                  {docItems.map(function (doc, di) {
+                    return (
+                      <text key={'doc' + di} x={x + barW / 2} y={padT + plotH + 54 + di * 9}
+                        textAnchor="middle"
+                        fontFamily="'Outfit',sans-serif" fontSize={6} fill="#CC8800" opacity={0.6}>
+                        {doc}
+                      </text>
+                    );
+                  })}
+                </g>
+              )}
+
+              {/* Employee share comparison under 35% bar (index 3) */}
+              {i === 3 && (
+                <text x={x + barW / 2} y={padT + plotH + 56} textAnchor="middle"
+                  fontFamily="'Outfit',sans-serif" fontSize={6.5} fontWeight={600}
+                  fill="#4a7a6f" opacity={0.7}>
+                  Pre: 25% / Post: 35%
+                </text>
+              )}
             </g>
           );
         })}
