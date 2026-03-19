@@ -64,6 +64,13 @@ export default function CommentaryPage({ params }) {
 
         <p className="article-desc">{item.summary}</p>
 
+        {/* LEVEL 0: THE ANSWER — bottom line leads */}
+        {item.bottomLine && (
+          <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
+            {item.bottomLine}
+          </div>
+        )}
+
         <div className="article-body sm">
           {paragraphs.map(function(p, i) {
             return <p key={i} style={{ marginBottom: 20 }}>{p}</p>;

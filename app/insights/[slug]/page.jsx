@@ -63,6 +63,13 @@ export default function InsightPage({ params }) {
         <h1 className="article-title">{insight.title}</h1>
         <p className="article-desc">{insight.desc}</p>
 
+        {/* LEVEL 0: THE ANSWER — bottom line leads */}
+        {insight.bottomLine && (
+          <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
+            {insight.bottomLine}
+          </div>
+        )}
+
         {insight.tool && (
           <div className="article-tool-callout">
             <span className="article-tool-label">Interactive Tool</span>

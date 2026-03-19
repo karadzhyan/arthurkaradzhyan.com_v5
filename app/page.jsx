@@ -52,9 +52,11 @@ export default function HomePage() {
           </div>
           <div className="home-hero-line" />
           <div className="home-hero-desc">
-            Defending employers in PAGA representative actions, wage-and-hour
-            class actions, workplace investigations, and complex employment
-            litigation across California.
+            Most PAGA defense is reactive. I do it differently — every matter starts
+            with a quantitative exposure model that disaggregates penalties by
+            violation category, strips non-recoverable categories, and produces
+            three scenarios: plaintiff maximum, data-driven realistic, and defense
+            best case.
           </div>
           <div className="home-hero-cta">
             <a href="#contact" className="btn-primary">
@@ -123,10 +125,11 @@ export default function HomePage() {
         <div className="home-about-grid">
           <div className="home-about-text">
             <p>
-              Most PAGA defense is reactive. I do it differently. Every matter
-              starts with a quantitative exposure model that disaggregates
-              penalties by violation category, strips non-recoverable categories,
-              and produces three scenarios.
+              The analytical methodology has been adopted firm-wide and has
+              reduced claimed exposure by more than 60% in multiple matters.
+              Temporal bifurcation, derivative penalty mapping, and forensic
+              regular rate analysis convert inflated PAGA demands into
+              defensible settlement authority ranges.
             </p>
             <div className="home-pullquote">
               <div className="home-pullquote-text">
