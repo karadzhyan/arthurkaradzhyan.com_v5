@@ -169,10 +169,10 @@ var industriesRaw = [
       "Audit piece-rate compliance for housekeeping departments under § 226.2 — this is the most commonly overlooked exposure category in hospitality because employers do not recognize per-room pay as piece-rate compensation subject to separate non-productive time and rest period compensation requirements."
     ],
     monitoring: [
-      "Pending DLSE guidance on service charge distribution for mandatory hotel and banquet service charges.",
-      "Legislative proposals affecting predictive scheduling requirements for hospitality workers in California.",
-      "Evolving treatment of on-duty meal period agreements in hospitality settings — no published appellate decision has addressed whether the 'nature of the work' prerequisite is satisfied for hotel front desk employees during overnight shifts.",
-      "Application of § 226.2 piece-rate requirements to per-room housekeeping compensation — limited published authority on whether per-room pay structures constitute piece-rate under the statute."
+      { text: "Pending DLSE guidance on service charge distribution for mandatory hotel and banquet service charges.", status: "pending" },
+      { text: "Legislative proposals affecting predictive scheduling requirements for hospitality workers in California.", status: "tracking" },
+      { text: "Evolving treatment of on-duty meal period agreements in hospitality settings — no published appellate decision has addressed whether the 'nature of the work' prerequisite is satisfied for hotel front desk employees during overnight shifts.", status: "pending" },
+      { text: "Application of § 226.2 piece-rate requirements to per-room housekeeping compensation — limited published authority on whether per-room pay structures constitute piece-rate under the statute.", status: "tracking" }
     ],
     relatedTools: ["paga-penalty-estimator", "regular-rate-calculator"],
     relatedInsights: ["the-two-hotels-framework-temporal-bifurcation-in-paga-penalty-analysis"],
@@ -242,9 +242,9 @@ var industriesRaw = [
       "Audit F&I manager and service advisor classifications under the administrative and commissioned-employee exemptions — these are the two most commonly misclassified positions in dealership operations."
     ],
     monitoring: [
-      "Pending appellate treatment of the commissioned-employee overtime exemption and whether workweek-by-workweek verification can be satisfied through retroactive true-up payments.",
-      "Legislative proposals affecting dealership compensation structures and commission payment timing.",
-      "DLSE enforcement actions targeting automotive dealership commission practices."
+      { text: "Pending appellate treatment of the commissioned-employee overtime exemption and whether workweek-by-workweek verification can be satisfied through retroactive true-up payments.", status: "pending" },
+      { text: "Legislative proposals affecting dealership compensation structures and commission payment timing.", status: "tracking" },
+      { text: "DLSE enforcement actions targeting automotive dealership commission practices.", status: "tracking" }
     ],
     relatedTools: ["regular-rate-calculator", "paga-penalty-estimator"],
     relatedInsights: ["commission-forfeiture-after-sciborski-the-liability-theory-nobody-s-raising", "the-regular-rate-problem-why-every-commission-plan-in-california-is-a-ticking-cl"],
@@ -314,10 +314,10 @@ var industriesRaw = [
       "Review on-call and standby compensation policies at each client facility — the compensability determination is facility-specific and depends on the degree of control exercised during on-call periods."
     ],
     monitoring: [
-      "Development of the joint employer PAGA penalty allocation doctrine — no published appellate authority addresses this issue.",
-      "CDPH staffing ratio changes that affect meal period scheduling constraints at client facilities.",
-      "Legislative proposals affecting healthcare staffing agency liability for client facility working conditions.",
-      "Evolving treatment of on-call compensation in healthcare settings — the Mendiola control test applies differently in clinical environments where response times are driven by patient safety requirements."
+      { text: "Development of the joint employer PAGA penalty allocation doctrine — no published appellate authority addresses this issue.", status: "pending" },
+      { text: "CDPH staffing ratio changes that affect meal period scheduling constraints at client facilities.", status: "tracking" },
+      { text: "Legislative proposals affecting healthcare staffing agency liability for client facility working conditions.", status: "tracking" },
+      { text: "Evolving treatment of on-call compensation in healthcare settings — the Mendiola control test applies differently in clinical environments where response times are driven by patient safety requirements.", status: "tracking" }
     ],
     relatedTools: ["statute-of-limitations-calculator", "paga-penalty-estimator"],
     relatedInsights: ["statistical-sampling-in-wage-and-hour-defense-building-a-duran-compliant-framewo"],
@@ -387,10 +387,10 @@ var industriesRaw = [
       "For public works projects, verify prevailing wage classification and payment compliance — the intersection of prevailing wage underpayment with PAGA penalties creates compound exposure that dwarfs either violation category standing alone."
     ],
     monitoring: [
-      "DIR enforcement activity related to AWS election procedures in the construction and energy sectors.",
-      "Evolving prevailing wage requirements for solar installation on public works projects.",
-      "Cal/OSHA heat illness prevention enforcement actions and proposed regulation updates.",
-      "Development of rest period compliance standards for remote outdoor worksites — limited published authority on what constitutes adequate rest period facilities at temporary installation sites."
+      { text: "DIR enforcement activity related to AWS election procedures in the construction and energy sectors.", status: "tracking" },
+      { text: "Evolving prevailing wage requirements for solar installation on public works projects.", status: "tracking" },
+      { text: "Cal/OSHA heat illness prevention enforcement actions and proposed regulation updates.", status: "tracking" },
+      { text: "Development of rest period compliance standards for remote outdoor worksites — limited published authority on what constitutes adequate rest period facilities at temporary installation sites.", status: "pending" }
     ],
     relatedTools: ["regular-rate-calculator", "paga-penalty-estimator"],
     relatedInsights: ["ab-2288-sb-92-a-defense-side-roadmap-to-the-2024-paga-reforms"],
@@ -460,10 +460,10 @@ var industriesRaw = [
       "Audit all independent contractor relationships against the ABC test, with particular focus on Prong B. Technology companies that engage contractors to perform work within their core business (software development, data analysis, product design) face the highest misclassification risk."
     ],
     monitoring: [
-      "Annual adjustment to the § 515.5 computer professional exemption salary threshold — verify compliance each January.",
-      "Legislative and regulatory developments affecting independent contractor classification in platform and gig-economy technology companies.",
-      "Evolving judicial treatment of § 2802 expense reimbursement adequacy for remote and hybrid work arrangements.",
-      "Development of case law on illusory unlimited PTO policies and their treatment under § 227.3 — limited published authority on when an unlimited PTO policy creates an accrued vacation obligation."
+      { text: "Annual adjustment to the § 515.5 computer professional exemption salary threshold — verify compliance each January.", status: "tracking" },
+      { text: "Legislative and regulatory developments affecting independent contractor classification in platform and gig-economy technology companies.", status: "tracking" },
+      { text: "Evolving judicial treatment of § 2802 expense reimbursement adequacy for remote and hybrid work arrangements.", status: "tracking" },
+      { text: "Development of case law on illusory unlimited PTO policies and their treatment under § 227.3 — limited published authority on when an unlimited PTO policy creates an accrued vacation obligation.", status: "pending" }
     ],
     relatedTools: ["wage-statement-compliance-checker", "recoverability-checker"],
     relatedInsights: [],
@@ -533,10 +533,10 @@ var industriesRaw = [
       "Audit the labor contractor relationship under Martinez v. Combs and § 2810.3 — the grower's exposure depends on both the allocation of operational control and the contractor's compliance record. Document both."
     ],
     monitoring: [
-      "Cal/OSHA heat illness prevention regulation updates and enforcement activity targeting agricultural operations.",
-      "AB 1066 agricultural overtime phase-out implementation — employer compliance rates and enforcement actions.",
-      "Development of the joint employer PAGA penalty allocation doctrine for grower/labor contractor arrangements.",
-      "Evolving enforcement of field sanitation requirements at remote agricultural worksites — Cal/OSHA inspection frequency and citation patterns."
+      { text: "Cal/OSHA heat illness prevention regulation updates and enforcement activity targeting agricultural operations.", status: "tracking" },
+      { text: "AB 1066 agricultural overtime phase-out implementation — employer compliance rates and enforcement actions.", status: "tracking" },
+      { text: "Development of the joint employer PAGA penalty allocation doctrine for grower/labor contractor arrangements.", status: "pending" },
+      { text: "Evolving enforcement of field sanitation requirements at remote agricultural worksites — Cal/OSHA inspection frequency and citation patterns.", status: "tracking" }
     ],
     relatedTools: ["paga-penalty-estimator", "derivative-penalty-mapper"],
     relatedInsights: ["drafting-paga-settlement-approval-motions-after-moniz-a-practitioner-s-framework"],

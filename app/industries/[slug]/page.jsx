@@ -227,11 +227,17 @@ export default function IndustryPage({ params }) {
             <div className="article-monitoring-bar" />
             <div className="article-monitoring-inner">
               <div className="article-section-label lg">Currently Monitoring</div>
+              <div className="article-monitoring-legend">
+                <span className="article-monitoring-legend-item"><span className="article-monitoring-dot pending" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 4 }} /> Pending</span>
+                <span className="article-monitoring-legend-item"><span className="article-monitoring-dot tracking" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 4 }} /> Tracking</span>
+              </div>
               {ind.monitoring.map(function(item, i) {
+                var text = typeof item === 'string' ? item : item.text;
+                var status = typeof item === 'string' ? 'tracking' : item.status;
                 return (
                   <div key={i} className="article-monitoring-item">
-                    <div className={'article-monitoring-dot' + (i === 0 ? ' pending' : ' tracking')} />
-                    <div className="article-monitoring-text">{item}</div>
+                    <div className={'article-monitoring-dot ' + status} />
+                    <div className="article-monitoring-text">{text}</div>
                   </div>
                 );
               })}

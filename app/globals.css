@@ -643,6 +643,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 
 .article-monitoring-dot.pending{background:#e6a817}
 .article-monitoring-dot.tracking{background:#2c3e3a}
+.article-monitoring-legend{display:flex;gap:16px;margin-bottom:12px}
+.article-monitoring-legend-item{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999}
 
 .article-nav-link{display:flex;flex-direction:column;gap:2px}
 .article-nav-link-next{text-align:right;align-items:flex-end}
