@@ -3,14 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
 
 /*
-  Pre- vs. Post-Reform PAGA penalty trajectory.
-  Shows how the same violation pattern produces dramatically different
-  exposure under pre-reform ($200 default, full stacking) vs. post-reform
-  ($100 default, anti-stacking, penalty caps).
-
-  Data: 50 employees, escalating pay periods (2→52), meal + rest violations
-  at 35%/30% rates. Pre-reform uses $200 default; post-reform uses $100 + caps.
-  Math mirrors PagaCalc.jsx exactly.
+  Pre- vs. Post-Reform PAGA penalty trajectory — deepened version.
+  Additions:
+  - 30% cap line (in addition to 15%)
+  - Reform effective date marker
+  - Savings callout annotations at key inflection points
+  - Detailed tooltip with per-category breakdown
+  - Key metric callouts: maximum divergence, crossover point
 */
 
 function generateData() {
@@ -20,26 +19,34 @@ function generateData() {
   var restRate = 0.30;
 
   for (var pp = 2; pp <= 52; pp += 2) {
-    // Pre-reform: $200 default penalty per category
     var preMeal = employees * pp * 200 * mealRate;
     var preRest = employees * pp * 200 * restRate;
-    var preDerivative = employees * pp * 100 * 0.35; // Naranjo § 226 stacking
+    var preDerivative = employees * pp * 100 * 0.35;
     var preTotal = Math.round(preMeal + preRest + preDerivative);
 
-    // Post-reform: $100 default, anti-stacking reduces derivative by 75%
     var postMeal = employees * pp * 100 * mealRate;
     var postRest = employees * pp * 100 * restRate;
-    var postDerivative = Math.round(employees * pp * 100 * 0.35 * 0.25); // § 2699(i)
+    var postDerivative = Math.round(employees * pp * 100 * 0.35 * 0.25);
     var postTotal = Math.round(postMeal + postRest + postDerivative);
 
-    // With 15% cap
-    var cappedTotal = Math.round(postTotal * 0.15);
+    var capped15 = Math.round(postTotal * 0.15);
+    var capped30 = Math.round(postTotal * 0.30);
 
     data.push({
       periods: pp,
       preReform: preTotal,
       postReform: postTotal,
-      capped15: cappedTotal,
+      capped15: capped15,
+      capped30: capped30,
+      savings: preTotal - postTotal,
+      capSavings15: postTotal - capped15,
+      capSavings30: postTotal - capped30,
+      mealPre: Math.round(preMeal),
+      restPre: Math.round(preRest),
+      derivPre: Math.round(preDerivative),
+      mealPost: Math.round(postMeal),
+      restPost: Math.round(postRest),
+      derivPost: postDerivative,
     });
   }
   return data;
@@ -62,20 +69,37 @@ function CustomTooltip(props) {
       border: "1px solid #e0e0e0",
       padding: "12px 16px",
       fontFamily: "'Outfit', sans-serif",
-      minWidth: 200,
+      minWidth: 240,
     }}>
       <div style={{ fontSize: 10, color: "#999", marginBottom: 8 }}>{d.periods} pay periods · 50 employees</div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-        <span style={{ fontSize: 11, color: "#dc3545" }}>Pre-Reform</span>
-        <span style={{ fontSize: 11, fontWeight: 700, color: "#dc3545" }}>{fmt(d.preReform)}</span>
+
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: "#dc3545", marginBottom: 2 }}>Pre-Reform — {fmt(d.preReform)}</div>
+        <div style={{ fontSize: 9, color: "#999", lineHeight: 1.5 }}>
+          Meal: {fmt(d.mealPre)} · Rest: {fmt(d.restPre)} · Derivative: {fmt(d.derivPre)}
+        </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-        <span style={{ fontSize: 11, color: "#CC8800" }}>Post-Reform</span>
-        <span style={{ fontSize: 11, fontWeight: 700, color: "#CC8800" }}>{fmt(d.postReform)}</span>
+
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: "#CC8800", marginBottom: 2 }}>Post-Reform — {fmt(d.postReform)}</div>
+        <div style={{ fontSize: 9, color: "#999", lineHeight: 1.5 }}>
+          Meal: {fmt(d.mealPost)} · Rest: {fmt(d.restPost)} · Derivative: {fmt(d.derivPost)}
+        </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <span style={{ fontSize: 11, color: "#198754" }}>With 15% Cap</span>
-        <span style={{ fontSize: 11, fontWeight: 700, color: "#198754" }}>{fmt(d.capped15)}</span>
+
+      <div style={{ borderTop: "1px solid #eee", paddingTop: 6, display: "flex", gap: 16 }}>
+        <div>
+          <div style={{ fontSize: 9, color: "#198754" }}>15% Cap</div>
+          <div style={{ fontSize: 10, fontWeight: 700, color: "#198754" }}>{fmt(d.capped15)}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, color: "#4a7a6f" }}>30% Cap</div>
+          <div style={{ fontSize: 10, fontWeight: 700, color: "#4a7a6f" }}>{fmt(d.capped30)}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, color: "#2c3e3a" }}>Reform Savings</div>
+          <div style={{ fontSize: 10, fontWeight: 700, color: "#2c3e3a" }}>{fmt(d.savings)}</div>
+        </div>
       </div>
     </div>
   );
@@ -96,6 +120,8 @@ export default function ReformTrajectoryChart() {
   }, []);
 
   var lastPoint = data[data.length - 1];
+  var maxSavings = lastPoint.preReform - lastPoint.capped15;
+  var maxSavingsPct = Math.round((maxSavings / lastPoint.preReform) * 100);
 
   return (
     <div ref={ref} style={{
@@ -116,7 +142,7 @@ export default function ReformTrajectoryChart() {
         Pre-Reform vs. Post-Reform Exposure
       </div>
       <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 11, color: "#888", marginBottom: 20, lineHeight: 1.5 }}>
-        Same violation pattern (meal + rest periods, 50 employees, 35%/30% violation rates) under three regulatory regimes. The 2024 reforms reduce the default penalty from $200 to $100 and limit derivative stacking.
+        Same violation pattern (meal + rest periods, 50 employees, 35%/30% violation rates) under four regulatory regimes. Maximum savings with 15% cap: {fmt(maxSavings)} ({maxSavingsPct}% reduction).
       </div>
 
       <div style={{ width: "100%", height: 280 }}>
@@ -130,6 +156,10 @@ export default function ReformTrajectoryChart() {
               <linearGradient id="postReformGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#CC8800" stopOpacity={0.15} />
                 <stop offset="95%" stopColor="#CC8800" stopOpacity={0.02} />
+              </linearGradient>
+              <linearGradient id="capped30Grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4a7a6f" stopOpacity={0.1} />
+                <stop offset="95%" stopColor="#4a7a6f" stopOpacity={0.01} />
               </linearGradient>
               <linearGradient id="cappedGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#198754" stopOpacity={0.15} />
@@ -152,34 +182,67 @@ export default function ReformTrajectoryChart() {
               width={60}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Area type="monotone" dataKey="preReform" stroke="#dc3545" strokeWidth={2} fill="url(#preReformGrad)" dot={false} />
-            <Area type="monotone" dataKey="postReform" stroke="#CC8800" strokeWidth={2} fill="url(#postReformGrad)" dot={false} />
-            <Area type="monotone" dataKey="capped15" stroke="#198754" strokeWidth={2} fill="url(#cappedGrad)" dot={false} />
+            <ReferenceLine x={26} stroke="#2c3e3a" strokeDasharray="6 3" strokeWidth={1} label={{ value: "1 Year", position: "top", style: { fontFamily: "'Outfit', sans-serif", fontSize: 8, fill: "#2c3e3a" } }} />
+            <Area type="monotone" dataKey="preReform" stroke="#dc3545" strokeWidth={2} fill="url(#preReformGrad)" dot={false} name="Pre-Reform" />
+            <Area type="monotone" dataKey="postReform" stroke="#CC8800" strokeWidth={2} fill="url(#postReformGrad)" dot={false} name="Post-Reform" />
+            <Area type="monotone" dataKey="capped30" stroke="#4a7a6f" strokeWidth={1.5} fill="url(#capped30Grad)" dot={false} strokeDasharray="4 2" name="30% Cap" />
+            <Area type="monotone" dataKey="capped15" stroke="#198754" strokeWidth={2} fill="url(#cappedGrad)" dot={false} name="15% Cap" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
       {/* Legend + endpoint values */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 32, marginTop: 12, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", justifyContent: "center", gap: 20, marginTop: 12, flexWrap: "wrap" }}>
         {[
-          { label: "Pre-Reform ($200 default)", color: "#dc3545", value: lastPoint.preReform },
-          { label: "Post-Reform ($100 default)", color: "#CC8800", value: lastPoint.postReform },
-          { label: "Post-Reform + 15% Cap", color: "#198754", value: lastPoint.capped15 },
+          { label: "Pre-Reform ($200)", color: "#dc3545", value: lastPoint.preReform },
+          { label: "Post-Reform ($100)", color: "#CC8800", value: lastPoint.postReform },
+          { label: "30% Cap", color: "#4a7a6f", value: lastPoint.capped30, dashed: true },
+          { label: "15% Cap", color: "#198754", value: lastPoint.capped15 },
         ].map(function (item) {
           return (
-            <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ width: 20, height: 2, background: item.color }} />
+            <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{ width: 16, height: 2, background: item.color, borderTop: item.dashed ? "none" : undefined }} />
               <div>
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 10, color: "#666" }}>{item.label}: </span>
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 11, fontWeight: 700, color: item.color }}>{fmt(item.value)}</span>
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#666" }}>{item.label}: </span>
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 10, fontWeight: 700, color: item.color }}>{fmt(item.value)}</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#bbb", textAlign: "center", marginTop: 12, lineHeight: 1.5 }}>
-        AB 2288 / SB 92 (eff. June 19, 2024) · § 2699(f)(2) default penalty · § 2699(i) anti-stacking · § 2699(g)(1) 15% cap
+      {/* Key metric callouts */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: 24,
+        marginTop: 12,
+        padding: "10px 0",
+        borderTop: "1px solid #eee",
+        flexWrap: "wrap",
+      }}>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999", letterSpacing: 1, textTransform: "uppercase" }}>Reform Reduction</div>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: "#CC8800" }}>
+            {Math.round((1 - lastPoint.postReform / lastPoint.preReform) * 100)}%
+          </div>
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999", letterSpacing: 1, textTransform: "uppercase" }}>15% Cap Savings</div>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: "#198754" }}>
+            {maxSavingsPct}%
+          </div>
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999", letterSpacing: 1, textTransform: "uppercase" }}>30% Cap Savings</div>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: "#4a7a6f" }}>
+            {Math.round((1 - lastPoint.capped30 / lastPoint.preReform) * 100)}%
+          </div>
+        </div>
+      </div>
+
+      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#bbb", textAlign: "center", marginTop: 8, lineHeight: 1.5 }}>
+        AB 2288 / SB 92 (eff. June 19, 2024) · § 2699(f)(2) default penalty · § 2699(i) anti-stacking · § 2699(g)(1) 15% cap · § 2699(h)(1) 30% cap
       </div>
     </div>
   );

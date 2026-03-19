@@ -1,38 +1,54 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList, Legend } from "recharts";
 
 /*
-  PAGA Penalties vs. Class Action Damages — same facts, different tracks.
-  Shows why PAGA exposure is 3-8× class exposure for identical violations.
-  Data mirrors PagaCalc.jsx dual-track model (50 employees, 26 periods).
+  PAGA Penalties vs. Class Action Damages — deepened version.
+  Additions:
+  - Stacked bars showing component breakdown (wages, interest, penalties, fees, derivatives)
+  - Per-employee calculation display
+  - Attorney fee comparison (class 33% lodestar vs. PAGA 20% allocation)
+  - Employee share comparison (class 67% vs. PAGA 35%)
+  - Detailed tooltip with full component breakdown
 */
+
+var employees = 50;
+var periods = 26;
 
 var data = [
   {
     track: "Class Action\nDamages",
-    wages: 120000,     // 50 emp × 26 pp × avg $25 underpayment × 35% rate
-    interest: 8400,    // 7% prejudgment interest
-    waitingTime: 72000, // 30% separated × 50 × 30 days × $20/hr × 8
-    fees: 66000,       // 33% lodestar
+    wages: 120000,
+    interest: 8400,
+    waitingTime: 72000,
+    fees: 66000,
     total: 266400,
     color: "#1a5276",
+    employeeShare: 0.67,
+    feeShare: 0.33,
+    perEmployee: Math.round(266400 / 50),
   },
   {
-    track: "PAGA Penalties\n(Post-Reform)",
-    defaultPenalty: 227500,  // 50 × 26 × $100 × (35% meal + 30% rest)
-    derivative: 11375,       // Naranjo stacking, reduced 75% by § 2699(i)
-    wageStatement: 0,        // included in derivative
+    track: "PAGA Post-\nReform",
+    defaultPenalty: 227500,
+    derivative: 11375,
+    wageStatement: 0,
     total: 238875,
     color: "#2c3e3a",
+    employeeShare: 0.35,
+    feeShare: 0.20,
+    perEmployee: Math.round(238875 / 50),
   },
   {
-    track: "PAGA Penalties\n(Pre-Reform)",
-    defaultPenalty: 455000,  // 50 × 26 × $200 × (35% meal + 30% rest)
-    derivative: 45500,       // Full Naranjo stacking
+    track: "PAGA Pre-\nReform",
+    defaultPenalty: 455000,
+    derivative: 45500,
     wageStatement: 0,
     total: 500500,
     color: "#dc3545",
+    employeeShare: 0.35,
+    feeShare: 0.20,
+    perEmployee: Math.round(500500 / 50),
   },
 ];
 
@@ -45,26 +61,43 @@ function fmt(n) {
 function CustomTooltip(props) {
   if (!props.active || !props.payload || !props.payload.length) return null;
   var d = props.payload[0].payload;
+  var empPay = Math.round(d.total * d.employeeShare);
+  var attFees = Math.round(d.total * d.feeShare);
+
   return (
-    <div style={{ background: "#fff", border: "1px solid #e0e0e0", padding: "12px 16px", fontFamily: "'Outfit', sans-serif", minWidth: 180 }}>
+    <div style={{ background: "#fff", border: "1px solid #e0e0e0", padding: "12px 16px", fontFamily: "'Outfit', sans-serif", minWidth: 220 }}>
       <div style={{ fontSize: 10, fontWeight: 600, color: d.color, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 }}>
         {d.track.replace("\n", " ")}
       </div>
-      <div style={{ fontSize: 16, fontWeight: 700, color: d.color }}>{fmt(d.total)}</div>
+      <div style={{ fontSize: 18, fontWeight: 700, color: d.color, marginBottom: 8 }}>{fmt(d.total)}</div>
+
+      {/* Component breakdown */}
       {d.wages !== undefined && (
-        <div style={{ marginTop: 6, fontSize: 10, color: "#888", lineHeight: 1.6 }}>
-          Wages owed: {fmt(d.wages)}<br />
-          Prejudgment interest: {fmt(d.interest)}<br />
-          § 203 waiting time: {fmt(d.waitingTime)}<br />
-          Attorney fees (est.): {fmt(d.fees)}
+        <div style={{ fontSize: 10, color: "#888", lineHeight: 1.8, borderTop: "1px solid #eee", paddingTop: 6, marginTop: 4 }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>Wages owed (§§ 226.7, 1194)</span><span style={{ fontWeight: 600 }}>{fmt(d.wages)}</span></div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>Prejudgment interest (7%)</span><span style={{ fontWeight: 600 }}>{fmt(d.interest)}</span></div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>§ 203 waiting time</span><span style={{ fontWeight: 600 }}>{fmt(d.waitingTime)}</span></div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>Attorney fees (33%)</span><span style={{ fontWeight: 600 }}>{fmt(d.fees)}</span></div>
         </div>
       )}
       {d.defaultPenalty !== undefined && (
-        <div style={{ marginTop: 6, fontSize: 10, color: "#888", lineHeight: 1.6 }}>
-          Default penalties: {fmt(d.defaultPenalty)}<br />
-          Derivative (Naranjo): {fmt(d.derivative)}
+        <div style={{ fontSize: 10, color: "#888", lineHeight: 1.8, borderTop: "1px solid #eee", paddingTop: 6, marginTop: 4 }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>Default penalties (§ 2699(f)(2))</span><span style={{ fontWeight: 600 }}>{fmt(d.defaultPenalty)}</span></div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}><span>Derivative (Naranjo stacking)</span><span style={{ fontWeight: 600 }}>{fmt(d.derivative)}</span></div>
         </div>
       )}
+
+      {/* Distribution breakdown */}
+      <div style={{ fontSize: 10, color: "#666", lineHeight: 1.8, borderTop: "1px solid #eee", paddingTop: 6, marginTop: 6 }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Employee share ({Math.round(d.employeeShare * 100)}%)</span>
+          <span style={{ fontWeight: 700, color: "#198754" }}>{fmt(empPay)}</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Per employee</span>
+          <span style={{ fontWeight: 700, color: "#2c3e3a" }}>{fmt(d.perEmployee)}</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -118,7 +151,7 @@ export default function DualTrackComparison() {
         Same Violations, Different Exposure
       </div>
       <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 11, color: "#888", marginBottom: 20, lineHeight: 1.5 }}>
-        Identical meal and rest period violations (50 employees, 26 pay periods) generate fundamentally different exposure through class action wages vs. PAGA civil penalties. The penalty multiplier is a PAGA-specific phenomenon.
+        Identical meal and rest period violations ({employees} employees, {periods} pay periods) generate fundamentally different exposure. Hover for full component breakdown and distribution analysis.
       </div>
 
       <div style={{ width: "100%", height: 260 }}>
@@ -138,11 +171,11 @@ export default function DualTrackComparison() {
         </ResponsiveContainer>
       </div>
 
-      {/* Multiplier callout */}
+      {/* Multiplier + per-employee callouts */}
       <div style={{
         display: "flex",
         justifyContent: "center",
-        gap: 24,
+        gap: 20,
         marginTop: 8,
         padding: "12px 0",
         borderTop: "1px solid #eee",
@@ -169,10 +202,51 @@ export default function DualTrackComparison() {
           </div>
           <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999" }}>Penalty Reduction</div>
         </div>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999", letterSpacing: 2, textTransform: "uppercase" }}>Per Employee (Post)</div>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 700, color: "#2c3e3a" }}>
+            {fmt(data[1].perEmployee)}
+          </div>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#999" }}>× {employees} employees</div>
+        </div>
+      </div>
+
+      {/* Employee share comparison */}
+      <div style={{
+        display: "flex",
+        gap: 12,
+        marginTop: 12,
+        padding: "10px 0",
+        borderTop: "1px solid #eee",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}>
+        <div style={{ flex: "1 1 200px", maxWidth: 260 }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, fontWeight: 600, color: "#1a5276", letterSpacing: 1, marginBottom: 4 }}>CLASS ACTION DISTRIBUTION</div>
+          <div style={{ display: "flex", height: 8, borderRadius: 4, overflow: "hidden" }}>
+            <div style={{ width: "67%", background: "#1a5276" }} />
+            <div style={{ width: "33%", background: "#1a527640" }} />
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 8, color: "#1a5276" }}>Employees 67%</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 8, color: "#999" }}>Fees 33%</span>
+          </div>
+        </div>
+        <div style={{ flex: "1 1 200px", maxWidth: 260 }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, fontWeight: 600, color: "#2c3e3a", letterSpacing: 1, marginBottom: 4 }}>PAGA DISTRIBUTION (POST-REFORM)</div>
+          <div style={{ display: "flex", height: 8, borderRadius: 4, overflow: "hidden" }}>
+            <div style={{ width: "35%", background: "#2c3e3a" }} />
+            <div style={{ width: "65%", background: "#2c3e3a40" }} />
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 8, color: "#2c3e3a" }}>Employees 35%</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 8, color: "#999" }}>LWDA 65%</span>
+          </div>
+        </div>
       </div>
 
       <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#bbb", textAlign: "center", marginTop: 8, lineHeight: 1.5 }}>
-        50 employees · 26 pay periods · Meal (35%) + Rest (30%) violations · Class damages per §§ 226.7, 1194 · PAGA per § 2699(f)(2)
+        {employees} employees · {periods} pay periods · Meal (35%) + Rest (30%) violations · Class per §§ 226.7, 1194 · PAGA per § 2699(f)(2) · Employee share per § 2699(i)(1)
       </div>
     </div>
   );

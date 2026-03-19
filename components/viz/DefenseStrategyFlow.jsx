@@ -2,13 +2,24 @@
 import { useState, useEffect, useRef } from "react";
 
 /*
-  Defense strategy decision flow — renders a numbered path diagram
-  from violation identified through each defense strategy.
-  Accepts strategies array as prop from industry data.
+  Defense strategy decision flow — deepened version.
+  Additions:
+  - Case law citation per step
+  - Outcome assessment (strength indicator)
+  - Cross-links to related tools
+  - Expandable detail panel per step
+  - Progress indicator showing completion through defense layers
 */
 
-export default function DefenseStrategyFlow({ strategies }) {
+var outcomeColors = {
+  strong: "#198754",
+  moderate: "#CC8800",
+  developing: "#2c3e3a",
+};
+
+export default function DefenseStrategyFlow({ strategies, citations }) {
   var [visible, setVisible] = useState(false);
+  var [expandedStep, setExpandedStep] = useState(-1);
   var ref = useRef(null);
 
   useEffect(function () {
@@ -23,7 +34,33 @@ export default function DefenseStrategyFlow({ strategies }) {
 
   if (!strategies || strategies.length === 0) return null;
 
-  // Truncate strategy text for the diagram
+  // Parse citations if provided (parallel array)
+  var cites = citations || [];
+
+  // Known defense strategy patterns with strength assessments
+  var strategyAnnotations = {
+    "arbitration": { strength: "strong", cite: "Viking River (2022); Hohenshelt (2025)", tool: "paga-reform-decision-tree" },
+    "standing": { strength: "strong", cite: "Adolph (2023); Leeper (pending)", tool: "paga-reform-decision-tree" },
+    "manageability": { strength: "moderate", cite: "Estrada (2024); § 2699(p)", tool: "paga-reform-decision-tree" },
+    "cure": { strength: "strong", cite: "§ 2699.3(a)(2)(A) — 33 days", tool: "penalty-cap-qualifier" },
+    "cap": { strength: "strong", cite: "§ 2699(g)(1) 15% / § 2699(h)(1) 30%", tool: "penalty-cap-qualifier" },
+    "bifurcation": { strength: "strong", cite: "Two Hotels framework", tool: "paga-penalty-estimator" },
+    "sampling": { strength: "moderate", cite: "Duran (2014); Bell (2001)", tool: "" },
+    "recoverability": { strength: "strong", cite: "ZB, N.A. (2019); Kirby (2012)", tool: "recoverability-checker" },
+    "regular rate": { strength: "moderate", cite: "Ferra (2021); Alvarado (2018)", tool: "regular-rate-calculator" },
+    "derivative": { strength: "moderate", cite: "Naranjo (2022); § 2699(i)", tool: "derivative-penalty-mapper" },
+    "statute of limitations": { strength: "strong", cite: "CCP § 340(a) — 1 year PAGA", tool: "statute-of-limitations-calculator" },
+    "wage statement": { strength: "moderate", cite: "§ 226(e); post-Naranjo scienter", tool: "wage-statement-compliance-checker" },
+  };
+
+  function getAnnotation(text) {
+    var lower = text.toLowerCase();
+    for (var key in strategyAnnotations) {
+      if (lower.indexOf(key) !== -1) return strategyAnnotations[key];
+    }
+    return null;
+  }
+
   function truncate(text, max) {
     if (text.length <= max) return text;
     return text.substring(0, max) + "...";
@@ -35,16 +72,35 @@ export default function DefenseStrategyFlow({ strategies }) {
       opacity: visible ? 1 : 0,
       transition: "opacity 0.6s ease",
     }}>
-      <div style={{
-        fontFamily: "'Outfit', sans-serif",
-        fontSize: 10,
-        fontWeight: 600,
-        letterSpacing: 3,
-        textTransform: "uppercase",
-        color: "#198754",
-        marginBottom: 16,
-      }}>
-        Defense Sequence
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <div style={{
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: 10,
+          fontWeight: 600,
+          letterSpacing: 3,
+          textTransform: "uppercase",
+          color: "#198754",
+        }}>
+          Defense Sequence
+        </div>
+        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#888" }}>
+          {strategies.length} layers
+        </div>
+      </div>
+
+      {/* Progress bar */}
+      <div style={{ display: "flex", gap: 2, marginBottom: 16 }}>
+        {strategies.map(function (_, i) {
+          return (
+            <div key={i} style={{
+              flex: 1,
+              height: 3,
+              borderRadius: 1.5,
+              background: i <= expandedStep ? "#198754" : "#eee",
+              transition: "background 0.3s ease",
+            }} />
+          );
+        })}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
@@ -82,12 +138,16 @@ export default function DefenseStrategyFlow({ strategies }) {
           </div>
         </div>
 
-        {/* Connector */}
         <div style={{ marginLeft: 15, width: 2, height: 12, background: "#ddd" }} />
 
         {/* Strategy nodes */}
         {strategies.map(function (strategy, i) {
           var delay = 0.2 + i * 0.1;
+          var annotation = getAnnotation(strategy);
+          var cite = cites[i] || (annotation ? annotation.cite : "");
+          var strength = annotation ? annotation.strength : "developing";
+          var isExpanded = expandedStep === i;
+
           return (
             <div key={i}>
               <div style={{
@@ -96,7 +156,8 @@ export default function DefenseStrategyFlow({ strategies }) {
                 alignItems: "flex-start",
                 opacity: visible ? 1 : 0,
                 transition: "opacity 0.4s ease " + delay + "s",
-              }}>
+                cursor: "pointer",
+              }} onClick={function () { setExpandedStep(isExpanded ? -1 : i); }}>
                 <div style={{
                   width: 32,
                   height: 32,
@@ -113,17 +174,56 @@ export default function DefenseStrategyFlow({ strategies }) {
                 }}>
                   {i + 1}
                 </div>
-                <div style={{
-                  flex: 1,
-                  padding: "8px 12px",
-                  background: "#f0faf4",
-                  borderLeft: "3px solid #198754",
-                  fontFamily: "'Outfit', sans-serif",
-                  fontSize: 11,
-                  color: "#555",
-                  lineHeight: 1.6,
-                }}>
-                  {truncate(strategy, 180)}
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    padding: "8px 12px",
+                    background: isExpanded ? "#f0faf4" : "#f8faf9",
+                    borderLeft: "3px solid #198754",
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: 11,
+                    color: "#555",
+                    lineHeight: 1.6,
+                    transition: "background 0.2s ease",
+                  }}>
+                    {truncate(strategy, 200)}
+                    {cite && (
+                      <div style={{ fontSize: 9, color: "#999", marginTop: 4, fontStyle: "italic" }}>
+                        {cite}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Expanded detail */}
+                  {isExpanded && annotation && (
+                    <div style={{
+                      padding: "8px 12px",
+                      background: "#fff",
+                      borderLeft: "3px solid " + outcomeColors[strength],
+                      marginTop: 2,
+                    }}>
+                      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4 }}>
+                        <div style={{
+                          padding: "2px 6px",
+                          background: outcomeColors[strength] + "15",
+                          border: "1px solid " + outcomeColors[strength] + "30",
+                          borderRadius: 3,
+                          fontFamily: "'Outfit', sans-serif",
+                          fontSize: 8,
+                          fontWeight: 600,
+                          color: outcomeColors[strength],
+                          letterSpacing: 0.5,
+                          textTransform: "uppercase",
+                        }}>
+                          {strength} defense
+                        </div>
+                      </div>
+                      {annotation.tool && (
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, color: "#2c3e3a", marginTop: 4 }}>
+                          Related tool: {annotation.tool.replace(/-/g, " ")}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               {i < strategies.length - 1 && (
