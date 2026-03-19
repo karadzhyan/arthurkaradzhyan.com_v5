@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/industries';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import ExposureChart from '@/components/ExposureChart';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -73,6 +74,10 @@ export default function IndustryPage({ params }) {
             {ind.structuralVulnerability.split('\n').filter(function(p) { return p.trim(); }).map(function(p, i) { return <p key={i}>{p}</p>; })}
           </div>
         </section>
+
+        {ind.slug === 'hospitality' && (
+          <ExposureChart categories={ind.exposureCategories} />
+        )}
 
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories</div>

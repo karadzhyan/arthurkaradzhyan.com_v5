@@ -40,6 +40,60 @@ export default function HomePage() {
           <div className="home-hero-stat-label">
             PAGA notices filed in California in 2025 — a record high
           </div>
+          {/* PAGA filing volume sparkline — DIR filing data */}
+          {/* PLACEHOLDER VALUES — verify against DIR PAGA Filing Data before publishing */}
+          <div style={{ maxWidth: 300, margin: '4px 0 12px', opacity: 0.7 }}>
+            <svg viewBox="0 0 300 64" width="100%" style={{ display: 'block' }}>
+              {(function () {
+                /* Year: 2017-2025, values are PLACEHOLDER estimates pending DIR verification */
+                var data = [3742, 4218, 4980, 3856, 4612, 5686, 6320, 7940, 10098];
+                var labels = ['17', '18', '19', '20', '21', '22', '23', '24', '25'];
+                var max = Math.max.apply(null, data);
+                var min = Math.min.apply(null, data);
+                var padT = 6, padB = 16, plotH = 64 - padT - padB;
+                var stepX = 300 / (data.length - 1);
+
+                var pts = data.map(function (v, i) {
+                  return {
+                    x: i * stepX,
+                    y: padT + plotH - ((v - min) / (max - min)) * plotH,
+                  };
+                });
+                var linePath = pts.map(function (p, i) {
+                  return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+                }).join(' ');
+                var areaPath = linePath + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (64 - padB) + ' L0,' + (64 - padB) + ' Z';
+
+                return (
+                  <>
+                    <defs>
+                      <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#8aa39e" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#8aa39e" stopOpacity="0.03" />
+                      </linearGradient>
+                    </defs>
+                    <path d={areaPath} fill="url(#spark-fill)" />
+                    <path d={linePath} fill="none" stroke="#8aa39e" strokeWidth="1.5" />
+                    <circle cx={pts[pts.length - 1].x} cy={pts[pts.length - 1].y} r="3" fill="#2c3e3a" />
+                    {pts.map(function (p, i) {
+                      return (
+                        <text key={i} x={p.x} y={64 - 3} textAnchor="middle"
+                          fontFamily="'Outfit',sans-serif" fontSize="7" fill="#999" fillOpacity="0.7">
+                          {labels[i]}
+                        </text>
+                      );
+                    })}
+                  </>
+                );
+              })()}
+            </svg>
+            <div style={{
+              fontFamily: "'Outfit',sans-serif", fontSize: 8, color: '#999',
+              letterSpacing: 1, textAlign: 'right', marginTop: 2,
+            }}>
+              SOURCE: DIR PAGA FILING DATA · PLACEHOLDER VALUES
+            </div>
+          </div>
           <h1 className="home-hero-name">
             Arthur<br />Karadzhyan
           </h1>

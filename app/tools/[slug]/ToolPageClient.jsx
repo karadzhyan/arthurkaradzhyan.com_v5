@@ -9,6 +9,7 @@ import SOLCalc from '@/components/tools/SOLCalc';
 import RecoverCheck from '@/components/tools/RecoverCheck';
 import DerivativeMapper from '@/components/tools/DerivativeMapper';
 import NaranjoCascade from '@/components/tools/NaranjoCascade';
+import RegRateFormula from '@/components/tools/RegRateFormula';
 import DecisionTree from '@/components/tools/DecisionTree';
 import WageStmtCheck from '@/components/tools/WageStmtCheck';
 import SiteNav from '@/components/SiteNav';
@@ -106,6 +107,7 @@ export default function ToolPageClient({ slug }) {
       <div className="tool-detail-band">
         <div className="tool-detail-band-inner">
           {tool.component === 'DerivativeMapper' && <NaranjoCascade />}
+          {tool.component === 'RegRateCalc' && <RegRateFormula />}
           {ToolComponent && <ToolComponent />}
         </div>
       </div>
