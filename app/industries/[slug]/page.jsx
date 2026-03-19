@@ -75,6 +75,8 @@ export default function IndustryPage({ params }) {
   }
 
   var relatedItems = resolveRelated(ind);
+  var criticalCount = ind.exposureCategories.filter(function(c) { return c.severity === 'critical'; }).length;
+  var highCount = ind.exposureCategories.filter(function(c) { return c.severity === 'high'; }).length;
 
   return (
     <div className="page-wrap">
@@ -85,90 +87,91 @@ export default function IndustryPage({ params }) {
       ]} />
       <SiteNav current="Industries" />
 
+      {/* ═══════════════════════════════════════════
+          LEVEL 0: THE ANSWER
+          Header delivers the governing thought immediately.
+          ═══════════════════════════════════════════ */}
       <div className="article-industry-header">
         <div className="article-industry-header-inner">
           <div className="page-label-dark">Industry Intelligence</div>
           <h1 className="page-title-dark" style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700 }}>{ind.name}</h1>
-          <div className="page-desc-dark" style={{ fontFamily: 'Georgia,serif', fontStyle: 'italic', maxWidth: 640, marginBottom: 24 }}>{ind.headline}</div>
-          <div className="article-industry-stats">
-            <div>
-              <div className="article-industry-stat-num">{ind.exposureCategories.length}</div>
-              <div className="article-industry-stat-label">Detailed Categories</div>
+
+          {/* The answer — front and center */}
+          <div className="ind-governing-thought">{ind.keyTakeaway}</div>
+
+          <div className="ind-header-meta">
+            <div className="ind-header-meta-item">
+              <span className="ind-header-meta-label">Wage Order</span>
+              <span className="ind-header-meta-value">{ind.wageOrder.split(' (')[0]}</span>
             </div>
-            <div>
-              <div className="article-industry-stat-num">{ind.issues.length}</div>
-              <div className="article-industry-stat-label">Exposure Areas</div>
+            <div className="ind-header-meta-sep" />
+            <div className="ind-header-meta-item">
+              <span className="ind-header-meta-label">Est. Annual Exposure</span>
+              <span className="ind-header-meta-value">{ind.annualExposure ? fmtK(ind.annualExposure) : '—'}</span>
             </div>
-            <div>
-              <div className="article-industry-stat-num">{ind.authorities.length}</div>
-              <div className="article-industry-stat-label">Governing Authorities</div>
-            </div>
-            <div>
-              <div className="article-industry-stat-num">{ind.defenseStrategies.length}</div>
-              <div className="article-industry-stat-label">Defense Strategies</div>
+            <div className="ind-header-meta-sep" />
+            <div className="ind-header-meta-item">
+              <span className="ind-header-meta-label">Key Authority</span>
+              <span className="ind-header-meta-value">{ind.keyCase}</span>
             </div>
           </div>
-          {ind.wageOrder && <div className="article-industry-wage">Applicable: {ind.wageOrder}</div>}
         </div>
       </div>
 
       <article className="article-wrap wide">
 
-        {/* ─── QUICK FACTS ─── */}
-        <div className="ind-quick-facts">
-          <div className="ind-quick-facts-title">Quick Facts</div>
-          <div className="ind-quick-facts-grid">
-            <div className="ind-quick-fact">
-              <div className="ind-quick-fact-label">Wage Order</div>
-              <div className="ind-quick-fact-value">{ind.wageOrder.split(' (')[0]}</div>
+        {/* ═══════════════════════════════════════════
+            LEVEL 1: SITUATION → COMPLICATION
+            Why this industry, why now, why it matters.
+            ═══════════════════════════════════════════ */}
+        <section className="ind-scq">
+          <div className="ind-scq-block">
+            <div className="ind-scq-label">Situation</div>
+            <div className="ind-scq-text">{ind.situation}</div>
+          </div>
+          <div className="ind-scq-block">
+            <div className="ind-scq-label">Complication</div>
+            <div className="ind-scq-text">{ind.complication}</div>
+          </div>
+        </section>
+
+        {/* Severity summary — bridges SCQ to the exposure detail */}
+        <div className="ind-severity-summary">
+          <div className="ind-severity-summary-inner">
+            <div className="ind-severity-summary-stat">
+              <span className="ind-ss-num" style={{ color: severityColors.critical }}>{criticalCount}</span>
+              <span className="ind-ss-label">Critical</span>
             </div>
-            <div className="ind-quick-fact">
-              <div className="ind-quick-fact-label">Primary Risk</div>
-              <div className="ind-quick-fact-value">{ind.primaryRisk}</div>
+            <div className="ind-severity-summary-stat">
+              <span className="ind-ss-num" style={{ color: severityColors.high }}>{highCount}</span>
+              <span className="ind-ss-label">High</span>
             </div>
-            <div className="ind-quick-fact">
-              <div className="ind-quick-fact-label">Key Authority</div>
-              <div className="ind-quick-fact-value">{ind.keyCase}</div>
+            <div className="ind-severity-summary-stat">
+              <span className="ind-ss-num" style={{ color: '#2c3e3a' }}>{ind.exposureCategories.length}</span>
+              <span className="ind-ss-label">Total Categories</span>
             </div>
-            <div className="ind-quick-fact">
-              <div className="ind-quick-fact-label">Est. Annual Exposure</div>
-              <div className="ind-quick-fact-value">{ind.annualExposure ? fmtK(ind.annualExposure) : '—'}</div>
-              <div className="ind-quick-fact-note">50 employees · 26 pay periods</div>
+            <div className="ind-severity-summary-stat">
+              <span className="ind-ss-num" style={{ color: '#2c3e3a' }}>{ind.issues.length}</span>
+              <span className="ind-ss-label">Exposure Areas</span>
             </div>
           </div>
         </div>
 
-        {/* ─── STRUCTURAL VULNERABILITY ─── */}
-        <section style={{ marginBottom: 40 }}>
-          <div className="article-section-label lg">Structural Vulnerability</div>
-          <div className="article-body">
-            {ind.structuralVulnerability.split('\n').filter(function(p) { return p.trim(); }).map(function(p, i) { return <p key={i}>{p}</p>; })}
-          </div>
-        </section>
-
-        {/* ─── KEY TAKEAWAY ─── */}
-        {ind.keyTakeaway && (
-          <div className="ind-key-takeaway">
-            <div className="ind-key-takeaway-label">Key Takeaway</div>
-            <div className="ind-key-takeaway-text">{ind.keyTakeaway}</div>
-          </div>
-        )}
-
-        {/* ─── EXPOSURE PROFILE CHART ─── */}
-        <ExposureProfileChart industryName={ind.name} />
-
-        {/* ─── EXPOSURE CATEGORIES ─── */}
+        {/* ═══════════════════════════════════════════
+            LEVEL 2: EXPOSURE CATEGORIES
+            Each category: Impact (the "so what") → Analysis (supporting) → Defense (action)
+            ═══════════════════════════════════════════ */}
         <section style={{ marginBottom: 60 }}>
-          <div className="article-section-label lg">Exposure Categories</div>
-          <div className="ind-exposure-cat-note">
-            {ind.exposureCategories.length} detailed categories with statutory basis, analysis, and defense strategy.
-          </div>
+          <div className="article-section-label lg">Where the Exposure Lives</div>
           {ind.exposureCategories.map(function(cat, i) {
             var severity = cat.severity || 'moderate';
             return (
-              <div key={i} className="article-exposure-cat" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
+              <div key={i} className="ind-cat-block" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
                 <div className="ind-cat-header">
                   <div>
+                    <div className="ind-cat-num">{i + 1}</div>
+                  </div>
+                  <div style={{ flex: 1 }}>
                     <div className="article-exposure-name">{cat.name}</div>
                     <div className="article-exposure-statute">{cat.statute}</div>
                   </div>
@@ -180,10 +183,19 @@ export default function IndustryPage({ params }) {
                     {severityLabels[severity]}
                   </div>
                 </div>
+
+                {/* Impact line — the "so what" leads */}
+                {cat.impact && (
+                  <div className="ind-cat-impact">{cat.impact}</div>
+                )}
+
+                {/* Supporting analysis */}
                 <div className="article-exposure-analysis">{cat.analysis}</div>
+
+                {/* Recommended action */}
                 <div className="article-exposure-defense">
                   <div className="ind-defense-header">
-                    <div className="article-section-label green">Defense Strategy</div>
+                    <div className="article-section-label green">Recommended Action</div>
                     {cat.priority && (
                       <div className="ind-priority-badge">{cat.priority}</div>
                     )}
@@ -195,40 +207,16 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
-        {/* ─── FULL EXPOSURE PROFILE ─── */}
-        <section style={{ marginBottom: 60 }}>
-          <div className="article-section-label lg">Full Exposure Profile</div>
-          <div className="ind-issues-grid">
-            {ind.issues.map(function(issue, i) {
-              return (
-                <div key={i} className="ind-issue-item">
-                  <div className="ind-issue-num">{i + 1}</div>
-                  <div className="ind-issue-text">{issue}</div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        {/* Exposure profile visualization */}
+        <ExposureProfileChart industryName={ind.name} />
 
-        {/* ─── GOVERNING AUTHORITIES ─── */}
-        <section style={{ marginBottom: 60 }}>
-          <div className="article-section-label lg">Governing Authorities</div>
-          <AuthorityTimeline authorities={ind.authorities} />
-          <div className="ind-authorities-list">
-            {ind.authorities.map(function(auth, i) {
-              return (
-                <div key={i} className="ind-authority-item">
-                  <div className="ind-authority-num">{i + 1}</div>
-                  <div className="ind-authority-text">{auth}</div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ─── DEFENSE STRATEGIES ─── */}
-        <div className="article-defense-box" style={{ marginBottom: 60 }}>
-          <div className="article-section-label green" style={{ marginBottom: 20 }}>Defense Strategies</div>
+        {/* ═══════════════════════════════════════════
+            LEVEL 2: DEFENSE FRAMEWORK
+            What to do — elevated above reference material.
+            ═══════════════════════════════════════════ */}
+        <div className="ind-defense-framework" style={{ marginBottom: 60 }}>
+          <div className="article-section-label lg" style={{ marginBottom: 8 }}>Defense Framework</div>
+          <div className="ind-defense-framework-sub">Recommended actions in priority order.</div>
           <DefenseStrategyFlow strategies={ind.defenseStrategies} />
           {ind.defenseStrategies.map(function(strategy, i) {
             return (
@@ -240,26 +228,62 @@ export default function IndustryPage({ params }) {
           })}
         </div>
 
-        {/* ─── CURRENTLY MONITORING ─── */}
-        {ind.monitoring && ind.monitoring.length > 0 && (
-          <div className="article-monitoring">
-            <div className="article-monitoring-bar" />
-            <div className="article-monitoring-inner">
-              <div className="article-section-label lg">Currently Monitoring</div>
-              <div className="ind-monitoring-note">
-                Active developments that may affect {ind.name.toLowerCase()} employers.
-              </div>
-              {ind.monitoring.map(function(item, i) {
+        {/* ═══════════════════════════════════════════
+            LEVEL 3: SUPPORTING REFERENCE
+            Authorities, full exposure list, monitoring — reference material.
+            ═══════════════════════════════════════════ */}
+        <div className="ind-reference-section">
+          <div className="ind-reference-label">Reference</div>
+
+          {/* Governing Authorities */}
+          <section style={{ marginBottom: 40 }}>
+            <div className="article-section-label lg">Governing Authorities</div>
+            <AuthorityTimeline authorities={ind.authorities} />
+            <div className="ind-authorities-list">
+              {ind.authorities.map(function(auth, i) {
                 return (
-                  <div key={i} className="article-monitoring-item">
-                    <div className="article-monitoring-dot" />
-                    <div className="article-monitoring-text">{item}</div>
+                  <div key={i} className="ind-authority-item">
+                    <div className="ind-authority-num">{i + 1}</div>
+                    <div className="ind-authority-text">{auth}</div>
                   </div>
                 );
               })}
             </div>
-          </div>
-        )}
+          </section>
+
+          {/* Full Exposure Profile */}
+          <section style={{ marginBottom: 40 }}>
+            <div className="article-section-label lg">Full Exposure Profile</div>
+            <div className="ind-issues-grid">
+              {ind.issues.map(function(issue, i) {
+                return (
+                  <div key={i} className="ind-issue-item">
+                    <div className="ind-issue-num">{i + 1}</div>
+                    <div className="ind-issue-text">{issue}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Currently Monitoring */}
+          {ind.monitoring && ind.monitoring.length > 0 && (
+            <div className="article-monitoring" style={{ marginBottom: 40 }}>
+              <div className="article-monitoring-bar" />
+              <div className="article-monitoring-inner">
+                <div className="article-section-label lg">Currently Monitoring</div>
+                {ind.monitoring.map(function(item, i) {
+                  return (
+                    <div key={i} className="article-monitoring-item">
+                      <div className="article-monitoring-dot" />
+                      <div className="article-monitoring-text">{item}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* ─── RELATED ON THIS SITE ─── */}
         <section style={{ marginBottom: 40 }}>
