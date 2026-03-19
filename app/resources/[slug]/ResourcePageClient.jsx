@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { getResourceBySlug } from "@/data/resources";
+import ReformWaterfall from "@/components/ReformWaterfall";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -211,6 +212,9 @@ function ReformPage({res}) {
         <S fontSize={10} fontWeight={600} letterSpacing={2} textTransform="uppercase" color="#2c3e3a" marginBottom={4}>Effective Date: {res.effectiveDate}</S>
         <S fontSize={12} lineHeight="1.8" color="#555">{res.effectiveNote}</S>
       </div>
+
+      {/* WATERFALL VISUALIZATION */}
+      {res.cascade && <ReformWaterfall />}
 
       {/* CASCADE */}
       {res.cascade && <div style={{marginBottom:48}}>

@@ -626,3 +626,240 @@ export function DonohueDiagram() {
     </div>
   );
 }
+
+
+/* Ferra: Regular rate vs base rate for premiums */
+export function FerraDiagram() {
+  var W = 580, H = 170;
+
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          FERRA — PREMIUM CALCULATION STANDARD
+        </text>
+        <text x={W / 2} y={30} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8.5} fill="#999">
+          Meal and rest period premiums must use the regular rate — not the base hourly rate
+        </text>
+
+        {/* Base rate (wrong) */}
+        <rect x={30} y={44} width={240} height={80} rx={4}
+          fill="#dc3545" opacity={0.04} stroke="#dc3545" strokeWidth={0.75} />
+        <rect x={30} y={44} width={240} height={3} rx={1.5} fill="#dc3545" />
+        <text x={150} y={64} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#dc3545">WRONG: BASE RATE</text>
+        <text x={150} y={84} textAnchor="middle"
+          fontFamily="'Libre Baskerville',serif" fontSize={14} fill="#333" fontWeight={700}>
+          $17.00/hr
+        </text>
+        <text x={150} y={100} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fill="#888">
+          Base hourly rate only
+        </text>
+        <text x={150} y={114} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#dc3545">
+          Applied retroactively — no safe harbor
+        </text>
+
+        {/* Arrow */}
+        <text x={W / 2} y={90} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={12} fontWeight={700} fill="#ccc">
+          vs.
+        </text>
+
+        {/* Regular rate (correct) */}
+        <rect x={310} y={44} width={240} height={80} rx={4}
+          fill="#198754" opacity={0.04} stroke="#198754" strokeWidth={0.75} />
+        <rect x={310} y={44} width={240} height={3} rx={1.5} fill="#198754" />
+        <text x={430} y={64} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#198754">CORRECT: REGULAR RATE</text>
+        <text x={430} y={84} textAnchor="middle"
+          fontFamily="'Libre Baskerville',serif" fontSize={14} fill="#333" fontWeight={700}>
+          $22.50/hr
+        </text>
+        <text x={430} y={100} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fill="#888">
+          Base + commissions + bonuses + piece-rate
+        </text>
+        <text x={430} y={114} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#198754">
+          Per Ferra + Alvarado methodology
+        </text>
+
+        {/* Gap callout */}
+        <rect x={W / 2 - 100} y={136} width={200} height={20} rx={10}
+          fill="#dc3545" opacity={0.08} stroke="#dc3545" strokeWidth={0.75} />
+        <text x={W / 2} y={150} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#dc3545">
+          $5.50/hr gap × premiums owed = exposure
+        </text>
+
+        <text x={W / 2} y={168} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          Ferra v. Loews Hollywood Hotel (2021) 11 Cal.5th 858 · Applied retroactively
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+
+/* Kirby: Demand stripping — what's NOT recoverable */
+export function KirbyDiagram() {
+  var W = 580, H = 180;
+  var categories = [
+    { label: 'Overtime\nUnderpayments', recoverable: false, color: '#dc3545' },
+    { label: 'Meal/Rest\nPremiums', recoverable: false, color: '#dc3545' },
+    { label: 'Unreimbursed\nExpenses', recoverable: false, color: '#dc3545' },
+    { label: 'Wage Statement\n§ 226(e)', recoverable: true, color: '#198754' },
+    { label: 'Min. Wage\n§ 1197.1', recoverable: true, color: '#198754' },
+    { label: 'Default PAGA\n§ 2699(f)', recoverable: true, color: '#198754' },
+  ];
+
+  var boxW = 80, boxH = 64, gap = 8;
+  var totalW = categories.length * (boxW + gap) - gap;
+  var startX = (W - totalW) / 2;
+
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          KIRBY / ZB — DEMAND STRIPPING ANALYSIS
+        </text>
+        <text x={W / 2} y={30} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8.5} fill="#999">
+          Stripping non-recoverable categories reduces theoretical PAGA exposure 30–50%
+        </text>
+
+        {categories.map(function (cat, i) {
+          var x = startX + i * (boxW + gap);
+          var y = 44;
+          return (
+            <g key={i}>
+              <rect x={x} y={y} width={boxW} height={boxH} rx={4}
+                fill={cat.color} opacity={0.06}
+                stroke={cat.color} strokeWidth={0.75} />
+
+              {/* X or check */}
+              <text x={x + boxW / 2} y={y + 20} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={16} fontWeight={700}
+                fill={cat.color}>
+                {cat.recoverable ? '✓' : '×'}
+              </text>
+
+              {/* Label */}
+              {cat.label.split('\n').map(function (line, li) {
+                return (
+                  <text key={li} x={x + boxW / 2} y={y + 36 + li * 12} textAnchor="middle"
+                    fontFamily="'Outfit',sans-serif" fontSize={8}
+                    fontWeight={li === 0 ? 600 : 400}
+                    fill={cat.recoverable ? '#198754' : '#dc3545'}>
+                    {line}
+                  </text>
+                );
+              })}
+
+              {/* Status badge */}
+              <rect x={x + 10} y={y + boxH + 6} width={boxW - 20} height={14} rx={7}
+                fill={cat.recoverable ? '#198754' : '#dc3545'} opacity={0.12} />
+              <text x={x + boxW / 2} y={y + boxH + 16} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={7} fontWeight={600}
+                fill={cat.recoverable ? '#198754' : '#dc3545'} letterSpacing={1}>
+                {cat.recoverable ? 'RECOVERABLE' : 'NOT PAGA'}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Reduction callout */}
+        <rect x={W / 2 - 130} y={140} width={260} height={22} rx={4}
+          fill="#198754" opacity={0.06} stroke="#198754" strokeWidth={0.75} />
+        <text x={W / 2} y={155} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#198754">
+          Stripping 3 non-recoverable categories = 30–50% demand reduction
+        </text>
+
+        <text x={W / 2} y={176} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          Kirby v. Immoos (2012) 53 Cal.4th 1244 · ZB, N.A. v. Superior Court (2019) 8 Cal.5th 175
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+
+/* Estrada: 5 court manageability tools */
+export function EstradaDiagram() {
+  var tools = [
+    { num: '1', label: 'Representative Testimony', desc: 'Select employees testify for subgroups' },
+    { num: '2', label: 'Surveys', desc: 'Written declarations as evidence' },
+    { num: '3', label: 'Statistical Analysis', desc: 'Sampling to establish violation rates' },
+    { num: '4', label: 'Evidence Limitation', desc: 'Narrow categories to manageable scope' },
+    { num: '5', label: 'Scope Limitation', desc: 'Restrict to specific locations/periods' },
+  ];
+  var W = 580, H = 170;
+  var boxW = 100, gap = 10;
+  var totalW = tools.length * (boxW + gap) - gap;
+  var startX = (W - totalW) / 2;
+
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          ESTRADA — FIVE COURT MANAGEABILITY TOOLS
+        </text>
+        <text x={W / 2} y={30} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8.5} fill="#999">
+          Cannot dismiss on manageability — but can limit scope using these tools
+        </text>
+
+        {tools.map(function (t, i) {
+          var x = startX + i * (boxW + gap);
+          return (
+            <g key={i}>
+              <rect x={x} y={44} width={boxW} height={90} rx={4}
+                fill="#f9faf9" stroke="#e0e0e0" strokeWidth={0.75} />
+              <circle cx={x + boxW / 2} cy={62} r={12}
+                fill="#2c3e3a" />
+              <text x={x + boxW / 2} y={66} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={11} fontWeight={700} fill="#fff">
+                {t.num}
+              </text>
+              <text x={x + boxW / 2} y={86} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600} fill="#333">
+                {t.label}
+              </text>
+              <text x={x + boxW / 2} y={100} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={7} fill="#888">
+                {t.desc.length > 30 ? t.desc.slice(0, 28) + '...' : t.desc}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Codified note */}
+        <rect x={W / 2 - 130} y={142} width={260} height={16} rx={8}
+          fill="#4a7a6f" opacity={0.08} />
+        <text x={W / 2} y={153} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600} fill="#4a7a6f">
+          Codified by AB 2288 → Lab. Code § 2699(p)
+        </text>
+
+        <text x={W / 2} y={168} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          Estrada v. Royalty Carpet Mills (2024) 15 Cal.5th 582
+        </text>
+      </svg>
+    </div>
+  );
+}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { caseLaw, getCaseBySlug, getAllCaseSlugs } from '@/data/caseLaw';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
-import { BrinkerDiagram, ZBDiagram, HohensheltDiagram, LeeperDiagram, NaranjoCaseDiagram, AlvaradoDiagram, DonohueDiagram } from '@/components/CaseDiagrams';
+import { BrinkerDiagram, ZBDiagram, HohensheltDiagram, LeeperDiagram, NaranjoCaseDiagram, AlvaradoDiagram, DonohueDiagram, FerraDiagram, KirbyDiagram, EstradaDiagram } from '@/components/CaseDiagrams';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -62,6 +62,9 @@ export default function CasePage({ params }) {
         {params.slug === 'naranjo-v-spectrum-security-services-inc' && <NaranjoCaseDiagram />}
         {params.slug === 'alvarado-v-dart-container-corp-of-california' && <AlvaradoDiagram />}
         {params.slug === 'donohue-v-amn-services-inc' && <DonohueDiagram />}
+        {params.slug === 'ferra-v-loews-hollywood-hotel-inc' && <FerraDiagram />}
+        {params.slug === 'kirby-v-immoos-fire-protection-inc' && <KirbyDiagram />}
+        {params.slug === 'estrada-v-royalty-carpet-mills-inc' && <EstradaDiagram />}
 
         <div className="article-section">
           <div className="article-section-label">Holding</div>

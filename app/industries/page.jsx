@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { industries } from '@/data/industries';
+import IndustryRadar from '@/components/IndustryRadar';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -67,6 +68,8 @@ export default function IndustriesIndex() {
             );
           })}
         </div>
+
+        <IndustryRadar />
 
         <div className="page-essay">
           <h3 className="page-essay-title">Why Industry-Specific Analysis</h3>

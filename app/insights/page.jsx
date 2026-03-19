@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { insights } from '@/data/insights';
+import InsightTopicMap from '@/components/InsightTopicMap';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -31,6 +32,7 @@ export default function InsightsIndex() {
       </div>
 
       <div className="page-body">
+        <InsightTopicMap />
         <div className="insights-index-grid">
           {insights.map(function (ins) {
             return (
