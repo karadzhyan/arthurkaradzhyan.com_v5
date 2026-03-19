@@ -26,6 +26,7 @@ import DefenseFlowchart from "@/components/visuals/DefenseFlowchart";
 import IndustryHeatmap from "@/components/visuals/IndustryHeatmap";
 import RecoverabilityMatrix from "@/components/visuals/RecoverabilityMatrix";
 import CaseLawTimeline from "@/components/visuals/CaseLawTimeline";
+import PenaltyWaterfall from "@/components/visuals/PenaltyWaterfall";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -168,6 +169,7 @@ export default function HomePage() {
         {/* Methodology visualizations */}
         <div className="home-viz-section">
           <PenaltyMath />
+          <PenaltyWaterfall />
           <ExposureModel />
         </div>
       </section>

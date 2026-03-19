@@ -3,6 +3,7 @@ import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights'
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import ArticleViz from '@/components/visuals/ArticleViz';
 
 export function generateStaticParams() {
   return getAllInsightSlugs().map(function(slug) { return { slug: slug }; });
@@ -73,6 +74,8 @@ export default function InsightPage({ params }) {
             return <p key={i}>{p}</p>;
           })}
         </div>
+
+        <ArticleViz slug={params.slug} type="insight" />
 
         <div className="article-disclaimer">
           For illustrative purposes only. This publication does not constitute legal advice. Prior results do not guarantee a similar outcome.

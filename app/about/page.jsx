@@ -6,6 +6,7 @@ import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import { IconWrench, IconBook, IconGavel, IconBuilding, IconScale } from '@/components/Icons';
+import AboutPageViz from '@/components/visuals/AboutPageViz';
 
 export var metadata = {
   title: 'About — Background & Qualifications | Arthur Karadzhyan',
@@ -102,6 +103,8 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+
+        <AboutPageViz />
       </div>
 
       <SiteFooter />
