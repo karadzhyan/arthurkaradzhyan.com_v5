@@ -6,6 +6,19 @@ import SiteFooter from '@/components/SiteFooter';
 import IndustryExposureProfile from '@/components/industries/IndustryExposureProfile';
 import ExposureCategoryChart from '@/components/industries/ExposureCategoryChart';
 import DefenseStrategyFlow from '@/components/industries/DefenseStrategyFlow';
+import HospitalityShiftExposure from '@/components/industries/HospitalityShiftExposure';
+import DonohueCascade from '@/components/industries/DonohueCascade';
+import ServiceChargeFlow from '@/components/industries/ServiceChargeFlow';
+import SciborskiTimeline from '@/components/industries/SciborskiTimeline';
+import AutoCompensationMap from '@/components/industries/AutoCompensationMap';
+import JointEmployerMatrix from '@/components/industries/JointEmployerMatrix';
+import WorksiteVariation from '@/components/industries/WorksiteVariation';
+import AWSElectionProcess from '@/components/industries/AWSElectionProcess';
+import TravelTimeAnalysis from '@/components/industries/TravelTimeAnalysis';
+import TechExemptionAnalysis from '@/components/industries/TechExemptionAnalysis';
+import RemoteWorkExposure from '@/components/industries/RemoteWorkExposure';
+import PieceRateBreakdown from '@/components/industries/PieceRateBreakdown';
+import SeasonalWorkforceTimeline from '@/components/industries/SeasonalWorkforceTimeline';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -83,6 +96,101 @@ export default function IndustryPage({ params }) {
             {ind.structuralVulnerability.split('\n').filter(function(p) { return p.trim(); }).map(function(p, i) { return <p key={i}>{p}</p>; })}
           </div>
         </section>
+
+        {/* HOSPITALITY-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'hospitality' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">24/7 Shift Exposure Analysis</div>
+              <HospitalityShiftExposure />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">The Donohue Derivative Cascade</div>
+              <DonohueCascade />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Service Charge vs. Gratuity Classification</div>
+              <ServiceChargeFlow />
+            </section>
+          </>
+        )}
+
+        {/* AGRICULTURE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'agriculture' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 226.2 Piece-Rate Calculation</div>
+              <PieceRateBreakdown />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Seasonal Workforce Lifecycle</div>
+              <SeasonalWorkforceTimeline />
+            </section>
+          </>
+        )}
+
+        {/* TECHNOLOGY-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'technology-startups' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 515.5 Exemption — Duties Analysis</div>
+              <TechExemptionAnalysis />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 2802 Remote Work Reimbursement</div>
+              <RemoteWorkExposure />
+            </section>
+          </>
+        )}
+
+        {/* SOLAR-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'solar-energy' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">AWS Election Compliance Audit</div>
+              <AWSElectionProcess />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Travel Time — Yard to Site</div>
+              <TravelTimeAnalysis />
+            </section>
+          </>
+        )}
+
+        {/* HEALTHCARE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'healthcare-staffing' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Joint Employer Liability Allocation</div>
+              <JointEmployerMatrix />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Multi-Worksite Compliance Variation</div>
+              <WorksiteVariation />
+            </section>
+          </>
+        )}
+
+        {/* AUTOMOTIVE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'automotive-dealerships' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Sciborski Forfeiture Analysis</div>
+              <SciborskiTimeline />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Compensation Structure & Regular Rate</div>
+              <AutoCompensationMap />
+            </section>
+          </>
+        )}
 
         {/* EXPOSURE CATEGORY CHART */}
         <section style={{ marginBottom: 32 }}>
