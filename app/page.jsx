@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Counter from "@/components/Counter";
 import ContactForm from "@/components/ContactForm";
+import HomeCaseTimeline from "@/components/HomeCaseTimeline";
+import HomePracticeRing from "@/components/HomePracticeRing";
 import { insights } from "@/data/insights";
 import { caseLaw } from "@/data/caseLaw";
 import { commentary } from "@/data/commentary";
@@ -175,6 +177,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="home-about-sidebar">
+            <HomePracticeRing />
             <div className="home-about-focus-title">Focus</div>
             <div className="home-about-focus-list">
               PAGA penalty exposure modeling<br />
@@ -281,6 +284,7 @@ export default function HomePage() {
         <p className="home-section-intro">
           {caseLaw.length} decisions that define PAGA defense practice.
         </p>
+        <HomeCaseTimeline />
         <div className="home-cases-grid">
           {caseLaw.slice(0, 6).map(function (c) {
             return (

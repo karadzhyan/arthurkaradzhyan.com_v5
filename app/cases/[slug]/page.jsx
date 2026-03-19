@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { caseLaw, getCaseBySlug, getAllCaseSlugs } from '@/data/caseLaw';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import { BrinkerDiagram, ZBDiagram, HohensheltDiagram, LeeperDiagram, NaranjoCaseDiagram, AlvaradoDiagram, DonohueDiagram } from '@/components/CaseDiagrams';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -52,6 +53,15 @@ export default function CasePage({ params }) {
         {caseItem.preview && (
           <div className="article-preview">{caseItem.preview}</div>
         )}
+
+        {/* Per-case visual diagrams */}
+        {params.slug === 'brinker-restaurant-corp-v-superior-court' && <BrinkerDiagram />}
+        {params.slug === 'zb-na-v-superior-court' && <ZBDiagram />}
+        {params.slug === 'hohenshelt-v-superior-court' && <HohensheltDiagram />}
+        {params.slug === 'leeper-v-shipt-inc' && <LeeperDiagram />}
+        {params.slug === 'naranjo-v-spectrum-security-services-inc' && <NaranjoCaseDiagram />}
+        {params.slug === 'alvarado-v-dart-container-corp-of-california' && <AlvaradoDiagram />}
+        {params.slug === 'donohue-v-amn-services-inc' && <DonohueDiagram />}
 
         <div className="article-section">
           <div className="article-section-label">Holding</div>

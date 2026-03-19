@@ -75,7 +75,7 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
-        {ind.slug === 'hospitality' && (
+        {ind.exposureCategories && ind.exposureCategories.length > 0 && (
           <ExposureChart categories={ind.exposureCategories} />
         )}
 

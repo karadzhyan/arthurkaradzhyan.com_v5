@@ -3,6 +3,7 @@ import { tools } from '@/data/tools';
 import { insights } from '@/data/insights';
 import { caseLaw } from '@/data/caseLaw';
 import { industries } from '@/data/industries';
+import PracticeTimeline from '@/components/PracticeTimeline';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -43,6 +44,7 @@ export default function AboutPage() {
             <p>The interactive tools, publications, and case law analyses on this site aren't marketing. They are the methodology, made visible.</p>
 
             <h3 className="about-section-title">Practice Trajectory</h3>
+            <PracticeTimeline />
             <p>I started on the plaintiff side — litigating wage-and-hour class actions at a Los Angeles firm that prosecuted meal-and-rest, overtime, and off-the-clock claims against mid-market and enterprise employers. I learned how plaintiff's counsel evaluates cases, prices risk, builds class certification motions, and approaches mediation.</p>
             <p>The transition to defense was deliberate. At a global litigation firm's employment practice group, I handled PAGA and wage-and-hour matters with a level of independence unusual for my seniority — building the quantitative exposure models, novel defense theories, and sampling methodologies that became standard analytical tools across the practice group.</p>
             <p>Earlier, I practiced intellectual property at a boutique firm — researching cutting-edge trademark and licensing issues, drafting prosecution briefs, and producing the kind of deep analytical writing that a transactional IP practice demands.</p>

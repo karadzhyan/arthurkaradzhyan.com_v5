@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { caseLaw } from '@/data/caseLaw';
+import CaseLawTimeline from '@/components/CaseLawTimeline';
+import CaseDependencyGraph from '@/components/CaseDependencyGraph';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -31,6 +33,8 @@ export default function CasesIndex() {
       </div>
 
       <div className="page-body">
+        <CaseLawTimeline />
+        <CaseDependencyGraph />
         <div className="cases-index-grid">
           {caseLaw.map(function (c) {
             return (

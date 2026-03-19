@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { tools } from '@/data/tools';
+import ToolsPenaltyMatrix from '@/components/ToolsPenaltyMatrix';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -32,6 +33,7 @@ export default function ToolsIndex() {
       </div>
 
       <div className="page-body">
+        <ToolsPenaltyMatrix />
         <div className="tools-index-grid">
           {tools.map(function (tool) {
             return (
