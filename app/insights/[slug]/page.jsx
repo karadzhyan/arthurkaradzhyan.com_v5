@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
-import { TwoHotelsDiagram, HohensheltInsightDiagram, SciborskiDiagram, ReformAxesDiagram, SamplingDiagram, MonizDiagram, ExpertDeposDiagram, NaranjoMultiplierDiagram, ManageabilityDiagram } from '@/components/InsightDiagrams';
+import { TwoHotelsDiagram, RecoverabilityTreeDiagram, HohensheltInsightDiagram, SciborskiDiagram, ReformAxesDiagram, SamplingDiagram, LeeperTimelineDiagram, MonizDiagram, ExpertDeposDiagram, RegularRateDiagram, NaranjoMultiplierDiagram, ManageabilityDiagram } from '@/components/InsightDiagrams';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -71,12 +71,15 @@ export default function InsightPage({ params }) {
 
         {/* Per-insight visual diagrams */}
         {params.slug.indexOf('two-hotels') > -1 && <TwoHotelsDiagram />}
+        {params.slug.indexOf('recoverable-vs-non-recoverable') > -1 && <RecoverabilityTreeDiagram />}
         {params.slug.indexOf('hohenshelt') > -1 && <HohensheltInsightDiagram />}
         {params.slug.indexOf('commission-forfeiture') > -1 && <SciborskiDiagram />}
         {params.slug.indexOf('ab-2288') > -1 && <ReformAxesDiagram />}
         {params.slug.indexOf('statistical-sampling') > -1 && <SamplingDiagram />}
+        {params.slug.indexOf('headless-paga') > -1 && <LeeperTimelineDiagram />}
         {params.slug.indexOf('drafting-paga-settlement') > -1 && <MonizDiagram />}
         {params.slug.indexOf('challenging-plaintiff') > -1 && <ExpertDeposDiagram />}
+        {params.slug.indexOf('regular-rate-problem') > -1 && <RegularRateDiagram />}
         {params.slug.indexOf('naranjo-cascade') > -1 && <NaranjoMultiplierDiagram />}
         {params.slug.indexOf('manageability-after') > -1 && <ManageabilityDiagram />}
 

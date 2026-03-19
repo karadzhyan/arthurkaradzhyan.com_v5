@@ -61,6 +61,94 @@ export function TwoHotelsDiagram() {
 }
 
 
+/* Insight 2 — Recoverable vs. Non-Recoverable: 3-question decision tree */
+export function RecoverabilityTreeDiagram() {
+  var W = 580, H = 220;
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          RECOVERABILITY DECISION TREE
+        </text>
+        <text x={W / 2} y={28} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#999">
+          Three-question test per alleged violation — can reduce demands 30–50%
+        </text>
+
+        {/* Question 1 */}
+        <rect x={180} y={38} width={220} height={28} rx={4}
+          fill="#2c3e3a" opacity={0.08} stroke="#2c3e3a" strokeWidth={1} />
+        <text x={290} y={56} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#2c3e3a">
+          1. Specific civil penalty statute?
+        </text>
+        {/* Yes branch */}
+        <line x1={240} y1={66} x2={160} y2={82} stroke="#198754" strokeWidth={1} />
+        <text x={190} y={76} fontFamily="'Outfit',sans-serif" fontSize={7} fontWeight={600} fill="#198754">YES</text>
+        {/* No branch */}
+        <line x1={340} y1={66} x2={420} y2={82} stroke="#dc3545" strokeWidth={1} />
+        <text x={390} y={76} fontFamily="'Outfit',sans-serif" fontSize={7} fontWeight={600} fill="#dc3545">NO</text>
+
+        {/* Question 2 (Yes path) */}
+        <rect x={60} y={84} width={200} height={28} rx={4}
+          fill="#4a7a6f" opacity={0.08} stroke="#4a7a6f" strokeWidth={1} />
+        <text x={160} y={102} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#4a7a6f">
+          2. PAGA-authorized recovery?
+        </text>
+        {/* Yes → recoverable */}
+        <line x1={110} y1={112} x2={80} y2={132} stroke="#198754" strokeWidth={1} />
+        <text x={88} y={126} fontFamily="'Outfit',sans-serif" fontSize={7} fontWeight={600} fill="#198754">YES</text>
+        <rect x={20} y={134} width={120} height={28} rx={14}
+          fill="#198754" opacity={0.1} stroke="#198754" strokeWidth={1} />
+        <text x={80} y={152} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={700} fill="#198754">
+          RECOVERABLE
+        </text>
+        {/* No → not recoverable */}
+        <line x1={210} y1={112} x2={230} y2={132} stroke="#dc3545" strokeWidth={1} />
+        <text x={226} y={126} fontFamily="'Outfit',sans-serif" fontSize={7} fontWeight={600} fill="#dc3545">NO</text>
+        <rect x={170} y={134} width={130} height={28} rx={14}
+          fill="#dc3545" opacity={0.1} stroke="#dc3545" strokeWidth={1} />
+        <text x={235} y={152} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={700} fill="#dc3545">
+          NOT RECOVERABLE
+        </text>
+
+        {/* Question 3 (No path from Q1) → default penalty */}
+        <rect x={340} y={84} width={200} height={28} rx={4}
+          fill="#CC8800" opacity={0.08} stroke="#CC8800" strokeWidth={1} />
+        <text x={440} y={102} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#CC8800">
+          3. Default § 2699(f) applies?
+        </text>
+        <line x1={440} y1={112} x2={440} y2={132} stroke="#CC8800" strokeWidth={1} />
+        <rect x={380} y={134} width={120} height={28} rx={14}
+          fill="#CC8800" opacity={0.1} stroke="#CC8800" strokeWidth={1} />
+        <text x={440} y={152} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={700} fill="#CC8800">
+          $100 / $200
+        </text>
+
+        {/* Common non-recoverable examples */}
+        <rect x={40} y={176} width={W - 80} height={26} rx={4}
+          fill="#f9faf9" stroke="#e0e0e0" strokeWidth={0.5} />
+        <text x={W / 2} y={193} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#888">
+          Non-recoverable: meal premiums (wages per Kirby) · rest premiums (wages) · overtime premiums (wages)
+        </text>
+        <text x={W / 2} y={214} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          ZB, N.A. v. Superior Court (2019) 8 Cal.5th 175 · Kirby v. Immoos (2012) 53 Cal.4th 1244
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+
 /* Insight 3 — Hohenshelt: Before/after + 7 disapproved cases */
 export function HohensheltInsightDiagram() {
   var W = 580, H = 200;
@@ -326,6 +414,106 @@ export function SamplingDiagram() {
 }
 
 
+/* Insight 7 — Headless PAGA: Appellate split timeline + case columns */
+export function LeeperTimelineDiagram() {
+  var W = 580, H = 220;
+  var events = [
+    { year: '2003', label: '"or" → "and"', sub: 'Legislative change', x: 60, color: '#888' },
+    { year: '2022', label: 'Viking River', sub: 'Individual vs.\nrepresentative split', x: 180, color: '#2c3e3a' },
+    { year: '2024', label: 'Appellate Split', sub: 'Leeper, Balderas\nconflicting rulings', x: 320, color: '#CC8800' },
+    { year: '2025', label: 'Review Granted', sub: 'Cal. Supreme Court\nApril 16, 2025', x: 430, color: '#dc3545' },
+    { year: '2026', label: 'Decision', sub: 'Expected mid-to-\nlate 2026', x: 530, color: '#198754' },
+  ];
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          HEADLESS PAGA — TIMELINE TO RESOLUTION
+        </text>
+        {/* Timeline line */}
+        <line x1={40} y1={56} x2={550} y2={56} stroke="#e0e0e0" strokeWidth={2} />
+        {events.map(function (e, i) {
+          return (
+            <g key={i}>
+              <circle cx={e.x} cy={56} r={5} fill={e.color} />
+              <text x={e.x} y={42} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={10} fontWeight={700} fill={e.color}>
+                {e.year}
+              </text>
+              <text x={e.x} y={74} textAnchor="middle"
+                fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600} fill="#333">
+                {e.label}
+              </text>
+              {e.sub.split('\n').map(function (line, li) {
+                return (
+                  <text key={li} x={e.x} y={86 + li * 11} textAnchor="middle"
+                    fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#888">
+                    {line}
+                  </text>
+                );
+              })}
+            </g>
+          );
+        })}
+        {/* 19-year gap annotation */}
+        <line x1={60} y1={34} x2={180} y2={34} stroke="#ccc" strokeWidth={0.5} />
+        <text x={120} y={30} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7} fill="#bbb">19-year gap</text>
+
+        {/* Split courts */}
+        <text x={145} y={126} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#dc3545">PROHIBITED</text>
+        <rect x={40} y={132} width={210} height={38} rx={4}
+          fill="#dc3545" opacity={0.06} stroke="#dc3545" strokeWidth={0.5} />
+        <text x={145} y={148} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#333">
+          Leeper v. Shipt (2024)
+        </text>
+        <text x={145} y={162} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#333">
+          Williams v. Alacrity (2025)
+        </text>
+
+        <text x={435} y={126} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#198754">PERMITTED</text>
+        <rect x={330} y={132} width={210} height={38} rx={4}
+          fill="#198754" opacity={0.06} stroke="#198754" strokeWidth={0.5} />
+        <text x={435} y={148} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#333">
+          Balderas v. Fresh Start (2024)
+        </text>
+        <text x={435} y={162} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#333">
+          Rodriguez v. Packers (2025)
+        </text>
+
+        {/* VS */}
+        <text x={W / 2} y={155} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={10} fontWeight={700} fill="#ccc">
+          vs.
+        </text>
+
+        {/* Pending resolution note */}
+        <rect x={W / 2 - 130} y={182} width={260} height={20} rx={10}
+          fill="#CC8800" opacity={0.08} stroke="#CC8800" strokeWidth={0.75} />
+        <text x={W / 2} y={196} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#CC8800">
+          Cal. Supreme Court review pending — plan for both outcomes
+        </text>
+        <text x={W / 2} y={214} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          Conjunctive "and" reading (§ 2699(g)(1)) is the central question
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+
 /* Insight 8 — Moniz three-part settlement test */
 export function MonizDiagram() {
   var W = 580, H = 150;
@@ -434,6 +622,87 @@ export function ExpertDeposDiagram() {
         <text x={W / 2} y={134} textAnchor="middle"
           fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
           Duran v. U.S. Bank (2014) 59 Cal.4th 1 at p. 49
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+
+/* Insight 10 — Regular Rate: formula diagram with base rate vs. correct rate */
+export function RegularRateDiagram() {
+  var W = 580, H = 200;
+  return (
+    <div style={{ maxWidth: 620, margin: '0 auto 32px', padding: '0 16px' }}>
+      <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display: 'block' }}>
+        <text x={W / 2} y={16} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600}
+          letterSpacing={3} fill="#2c3e3a">
+          REGULAR RATE CALCULATION ERROR
+        </text>
+        <text x={W / 2} y={28} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#999">
+          Every pay period × every commissioned employee = compounding systemic underpayment
+        </text>
+
+        {/* Formula */}
+        <rect x={40} y={38} width={W - 80} height={36} rx={4}
+          fill="#2c3e3a" opacity={0.06} stroke="#2c3e3a" strokeWidth={1} />
+        <text x={W / 2} y={54} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={1} fill="#2c3e3a">CORRECT FORMULA</text>
+        <text x={W / 2} y={68} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={11} fontWeight={600} fill="#333">
+          Regular Rate = (Base Pay + Commissions + Bonuses + Shift Diff.) ÷ Total Hours
+        </text>
+
+        {/* Wrong vs. Right comparison */}
+        <rect x={40} y={86} width={240} height={56} rx={4}
+          fill="#dc3545" opacity={0.06} stroke="#dc3545" strokeWidth={0.75} />
+        <rect x={40} y={86} width={240} height={3} rx={1.5} fill="#dc3545" />
+        <text x={160} y={104} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#dc3545">EMPLOYER CALCULATES</text>
+        <text x={160} y={120} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={14} fontWeight={700} fill="#dc3545">
+          $18/hr × 1.5x
+        </text>
+        <text x={160} y={134} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#888">
+          Base hourly only
+        </text>
+
+        {/* Arrow */}
+        <text x={W / 2} y={118} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={16} fontWeight={300} fill="#ccc">→</text>
+
+        <rect x={300} y={86} width={240} height={56} rx={4}
+          fill="#198754" opacity={0.06} stroke="#198754" strokeWidth={0.75} />
+        <rect x={300} y={86} width={240} height={3} rx={1.5} fill="#198754" />
+        <text x={420} y={104} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fontWeight={600}
+          letterSpacing={2} fill="#198754">STATUTE REQUIRES</text>
+        <text x={420} y={120} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={14} fontWeight={700} fill="#198754">
+          $24.50/hr × 1.5x
+        </text>
+        <text x={420} y={134} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={8} fill="#888">
+          Regular rate with all comp.
+        </text>
+
+        {/* Per-hour gap */}
+        <rect x={W / 2 - 100} y={152} width={200} height={20} rx={10}
+          fill="#dc3545" opacity={0.08} stroke="#dc3545" strokeWidth={0.75} />
+        <text x={W / 2} y={166} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={9} fontWeight={600} fill="#dc3545">
+          $3.25/OT hour underpayment × 0.5x premium
+        </text>
+
+        {/* Case citations */}
+        <text x={W / 2} y={188} textAnchor="middle"
+          fontFamily="'Outfit',sans-serif" fontSize={7.5} fill="#bbb" fontStyle="italic">
+          Ferra v. Loews (2021) 11 Cal.5th 858 · Alvarado v. Dart (2018) 4 Cal.5th 542
         </text>
       </svg>
     </div>
