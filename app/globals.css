@@ -653,6 +653,24 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-related-link:hover{background:#2c3e3a;color:#fff}
 .article-related-link.muted{color:#999;border-color:#eee}
 .article-related-link.muted:hover{background:#fafafa;color:#2c3e3a;border-color:#2c3e3a}
+
+/* Related Content Cards */
+.article-related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.article-related-card{display:block;padding:14px 16px;border:1px solid #eee;text-decoration:none;transition:all .3s;border-left:3px solid #2c3e3a}
+.article-related-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(44,62,58,.06);border-left-color:#4a7a6f}
+.article-related-card-tool{border-left-color:#CC8800}
+.article-related-card-tool:hover{border-left-color:#b85c00}
+.article-related-type{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px}
+.article-related-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.4;margin-bottom:4px}
+.article-related-desc{font-family:'Outfit',sans-serif;font-size:10px;color:#888;line-height:1.5}
+
+/* Linked Authorities */
+.article-authority-linked{display:flex;justify-content:space-between;align-items:center;text-decoration:none;cursor:pointer;transition:all .2s}
+.article-authority-linked:hover{background:rgba(44,62,58,.03);border-left-color:#2c3e3a;padding-left:16px}
+.article-authority-text{flex:1}
+.article-authority-arrow{font-family:'Outfit',sans-serif;font-size:12px;color:#8aa39e;margin-left:8px;transition:transform .2s}
+.article-authority-linked:hover .article-authority-arrow{transform:translateX(3px);color:#2c3e3a}
+
 .article-disclaimer{font-family:'Outfit',sans-serif;font-size:10px;color:#bbb;font-style:italic;margin-top:60px;padding-top:24px;border-top:1px solid #eee}
 .article-nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #eee}
 .article-nav-link{font-family:'Outfit',sans-serif;font-size:11px;color:#2c3e3a;text-decoration:none;transition:opacity .3s}

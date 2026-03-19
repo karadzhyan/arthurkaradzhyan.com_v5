@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/industries';
+import { insights } from '@/data/insights';
+import { tools } from '@/data/tools';
+import { caseLaw } from '@/data/caseLaw';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
@@ -232,6 +235,19 @@ export default function IndustryPage({ params }) {
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Governing Authorities</div>
           {ind.authorities.map(function(auth, i) {
+            var shortName = auth.split(' v. ')[0];
+            if (!shortName || shortName === auth) shortName = auth.split('(')[0].trim();
+            var caseMatch = caseLaw.find(function(c) {
+              return c.case && c.case.toLowerCase().indexOf(shortName.toLowerCase()) !== -1;
+            });
+            if (caseMatch) {
+              return (
+                <Link key={i} href={'/cases/' + caseMatch.slug} className="article-authority article-authority-linked">
+                  <span className="article-authority-text">{auth}</span>
+                  <span className="article-authority-arrow">→</span>
+                </Link>
+              );
+            }
             return <div key={i} className="article-authority">{auth}</div>;
           })}
         </section>
@@ -262,14 +278,30 @@ export default function IndustryPage({ params }) {
         {/* RELATED */}
         <section style={{ marginBottom: 40, marginTop: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>
-          <div className="article-related-links">
-            {ind.relatedInsights && ind.relatedInsights.map(function(slug, i) {
-              return <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">Publication →</Link>;
+          <div className="article-related-grid">
+            {ind.relatedInsights && ind.relatedInsights.map(function(insightSlug, i) {
+              var match = insights.find(function(ins) { return ins.slug === insightSlug; });
+              return (
+                <Link key={'i' + i} href={'/insights/' + insightSlug} className="article-related-card">
+                  <div className="article-related-type">Publication</div>
+                  <div className="article-related-title">{match ? match.title : insightSlug}</div>
+                  {match && match.desc && <div className="article-related-desc">{match.desc.length > 120 ? match.desc.slice(0, 120) + '...' : match.desc}</div>}
+                </Link>
+              );
             })}
-            {ind.relatedTools && ind.relatedTools.map(function(slug, i) {
-              return <Link key={'t' + i} href={'/tools/' + slug} className="article-related-link muted">Interactive Tool →</Link>;
+            {ind.relatedTools && ind.relatedTools.map(function(toolSlug, i) {
+              var match = tools.find(function(t) { return t.slug === toolSlug; });
+              return (
+                <Link key={'t' + i} href={'/tools/' + toolSlug} className="article-related-card article-related-card-tool">
+                  <div className="article-related-type">Interactive Tool</div>
+                  <div className="article-related-title">{match ? match.name : toolSlug}</div>
+                  {match && match.sub && <div className="article-related-desc">{match.sub}</div>}
+                </Link>
+              );
             })}
-            <Link href="/industries" className="article-related-link muted">All Industries →</Link>
+          </div>
+          <div style={{ marginTop: 12 }}>
+            <Link href="/industries" className="article-related-link muted">← All Industries</Link>
           </div>
         </section>
 
