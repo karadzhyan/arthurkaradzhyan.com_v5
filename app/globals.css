@@ -667,11 +667,59 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-monitoring-dot{width:7px;height:7px;border-radius:50%;background:#2c3e3a;margin-top:6px;flex-shrink:0}
 .article-monitoring-text{font-family:'Outfit',sans-serif;font-size:12px;color:#666;line-height:1.7}
 
+/* Industry page — Quick Facts */
+.ind-quick-facts{padding:24px;border:1px solid #e0e8e6;background:#f8faf9;margin-bottom:40px}
+.ind-quick-facts-title{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:16px}
+.ind-quick-facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ind-quick-fact{padding:12px 0;border-bottom:1px solid #e0e8e6}
+.ind-quick-fact:nth-last-child(-n+2){border-bottom:none}
+.ind-quick-fact-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px}
+.ind-quick-fact-value{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#2c3e3a;line-height:1.5}
+.ind-quick-fact-note{font-family:'Outfit',sans-serif;font-size:9px;color:#bbb;margin-top:2px}
+
+/* Industry page — Key Takeaway */
+.ind-key-takeaway{padding:20px 24px;margin-bottom:40px;border-left:4px solid #2c3e3a;background:#f8faf9}
+.ind-key-takeaway-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:8px}
+.ind-key-takeaway-text{font-family:'Libre Baskerville',serif;font-size:14px;line-height:1.8;color:#333;font-style:italic}
+
+/* Industry page — Exposure Category enhancements */
+.ind-cat-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px}
+.ind-severity-badge{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border:1px solid;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.ind-defense-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ind-priority-badge{font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#2c3e3a;background:#e8f0ee;padding:2px 8px;border-radius:3px}
+.ind-exposure-cat-note{font-family:'Outfit',sans-serif;font-size:11px;color:#888;margin-bottom:24px}
+
+/* Industry page — Issues grid enhanced */
+.ind-issues-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ind-issue-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:#fafafa;border:1px solid #eee}
+.ind-issue-num{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:rgba(44,62,58,.15);flex-shrink:0;width:20px;text-align:center}
+.ind-issue-text{font-family:'Outfit',sans-serif;font-size:11px;color:#555;line-height:1.6}
+
+/* Industry page — Authorities list enhanced */
+.ind-authorities-list{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.ind-authority-item{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border-left:3px solid #2c3e3a;background:#fafafa}
+.ind-authority-num{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:rgba(44,62,58,.2);flex-shrink:0;width:20px;text-align:center}
+.ind-authority-text{font-family:'Libre Baskerville',serif;font-size:12px;color:#555;line-height:1.5;font-style:italic}
+
+/* Industry page — Monitoring note */
+.ind-monitoring-note{font-family:'Outfit',sans-serif;font-size:11px;color:#888;margin-bottom:16px}
+
+/* Industry page — Related grid */
+.ind-related-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ind-related-card{display:block;padding:16px;border:1px solid #eee;text-decoration:none;transition:all .3s}
+.ind-related-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(44,62,58,.06);border-color:#2c3e3a}
+.ind-related-type{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8aa39e;margin-bottom:4px}
+.ind-related-title{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#2c3e3a;line-height:1.5}
+.ind-related-back{border-style:dashed}
+
 @media(max-width:768px){
   .article-wrap{padding:60px 20px 80px}
   .article-industry-header{padding:60px 20px 40px}
-  .article-issues-grid{grid-template-columns:1fr}
+  .article-issues-grid,.ind-issues-grid{grid-template-columns:1fr}
   .article-industry-stats{gap:16px}
+  .ind-quick-facts-grid{grid-template-columns:1fr}
+  .ind-quick-fact{border-bottom:1px solid #e0e8e6}
+  .ind-related-grid{grid-template-columns:1fr}
 }
 
 /* ============================================
