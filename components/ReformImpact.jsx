@@ -7,49 +7,63 @@ export default function ReformImpact() {
       before: "$200 per employee per pay period (subsequent)",
       after: "$100 per employee per pay period (subsequent)",
       savings: "50%",
-      statute: "§ 2699(f)(2)(A)"
+      statute: "§ 2699(f)(2)(A)",
+      strategic: "Reduces per-instance penalty exposure immediately, but only for violations accruing after July 1, 2024. Pre-reform violations still carry the $200 rate — creating a split-period calculation.",
+      openQuestion: "Does the reduced rate apply to pay periods straddling the effective date?"
     },
     {
       category: "Penalty Cap — Pre-Notice Compliance",
       before: "No cap available",
-      after: "15% of total penalties if employer took all reasonable steps before notice",
+      after: "15% of total penalties if employer took 'all reasonable steps' before notice",
       savings: "85%",
-      statute: "§ 2699(g)"
+      statute: "§ 2699(g)",
+      strategic: "The most powerful defense tool in the reforms. Requires documentation assembled before the notice — cannot be created retroactively. The compliance scorecard framework identifies the specific elements.",
+      openQuestion: "No published appellate decision has interpreted 'all reasonable steps' — standard is untested."
     },
     {
       category: "Penalty Cap — Post-Notice Cure",
       before: "No cap available",
       after: "30% of total penalties if employer cures within 60 days of notice",
       savings: "70%",
-      statute: "§ 2699(h)"
+      statute: "§ 2699(h)",
+      strategic: "Requires affirmative cure — policy changes, retraining, back-pay. The 60-day window runs from notice receipt, not from filing. Documentation of every remediation step is critical.",
+      openQuestion: "What constitutes sufficient 'cure' for violations that are inherently structural (e.g., exempt misclassification)?"
     },
     {
       category: "Cure Proposal Window",
       before: "33 days from LWDA notice (limited scope)",
       after: "33 days + expanded cure framework with employer proposal rights",
       savings: "—",
-      statute: "§ 2699.3(a)"
+      statute: "§ 2699.3(a)",
+      strategic: "The cure proposal is the first impression. A data-driven proposal with specific remediation steps, timeline, and back-pay methodology signals analytical rigor to the LWDA and to the plaintiff's counsel.",
+      openQuestion: null
     },
     {
       category: "Manageability",
       before: "No statutory authority to limit scope (Estrada)",
       after: "Court may limit claims and evidence at trial for manageability",
       savings: "—",
-      statute: "§ 2699(p)"
+      statute: "§ 2699(p)",
+      strategic: "Codifies what Estrada implied. For multi-location employers with diverse job classifications, this is the mechanism to prevent a single PAGA case from encompassing all locations and all positions.",
+      openQuestion: "Does § 2699(p) authorize pre-trial scope limitation or only trial-phase limitation?"
     },
     {
       category: "Early Evaluation Conference",
       before: "No mechanism",
       after: "Court-supervised conference to narrow claims, discuss resolution",
       savings: "—",
-      statute: "§ 2699.3(b)(2)"
+      statute: "§ 2699.3(b)(2)",
+      strategic: "Creates a structured opportunity to present the three-scenario exposure model to the court and opposing counsel before substantial litigation costs accrue.",
+      openQuestion: null
     },
     {
       category: "Injunctive Relief Standing",
       before: "Courts split on availability",
       after: "Expressly authorized — compliance-focused resolution option",
       savings: "—",
-      statute: "§ 2699(o)"
+      statute: "§ 2699(o)",
+      strategic: "Opens a resolution pathway focused on prospective compliance rather than retrospective penalties. Particularly valuable for employers who have already remediated.",
+      openQuestion: null
     }
   ];
 
@@ -75,6 +89,12 @@ export default function ReformImpact() {
                   <div className="reform-row-savings">{c.savings}</div>
                 )}
               </div>
+              <div className="reform-row-strategic">{c.strategic}</div>
+              {c.openQuestion && (
+                <div className="reform-row-question">
+                  <span className="reform-row-question-label">Open Question:</span> {c.openQuestion}
+                </div>
+              )}
             </div>
           );
         })}
@@ -96,6 +116,15 @@ export default function ReformImpact() {
             <div className="reform-summary-num" style={{ color: "#2c3e3a" }}>$380K</div>
             <div className="reform-summary-desc">With penalty cap</div>
           </div>
+        </div>
+      </div>
+      <div className="reform-impact-unchanged">
+        <div className="reform-unchanged-title">What Did Not Change</div>
+        <div className="reform-unchanged-items">
+          <div className="reform-unchanged-item">PAGA standing requirements — Adolph framework intact</div>
+          <div className="reform-unchanged-item">Derivative penalty cascade — Naranjo still applies in full</div>
+          <div className="reform-unchanged-item">Recoverability framework — ZB, N.A. distinction unchanged</div>
+          <div className="reform-unchanged-item">Attorney fee structure — plaintiff bar incentives preserved</div>
         </div>
       </div>
       <div className="reform-impact-cite">
