@@ -346,19 +346,51 @@ var industriesRaw = [
         statute: "Lab. Code § 226.2",
         analysis: "Solar installers paid on piece-rate (per panel installed, per system completed) must receive separate compensation for rest and recovery periods and 'other nonproductive time' — calculated at a regular rate derived from piece-rate earnings. Most legacy payroll systems cannot perform this calculation automatically. The failure to separately identify and compensate non-productive time creates both a wage claim and a derivative wage statement violation.",
         defenseStrategy: "Audit payroll system output for § 226.2 compliance. Ensure rest period compensation is separately calculated and identified on the wage statement. Implement payroll system updates or manual calculation procedures to address the gap."
+      },
+      {
+        name: "Travel Time from Reporting Locations to Installation Sites",
+        statute: "Morillion v. Royal Packing (2000) 22 Cal.4th 575; Lab. Code §§ 510, 1194",
+        analysis: "Solar field crews typically report to an employer-designated yard or warehouse each morning, load equipment and materials onto company vehicles, and then drive to remote installation sites that may be 30 to 90 minutes away. Under Morillion, when the employer requires the employee to report to a specific location and then travel to the worksite, the travel time from the reporting location to the worksite is compensable as hours worked — it is not a non-compensable commute. This travel time pushes total daily hours well beyond 8 even before installation work begins. On a 4/10 AWS, a crew that spends 1 hour traveling each way works 12 hours (10 + 2 travel), generating 2 hours of unpaid overtime per day if travel time is not compensated. If the AWS is also invalid, the overtime calculation resets to an 8-hour day, generating 4 hours of unpaid overtime per day.",
+        defenseStrategy: "Audit the travel time policy and actual practices for all field crews. Distinguish between employer-required yard reporting (compensable travel from yard to site) and voluntary direct reporting to the job site (potentially non-compensable commute). Document the policy and ensure consistent application. If travel time is compensable and unpaid, calculate the aggregate overtime exposure across all affected employees."
+      },
+      {
+        name: "Expense Reimbursement for Field Workers",
+        statute: "Lab. Code § 2802",
+        analysis: "Solar field workers frequently incur unreimbursed expenses: personal vehicle mileage when driving to remote sites, personal cell phone use for job-site coordination, personal tools and equipment, safety gear replacement, and work clothing required by the employer or by safety regulations. Section 2802 requires reimbursement of all necessary expenditures incurred in direct consequence of the discharge of duties. Many solar employers provide company vehicles and some equipment but do not reimburse for personal cell phone use, personal tool wear, or other out-of-pocket expenses. The absence of a comprehensive reimbursement policy creates per-employee, per-pay-period PAGA exposure for every field worker.",
+        defenseStrategy: "Audit expense reimbursement policies and practices for all field positions. Identify every category of employee expenditure — vehicles, fuel, tools, equipment, phones, safety gear, clothing — and determine whether reimbursement is provided. Implement a comprehensive § 2802 reimbursement policy with documented cost analysis supporting the reimbursement amounts."
+      },
+      {
+        name: "Heat Illness Prevention Compliance",
+        statute: "Cal/OSHA T8 § 3395; Lab. Code § 6720",
+        analysis: "Solar installation is outdoor work performed in direct sun exposure, often on rooftops where reflected heat can push effective temperatures well above ambient. Cal/OSHA's heat illness prevention regulation requires shade access when temperatures exceed 80 degrees Fahrenheit, potable water provision (one quart per hour per employee), cool-down rest periods of at least five minutes net whenever an employee feels the need to cool down, and training for all employees and supervisors on heat illness recognition and response. Violations are PAGA-actionable under Labor Code section 6720, which creates a private right of action for certain Cal/OSHA violations. On remote installation sites — particularly residential rooftop installations — compliance with shade and water requirements presents logistical challenges that many solar employers have not adequately addressed.",
+        defenseStrategy: "Audit heat illness prevention compliance at representative installation sites during peak temperature periods. Document shade structure availability (or alternative cooling measures for rooftop work), water supply logistics, cool-down rest period practices, and training records. Build the compliance documentation for 15% penalty cap qualification."
+      },
+      {
+        name: "Multi-Site Rest Period Logistics",
+        statute: "Lab. Code § 226.7; IWC Wage Orders, § 12",
+        analysis: "Solar field crews working at remote residential or commercial installation sites face practical barriers to rest period compliance. A 10-minute rest period requires a safe location to rest — but on a residential rooftop, the crew must climb down, find shade, and then climb back up. The total time consumed exceeds 10 minutes even if the actual rest time is compliant. Multi-site days — where a crew finishes one installation and drives to another — compress the available work time and create pressure to skip or shorten rest periods. If the employer does not track rest periods at remote sites, the absence of records creates a presumption of non-compliance that the employer must rebut.",
+        defenseStrategy: "Implement electronic rest period tracking for all field crews at all installation sites. Document the logistics of rest period provision at different site types (rooftop residential, ground-mount commercial, utility-scale). If rest period provision is structurally difficult at certain site types, evaluate whether the rest period premium auto-pay model is more defensible than attempting to demonstrate 100% compliance."
+      },
+      {
+        name: "Prevailing Wage on Public Works Projects",
+        statute: "Lab. Code §§ 1720-1861; DIR Prevailing Wage Determinations",
+        analysis: "Solar installations on public buildings, schools, government facilities, or projects receiving public funding may trigger prevailing wage requirements. The prevailing wage determination sets minimum hourly rates for each craft classification — and solar installer classifications can vary significantly depending on whether the work is characterized as electrical, roofing, or general construction. Misclassification of the craft type, failure to pay the correct prevailing wage rate, or failure to maintain certified payroll records creates both DIR enforcement exposure and PAGA exposure for the wage underpayment. The intersection of prevailing wage requirements with the AWS and piece-rate issues creates a compliance matrix that few solar employers navigate correctly.",
+        defenseStrategy: "Identify all projects that may trigger prevailing wage requirements. Verify craft classification for each solar installation role against DIR prevailing wage determinations. Audit payroll records against the applicable prevailing wage rates. Maintain certified payroll records for all prevailing wage projects. If underpayment exists, calculate the per-employee shortfall and assess whether voluntary correction through the DIR's self-audit program is available."
       }
     ],
-    authorities: ["Lab. Code § 511 (AWS election requirements)", "Morillion v. Royal Packing (2000) 22 Cal.4th 575", "Lab. Code § 226.2 (piece-rate compensation)", "Cal/OSHA T8 § 3395 (heat illness prevention)"],
+    authorities: ["Lab. Code § 511 (AWS election requirements)", "Morillion v. Royal Packing (2000) 22 Cal.4th 575", "Lab. Code § 226.2 (piece-rate compensation)", "Cal/OSHA T8 § 3395 (heat illness prevention)", "Lab. Code §§ 1720-1861 (prevailing wage)", "Lab. Code § 2802 (expense reimbursement)"],
     defenseStrategies: [
       "Conduct an immediate AWS compliance audit — verify all four steps for every active alternative workweek election. This is the single highest-priority action for any solar/energy employer.",
       "Audit travel time practices: distinguish between employer-required yard reporting (compensable travel from yard to site) and voluntary reporting (non-compensable commute). Document the policy and ensure consistent application.",
       "Implement § 226.2-compliant payroll procedures for piece-rate workers — separate compensation for rest periods and non-productive time, separately identified on the wage statement.",
-      "Position for the 15% penalty cap by documenting heat illness prevention training, rest period provision at remote sites, and equipment/vehicle expense reimbursement policies."
+      "Position for the 15% penalty cap by documenting heat illness prevention training, rest period provision at remote sites, and equipment/vehicle expense reimbursement policies.",
+      "For public works projects, verify prevailing wage classification and payment compliance — the intersection of prevailing wage underpayment with PAGA penalties creates compound exposure that dwarfs either violation category standing alone."
     ],
     monitoring: [
       "DIR enforcement activity related to AWS election procedures in the construction and energy sectors.",
       "Evolving prevailing wage requirements for solar installation on public works projects.",
-      "Cal/OSHA heat illness prevention enforcement actions and proposed regulation updates."
+      "Cal/OSHA heat illness prevention enforcement actions and proposed regulation updates.",
+      "Development of rest period compliance standards for remote outdoor worksites — limited published authority on what constitutes adequate rest period facilities at temporary installation sites."
     ],
     relatedTools: ["regular-rate-calculator", "paga-penalty-estimator"],
     relatedInsights: ["ab-2288-sb-92-a-defense-side-roadmap-to-the-2024-paga-reforms"],
