@@ -62,14 +62,15 @@ export default function CommentaryPage({ params }) {
           {item.title}
         </h1>
 
-        <p className="article-desc">{item.summary}</p>
-
         {/* LEVEL 0: THE ANSWER — bottom line leads */}
         {item.bottomLine && (
           <div className="ind-cat-impact" style={{ marginBottom: 24 }}>
             {item.bottomLine}
           </div>
         )}
+
+        {/* LEVEL 1: FRAMING — the context that makes the answer meaningful */}
+        <p className="article-desc">{item.summary}</p>
 
         <div className="article-body sm">
           {paragraphs.map(function(p, i) {

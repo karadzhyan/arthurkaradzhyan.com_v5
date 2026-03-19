@@ -61,7 +61,6 @@ export default function InsightPage({ params }) {
         </div>
 
         <h1 className="article-title">{insight.title}</h1>
-        <p className="article-desc">{insight.desc}</p>
 
         {/* LEVEL 0: THE ANSWER — bottom line leads */}
         {insight.bottomLine && (
@@ -69,6 +68,9 @@ export default function InsightPage({ params }) {
             {insight.bottomLine}
           </div>
         )}
+
+        {/* LEVEL 1: FRAMING — the context that makes the answer meaningful */}
+        <p className="article-desc">{insight.desc}</p>
 
         {insight.tool && (
           <div className="article-tool-callout">
