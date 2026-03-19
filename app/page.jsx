@@ -12,6 +12,9 @@ import { matters } from "@/data/matters";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import PenaltyScaleViz from "@/components/PenaltyScaleViz";
+import ReformTrajectoryChart from "@/components/viz/ReformTrajectoryChart";
+import DualTrackComparison from "@/components/viz/DualTrackComparison";
+import IndustryHeatMap from "@/components/viz/IndustryHeatMap";
 
 export default function HomePage() {
   var [statsVisible, setStatsVisible] = useState(false);
@@ -99,6 +102,14 @@ export default function HomePage() {
         </div>
         <div className="home-stats-source">
           DIR PAGA Filing Data · LWDA Initial Statement of Reasons (Feb. 2026) · AB 2288 / SB 92
+        </div>
+      </div>
+
+      {/* REFORM TRAJECTORY + DUAL-TRACK CHARTS */}
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 24px 0" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <ReformTrajectoryChart />
+          <DualTrackComparison />
         </div>
       </div>
 
@@ -301,6 +312,9 @@ export default function HomePage() {
           Every industry has a structural vulnerability that generic defense
           strategies miss.
         </p>
+        <div style={{ marginBottom: 32 }}>
+          <IndustryHeatMap />
+        </div>
         <div className="home-industries-grid" style={{ borderColor: '#eee' }}>
           {industries.map(function (ind) {
             return (

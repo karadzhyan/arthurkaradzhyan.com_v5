@@ -3,6 +3,11 @@ import { insights, getInsightBySlug, getAllInsightSlugs } from '@/data/insights'
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import TwoHotelsDiagram from '@/components/viz/TwoHotelsDiagram';
+import ReformRoadmapFlow from '@/components/viz/ReformRoadmapFlow';
+import RecoverabilityMatrix from '@/components/viz/RecoverabilityMatrix';
+import NaranjoCascadeFull from '@/components/viz/NaranjoCascadeFull';
+import SamplingFunnel from '@/components/viz/SamplingFunnel';
 
 export function generateStaticParams() {
   return getAllInsightSlugs().map(function(slug) { return { slug: slug }; });
@@ -67,6 +72,13 @@ export default function InsightPage({ params }) {
             </Link>
           </div>
         )}
+
+        {/* Conditional diagrams for specific articles */}
+        {params.slug.indexOf('two-hotels') !== -1 && <TwoHotelsDiagram />}
+        {params.slug.indexOf('ab-2288') !== -1 && <ReformRoadmapFlow />}
+        {params.slug.indexOf('recoverable-vs-non-recoverable') !== -1 && <RecoverabilityMatrix />}
+        {params.slug.indexOf('naranjo-cascade') !== -1 && <NaranjoCascadeFull />}
+        {params.slug.indexOf('statistical-sampling') !== -1 && <SamplingFunnel />}
 
         <div className="article-body">
           {paragraphs.map(function(p, i) {

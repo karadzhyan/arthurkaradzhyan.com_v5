@@ -4,6 +4,8 @@ import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import ExposureProfileChart from '@/components/ExposureProfileChart';
+import DefenseStrategyFlow from '@/components/viz/DefenseStrategyFlow';
+import AuthorityTimeline from '@/components/viz/AuthorityTimeline';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -75,9 +77,7 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
-        {ind.name === 'Hospitality' && (
-          <ExposureProfileChart />
-        )}
+        <ExposureProfileChart industryName={ind.name} />
 
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories</div>
@@ -107,6 +107,7 @@ export default function IndustryPage({ params }) {
 
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Governing Authorities</div>
+          <AuthorityTimeline authorities={ind.authorities} />
           {ind.authorities.map(function(auth, i) {
             return <div key={i} className="article-authority">{auth}</div>;
           })}
@@ -114,6 +115,7 @@ export default function IndustryPage({ params }) {
 
         <div className="article-defense-box" style={{ marginBottom: 60 }}>
           <div className="article-section-label green" style={{ marginBottom: 20 }}>Defense Strategies</div>
+          <DefenseStrategyFlow strategies={ind.defenseStrategies} />
           {ind.defenseStrategies.map(function(strategy, i) {
             return (
               <div key={i} className="article-strategy">

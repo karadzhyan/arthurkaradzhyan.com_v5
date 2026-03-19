@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import CrossIndustryMatrix from '@/components/viz/CrossIndustryMatrix';
 
 export var metadata = {
   title: 'Industry Intelligence — PAGA Defense by Sector | Arthur Karadzhyan',
@@ -42,6 +43,7 @@ export default function IndustriesIndex() {
       </div>
 
       <div className="page-body">
+        <CrossIndustryMatrix />
         <div className="industries-index-grid">
           {industries.map(function (ind) {
             return (

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import CapQualGauge from "../viz/CapQualGauge";
 
 function CapQualifier(){
   const [track,setTrack]=useState("pre");
@@ -104,6 +105,9 @@ function CapQualifier(){
           <S fontSize={20} fontWeight={700} color="#2c3e3a">Savings: {fmt(savings)}</S>
         </div>
       </div>
+
+      {/* QUALIFICATION GAUGE */}
+      <CapQualGauge pct={pct} capLabel={capLabel} exposure={exposure} savings={savings} />
 
       {/* GAPS */}
       {items.filter(i=>(scores[i.id]||0)<2).length>0&&<div style={{padding:20,background:"#fff8f0",border:"1px solid #f0e0c0",marginBottom:16}}>

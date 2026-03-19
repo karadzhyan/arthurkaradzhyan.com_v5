@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import S from "../S";
+import ScenarioComparisonChart from "../viz/ScenarioComparisonChart";
+import BifurcationTimeline from "../viz/BifurcationTimeline";
 
 function PagaCalc(){
   const [employees,setEmployees]=useState(50);
@@ -219,6 +221,8 @@ function PagaCalc(){
             <S fontSize={9} fontWeight={600} color="#fff">REMEDIED · {remediedRate}%</S>
           </div>
         </div>
+        {/* Bifurcation Timeline Diagram */}
+        <BifurcationTimeline legacyPct={legacyPct} legacyRate={legacyRate} remediedRate={remediedRate} periods={periods} />
       </div>}
 
       {/* THREE-SCENARIO OUTPUT */}
@@ -231,6 +235,9 @@ function PagaCalc(){
           </div>
         ))}
       </div>
+
+      {/* SCENARIO COMPARISON CHART */}
+      {active.length>0&&<ScenarioComparisonChart worst={worst} realistic={realistic} best={best} capRate={capTrack} />}
 
       {/* BREAKDOWN TABLE */}
       {active.length>0&&<div style={{padding:16,background:"#fafafa",border:"1px solid #eee",marginBottom:12}}>
