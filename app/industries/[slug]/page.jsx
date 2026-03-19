@@ -134,6 +134,10 @@ export default function IndustryPage({ params }) {
         {/* ── Exposure Categories ────────────────────────────── */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories</div>
+          <p className="article-cross-intro">
+            {ind.exposureCategories.length} violation categories mapped to their governing statutes,
+            analytical challenges, and defense strategies.
+          </p>
           {ind.exposureCategories.map(function(cat, i) {
             return (
               <div key={i} className="article-exposure-cat" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
@@ -169,9 +173,10 @@ export default function IndustryPage({ params }) {
           <section style={{ marginBottom: 60 }}>
             <div className="article-section-label lg">Cross-Industry Patterns</div>
             <p className="article-cross-intro">
-              This industry shares {patterns.length} exposure {patterns.length === 1 ? 'pattern' : 'patterns'} with
+              Defense strategies from {patterns.length === 1 ? 'one other sector applies' : patterns.length + ' other sectors apply'} here.
+              {' '}This industry shares {patterns.length} exposure {patterns.length === 1 ? 'pattern' : 'patterns'} with
               other sectors — the same statutory framework creating parallel vulnerabilities
-              across different operational contexts.
+              that the same defense methodology addresses.
             </p>
             <div className="article-cross-patterns">
               {patterns.map(function(pattern) {

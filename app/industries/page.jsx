@@ -55,11 +55,14 @@ export default function IndustriesIndex() {
           <div className="page-label-dark">Sector Analysis</div>
           <h1 className="page-title-dark">Industry Intelligence</h1>
           <p className="page-desc-dark">
-            Every industry has a structural vulnerability that generic defense
-            strategies miss. Six sector profiles mapping the specific violation
-            categories, governing authorities, cross-industry patterns, and defense
-            methodologies — built from actual PAGA defense work across California's
-            highest-exposure industries.
+            Generic defense strategies fail because each industry's exposure
+            architecture is structurally distinct. A hospitality employer's
+            Donohue problem is not an automotive dealership's Sciborski problem
+            is not a staffing firm's joint employer problem. These six profiles
+            map the specific violation categories, governing authorities, and
+            defense methodologies for each sector — and identify the cross-industry
+            patterns where defense strategies developed in one sector transfer
+            to another.
           </p>
           <div className="industry-stats-row">
             {stats.map(function (pair, i) {
@@ -127,10 +130,13 @@ export default function IndustriesIndex() {
           <div className="ind-section-label">Cross-Sector Analysis</div>
           <h2 className="ind-section-title">Patterns Across Industries</h2>
           <p className="ind-section-desc">
-            Six vulnerability patterns cut across multiple industries —
-            the same statutory framework, the same structural exposure, the same
-            defense methodology adapted to different operational contexts. These
-            patterns are where industry-specific knowledge compounds.
+            Defense strategies proven in one industry can be adapted to defend
+            in another — when both share the same underlying statutory exposure.
+            Six patterns cut across multiple sectors: meal/rest period
+            structural barriers, piece-rate calculation failures, joint employer
+            allocation gaps, regular rate complexity, travel time compensability,
+            and manageability limitations. Each pattern below identifies the
+            shared vulnerability, the affected industries, and the defense angle.
           </p>
         </div>
 
@@ -172,10 +178,12 @@ export default function IndustriesIndex() {
           <div className="ind-section-label">Universal Methodology</div>
           <h2 className="ind-section-title">Defense Frameworks Across All Industries</h2>
           <p className="ind-section-desc">
-            Four analytical frameworks apply to every industry profile.
-            These are the structural tools of PAGA defense — the methodologies
-            that convert raw exposure data into actionable defense strategy
-            regardless of sector.
+            Every PAGA matter — regardless of industry — requires four analytical
+            frameworks to convert raw exposure data into defense strategy:
+            temporal bifurcation to disaggregate violation rates, penalty cap
+            qualification to limit exposure, manageability to challenge
+            representative treatment, and three-scenario modeling to structure
+            settlement positioning.
           </p>
         </div>
 
@@ -208,26 +216,27 @@ export default function IndustriesIndex() {
           <h3 className="page-essay-title">Why Industry-Specific Analysis</h3>
           <div className="page-essay-cols">
             <p>
-              These six industries represent structurally distinct PAGA and class
-              action exposure profiles driven by differences in applicable wage
-              orders, exemption frameworks, compensation structures, and
-              operational patterns. A hospitality employer operating under Wage
-              Order 5 with tipped employees and 24/7 scheduling faces a
-              fundamentally different compliance landscape than an automotive
-              dealership operating under Wage Order 7 with commissioned
-              salespeople — and both differ from a healthcare staffing firm
-              navigating joint employer liability across 14 client facilities.
+              Applying the same defense framework across industries misses
+              sector-specific vulnerabilities that drive the largest exposure
+              concentrations — the AWS election invalidity that creates
+              retroactive overtime in solar, the commission forfeiture pattern
+              that generates industry-wide claims in automotive, the
+              multi-worksite manageability challenge that complicates
+              representative treatment in staffing, the piece-rate legacy gap
+              that compounds underpayment across years in agriculture. Each of
+              these vulnerabilities arises from the intersection of a specific
+              wage order, compensation structure, and operational model that
+              generic analysis cannot capture.
             </p>
             <p>
-              Generic defense strategies that apply the same analytical framework
-              across industries miss the structural vulnerabilities unique to
-              each sector — the AWS election exposure in solar, the commission
-              forfeiture pattern in automotive, the multi-worksite manageability
-              challenge in staffing, the piece-rate legacy compliance gap in
-              agriculture. The cross-industry patterns identified above reveal
-              where these sector-specific vulnerabilities share common statutory
-              roots — and where defense strategies developed in one industry
-              can be adapted to another.
+              But the analysis cannot stop at individual sectors. The
+              cross-industry patterns reveal where sector-specific
+              vulnerabilities share common statutory roots — where a defense
+              framework developed for hospitality meal period exposure can be
+              adapted to defend a healthcare staffing firm facing the same
+              Donohue presumption at client facilities. The value of
+              industry-specific knowledge compounds when it operates across
+              sectors.
             </p>
           </div>
         </div>
@@ -235,18 +244,17 @@ export default function IndustriesIndex() {
         <div className="page-primer" style={{ marginTop: 20 }}>
           <div className="page-primer-label">How to Use These Profiles</div>
           <p className="page-primer-text">
-            Each industry profile follows the same analytical structure: structural
-            vulnerability analysis identifying why the industry is exposed, followed
-            by detailed exposure categories mapping each violation type to its
-            governing statute and defense strategy, then the governing authorities
-            and precedential framework, and finally the defense strategies specific
-            to that sector. Start with the structural vulnerability to understand
-            the industry's exposure architecture, then use the exposure categories
-            to map the specific claims at issue. Apply the universal defense
-            frameworks — temporal bifurcation, penalty cap qualification,
-            manageability, and three-scenario modeling — to build the defense
-            strategy. The cross-industry patterns reveal where analysis from one
-            sector informs defense in another.
+            Each profile gives you a complete defense architecture in four steps.
+            First, the structural vulnerability identifies why the industry is
+            exposed — the single operational or regulatory characteristic that
+            drives the sector's highest-concentration risk. Second, the exposure
+            categories map each violation type to its governing statute, the
+            specific analytical challenge it presents, and the defense strategy
+            that addresses it. Third, the governing authorities and defense
+            strategies provide the legal and tactical framework. Fourth, the
+            cross-industry patterns connect the sector's vulnerabilities to
+            parallel exposures in other industries — revealing where defense
+            strategies can be adapted across sectors.
           </p>
           <Link href="/industries/hospitality" className="page-primer-link">
             Start with Hospitality →
