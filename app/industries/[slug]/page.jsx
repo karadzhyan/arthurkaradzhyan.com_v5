@@ -3,6 +3,9 @@ import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/indus
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import IndustryExposureProfile from '@/components/industries/IndustryExposureProfile';
+import ExposureCategoryChart from '@/components/industries/ExposureCategoryChart';
+import DefenseStrategyFlow from '@/components/industries/DefenseStrategyFlow';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -67,6 +70,13 @@ export default function IndustryPage({ params }) {
       </div>
 
       <article className="article-wrap wide">
+
+        {/* EXPOSURE PROFILE VISUALIZATION */}
+        <section style={{ marginBottom: 48 }}>
+          <IndustryExposureProfile industry={ind} />
+        </section>
+
+        {/* STRUCTURAL VULNERABILITY */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Structural Vulnerability</div>
           <div className="article-body">
@@ -74,11 +84,20 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* EXPOSURE CATEGORY CHART */}
+        <section style={{ marginBottom: 32 }}>
+          <div className="article-section-label lg">Exposure Category Complexity</div>
+          <ExposureCategoryChart categories={ind.exposureCategories} />
+        </section>
+
+        {/* EXPOSURE CATEGORIES DETAIL */}
         <section style={{ marginBottom: 60 }}>
-          <div className="article-section-label lg">Exposure Categories</div>
+          <div className="article-section-label lg">Exposure Categories — Analysis & Defense</div>
           {ind.exposureCategories.map(function(cat, i) {
+            var colors = ["#dc3545", "#CC8800", "#b85c00", "#4a7a6f", "#2c3e3a", "#8aa39e"];
             return (
               <div key={i} className="article-exposure-cat" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
+                <div className="article-exposure-cat-num" style={{ color: colors[i % colors.length] }}>{String(i + 1).padStart(2, '0')}</div>
                 <div className="article-exposure-name">{cat.name}</div>
                 <div className="article-exposure-statute">{cat.statute}</div>
                 <div className="article-exposure-analysis">{cat.analysis}</div>
@@ -91,6 +110,7 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
+        {/* FULL EXPOSURE PROFILE */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Full Exposure Profile</div>
           <div className="article-issues-grid">
@@ -100,6 +120,7 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* GOVERNING AUTHORITIES */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Governing Authorities</div>
           {ind.authorities.map(function(auth, i) {
@@ -107,18 +128,12 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
-        <div className="article-defense-box" style={{ marginBottom: 60 }}>
-          <div className="article-section-label green" style={{ marginBottom: 20 }}>Defense Strategies</div>
-          {ind.defenseStrategies.map(function(strategy, i) {
-            return (
-              <div key={i} className="article-strategy">
-                <div className="article-strategy-num">{i + 1}</div>
-                <div className="article-strategy-text">{strategy}</div>
-              </div>
-            );
-          })}
-        </div>
+        {/* DEFENSE STRATEGY FLOW */}
+        <section style={{ marginBottom: 60 }}>
+          <DefenseStrategyFlow strategies={ind.defenseStrategies} industryName={ind.name} />
+        </section>
 
+        {/* MONITORING */}
         {ind.monitoring && ind.monitoring.length > 0 && (
           <div className="article-monitoring">
             <div className="article-monitoring-bar" />
@@ -136,7 +151,8 @@ export default function IndustryPage({ params }) {
           </div>
         )}
 
-        <section style={{ marginBottom: 40 }}>
+        {/* RELATED */}
+        <section style={{ marginBottom: 40, marginTop: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>
           <div className="article-related-links">
             {ind.relatedInsights && ind.relatedInsights.map(function(slug, i) {

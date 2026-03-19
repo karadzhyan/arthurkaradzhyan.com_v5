@@ -665,6 +665,60 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-industry-stat-label{font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .article-industry-wage{font-family:'Outfit',sans-serif;font-size:11px;color:rgba(255,255,255,.35);margin-top:20px}
 
+/* Industry Detail — Exposure Profile */
+.ind-profile{margin-bottom:20px}
+.ind-profile-score{display:flex;align-items:baseline;gap:4px;margin-bottom:16px}
+.ind-profile-score-num{font-family:'Outfit',sans-serif;font-size:48px;font-weight:700;color:#2c3e3a;line-height:1}
+.ind-profile-score-max{font-family:'Outfit',sans-serif;font-size:20px;font-weight:300;color:#ccc}
+.ind-profile-score-label{font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-left:12px}
+.ind-profile-bars{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.ind-profile-bar-row{display:flex;align-items:center;gap:12px}
+.ind-profile-bar-label{font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;color:#666;min-width:130px}
+.ind-profile-bar-track{display:flex;gap:3px;flex:1}
+.ind-profile-bar-block{height:20px;flex:1;transition:background .3s}
+.ind-profile-bar-val{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;min-width:90px;text-align:right}
+.ind-profile-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px;background:#f8faf9;border:1px solid #e0e8e6}
+.ind-profile-meta-item{text-align:center}
+.ind-profile-meta-num{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;color:#2c3e3a}
+.ind-profile-meta-label{font-family:'Outfit',sans-serif;font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase}
+@media(max-width:768px){
+  .ind-profile-bar-label{min-width:80px;font-size:9px}
+  .ind-profile-bar-val{min-width:70px;font-size:9px}
+  .ind-profile-meta{grid-template-columns:1fr 1fr}
+}
+
+/* Industry Detail — Exposure Category Chart */
+.exp-cat-chart{margin-bottom:20px}
+.exp-cat-bars{display:flex;flex-direction:column;gap:8px}
+.exp-cat-bar-row{display:flex;align-items:center;gap:12px}
+.exp-cat-bar-label{min-width:180px}
+.exp-cat-bar-name{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#1a1a1a}
+.exp-cat-bar-statute{font-family:'Outfit',sans-serif;font-size:9px;color:#999}
+.exp-cat-bar-track{flex:1;height:12px;background:#f0f0f0}
+.exp-cat-bar-fill{height:100%}
+.exp-cat-bar-pct{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;min-width:40px;text-align:right}
+.exp-cat-note{font-family:'Outfit',sans-serif;font-size:9px;color:#bbb;margin-top:8px}
+@media(max-width:768px){
+  .exp-cat-bar-row{flex-direction:column;align-items:stretch;gap:4px}
+  .exp-cat-bar-label{min-width:auto}
+}
+
+/* Industry Detail — Exposure Category Numbering */
+.article-exposure-cat-num{font-family:'Outfit',sans-serif;font-size:28px;font-weight:300;opacity:.25;margin-bottom:4px}
+
+/* Industry Detail — Defense Strategy Flow */
+.def-strategy-flow{padding:24px;border:1px solid #e0e8e6;background:#f8faf9}
+.def-strategy-label{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:20px}
+.def-strategy-steps{}
+.def-strategy-step{display:flex;gap:16px}
+.def-strategy-marker{display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0}
+.def-strategy-num{width:28px;height:28px;border-radius:50%;color:#fff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.def-strategy-connector{width:2px;flex:1;background:#e0e0e0;min-height:12px}
+.def-strategy-body{flex:1;padding-bottom:20px}
+.def-strategy-step:last-child .def-strategy-body{padding-bottom:0}
+.def-strategy-priority{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.def-strategy-text{font-family:'Outfit',sans-serif;font-size:12px;color:#555;line-height:1.8}
+
 .article-exposure-cat{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid #eee}
 .article-exposure-cat:last-child{border-bottom:none}
 .article-exposure-name{font-size:19px;font-weight:700;color:#1a1a1a;margin-bottom:4px;line-height:1.3}
