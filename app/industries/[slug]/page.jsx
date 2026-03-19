@@ -1,8 +1,28 @@
 import Link from 'next/link';
 import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/industries';
+import { insights } from '@/data/insights';
+import { tools } from '@/data/tools';
+import { caseLaw } from '@/data/caseLaw';
+import { matters } from '@/data/matters';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import IndustryExposureProfile from '@/components/industries/IndustryExposureProfile';
+
+import DefenseStrategyFlow from '@/components/industries/DefenseStrategyFlow';
+import HospitalityShiftExposure from '@/components/industries/HospitalityShiftExposure';
+import DonohueCascade from '@/components/industries/DonohueCascade';
+import ServiceChargeFlow from '@/components/industries/ServiceChargeFlow';
+import SciborskiTimeline from '@/components/industries/SciborskiTimeline';
+import AutoCompensationMap from '@/components/industries/AutoCompensationMap';
+import JointEmployerMatrix from '@/components/industries/JointEmployerMatrix';
+import WorksiteVariation from '@/components/industries/WorksiteVariation';
+import AWSElectionProcess from '@/components/industries/AWSElectionProcess';
+import TravelTimeAnalysis from '@/components/industries/TravelTimeAnalysis';
+import TechExemptionAnalysis from '@/components/industries/TechExemptionAnalysis';
+import RemoteWorkExposure from '@/components/industries/RemoteWorkExposure';
+import PieceRateBreakdown from '@/components/industries/PieceRateBreakdown';
+import SeasonalWorkforceTimeline from '@/components/industries/SeasonalWorkforceTimeline';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -67,6 +87,13 @@ export default function IndustryPage({ params }) {
       </div>
 
       <article className="article-wrap wide">
+
+        {/* EXPOSURE PROFILE VISUALIZATION */}
+        <section style={{ marginBottom: 48 }}>
+          <IndustryExposureProfile industry={ind} />
+        </section>
+
+        {/* STRUCTURAL VULNERABILITY */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Structural Vulnerability</div>
           <div className="article-body">
@@ -74,11 +101,109 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* HOSPITALITY-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'hospitality' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">24/7 Shift Exposure Analysis</div>
+              <HospitalityShiftExposure />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">The Donohue Derivative Cascade</div>
+              <DonohueCascade />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Service Charge vs. Gratuity Classification</div>
+              <ServiceChargeFlow />
+            </section>
+          </>
+        )}
+
+        {/* AGRICULTURE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'agriculture' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 226.2 Piece-Rate Calculation</div>
+              <PieceRateBreakdown />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Seasonal Workforce Lifecycle</div>
+              <SeasonalWorkforceTimeline />
+            </section>
+          </>
+        )}
+
+        {/* TECHNOLOGY-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'technology-startups' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 515.5 Exemption — Duties Analysis</div>
+              <TechExemptionAnalysis />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">§ 2802 Remote Work Reimbursement</div>
+              <RemoteWorkExposure />
+            </section>
+          </>
+        )}
+
+        {/* SOLAR-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'solar-energy' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">AWS Election Compliance Audit</div>
+              <AWSElectionProcess />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Travel Time — Yard to Site</div>
+              <TravelTimeAnalysis />
+            </section>
+          </>
+        )}
+
+        {/* HEALTHCARE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'healthcare-staffing' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Joint Employer Liability Allocation</div>
+              <JointEmployerMatrix />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Multi-Worksite Compliance Variation</div>
+              <WorksiteVariation />
+            </section>
+          </>
+        )}
+
+        {/* AUTOMOTIVE-SPECIFIC VISUALIZATIONS */}
+        {params.slug === 'automotive-dealerships' && (
+          <>
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Sciborski Forfeiture Analysis</div>
+              <SciborskiTimeline />
+            </section>
+
+            <section style={{ marginBottom: 48 }}>
+              <div className="article-section-label lg">Compensation Structure & Regular Rate</div>
+              <AutoCompensationMap />
+            </section>
+          </>
+        )}
+
+        {/* EXPOSURE CATEGORIES DETAIL */}
         <section style={{ marginBottom: 60 }}>
-          <div className="article-section-label lg">Exposure Categories</div>
+          <div className="article-section-label lg">Exposure Categories — Analysis & Defense</div>
           {ind.exposureCategories.map(function(cat, i) {
+            var colors = ["#dc3545", "#CC8800", "#b85c00", "#4a7a6f", "#2c3e3a", "#8aa39e"];
             return (
               <div key={i} className="article-exposure-cat" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
+                <div className="article-exposure-cat-num" style={{ color: colors[i % colors.length] }}>{String(i + 1).padStart(2, '0')}</div>
                 <div className="article-exposure-name">{cat.name}</div>
                 <div className="article-exposure-statute">{cat.statute}</div>
                 <div className="article-exposure-analysis">{cat.analysis}</div>
@@ -91,6 +216,7 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
+        {/* FULL EXPOSURE PROFILE */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Full Exposure Profile</div>
           <div className="article-issues-grid">
@@ -100,25 +226,33 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* GOVERNING AUTHORITIES */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Governing Authorities</div>
           {ind.authorities.map(function(auth, i) {
+            var shortName = auth.split(' v. ')[0];
+            if (!shortName || shortName === auth) shortName = auth.split('(')[0].trim();
+            var caseMatch = caseLaw.find(function(c) {
+              return c.case && c.case.toLowerCase().indexOf(shortName.toLowerCase()) !== -1;
+            });
+            if (caseMatch) {
+              return (
+                <Link key={i} href={'/cases/' + caseMatch.slug} className="article-authority article-authority-linked">
+                  <span className="article-authority-text">{auth}</span>
+                  <span className="article-authority-arrow">→</span>
+                </Link>
+              );
+            }
             return <div key={i} className="article-authority">{auth}</div>;
           })}
         </section>
 
-        <div className="article-defense-box" style={{ marginBottom: 60 }}>
-          <div className="article-section-label green" style={{ marginBottom: 20 }}>Defense Strategies</div>
-          {ind.defenseStrategies.map(function(strategy, i) {
-            return (
-              <div key={i} className="article-strategy">
-                <div className="article-strategy-num">{i + 1}</div>
-                <div className="article-strategy-text">{strategy}</div>
-              </div>
-            );
-          })}
-        </div>
+        {/* DEFENSE STRATEGY FLOW */}
+        <section style={{ marginBottom: 60 }}>
+          <DefenseStrategyFlow strategies={ind.defenseStrategies} industryName={ind.name} />
+        </section>
 
+        {/* MONITORING */}
         {ind.monitoring && ind.monitoring.length > 0 && (
           <div className="article-monitoring">
             <div className="article-monitoring-bar" />
@@ -136,16 +270,45 @@ export default function IndustryPage({ params }) {
           </div>
         )}
 
-        <section style={{ marginBottom: 40 }}>
+        {/* RELATED */}
+        <section style={{ marginBottom: 40, marginTop: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>
-          <div className="article-related-links">
-            {ind.relatedInsights && ind.relatedInsights.map(function(slug, i) {
-              return <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">Publication →</Link>;
+          <div className="article-related-grid">
+            {ind.relatedMatters && ind.relatedMatters.length > 0 && ind.relatedMatters.map(function(matterName, i) {
+              var match = matters.find(function(m) { return m.title === matterName; });
+              if (!match) return null;
+              return (
+                <Link key={'m' + i} href={'/matters/' + match.slug} className="article-related-card article-related-card-matter">
+                  <div className="article-related-type">Matter Experience</div>
+                  <div className="article-related-title">{match.title}</div>
+                  <div className="article-related-desc">{match.short}</div>
+                  {match.result && <div className="article-related-result">{match.result}</div>}
+                </Link>
+              );
             })}
-            {ind.relatedTools && ind.relatedTools.map(function(slug, i) {
-              return <Link key={'t' + i} href={'/tools/' + slug} className="article-related-link muted">Interactive Tool →</Link>;
+            {ind.relatedInsights && ind.relatedInsights.map(function(insightSlug, i) {
+              var match = insights.find(function(ins) { return ins.slug === insightSlug; });
+              return (
+                <Link key={'i' + i} href={'/insights/' + insightSlug} className="article-related-card">
+                  <div className="article-related-type">Publication</div>
+                  <div className="article-related-title">{match ? match.title : insightSlug}</div>
+                  {match && match.desc && <div className="article-related-desc">{match.desc.length > 120 ? match.desc.slice(0, 120) + '...' : match.desc}</div>}
+                </Link>
+              );
             })}
-            <Link href="/industries" className="article-related-link muted">All Industries →</Link>
+            {ind.relatedTools && ind.relatedTools.map(function(toolSlug, i) {
+              var match = tools.find(function(t) { return t.slug === toolSlug; });
+              return (
+                <Link key={'t' + i} href={'/tools/' + toolSlug} className="article-related-card article-related-card-tool">
+                  <div className="article-related-type">Interactive Tool</div>
+                  <div className="article-related-title">{match ? match.name : toolSlug}</div>
+                  {match && match.sub && <div className="article-related-desc">{match.sub}</div>}
+                </Link>
+              );
+            })}
+          </div>
+          <div style={{ marginTop: 12 }}>
+            <Link href="/industries" className="article-related-link muted">← All Industries</Link>
           </div>
         </section>
 
