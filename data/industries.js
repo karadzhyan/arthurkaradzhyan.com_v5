@@ -279,19 +279,45 @@ var industriesRaw = [
         statute: "Morillion v. Royal Packing (2000) 22 Cal.4th 575; Lab. Code § 1194",
         analysis: "Healthcare workers who travel between client locations during the workday — a traveling nurse who works a morning shift at one hospital and an afternoon shift at another — have a strong argument that the inter-facility travel time is compensable under Morillion. The distinction turns on whether the employer 'requires' the travel: if the staffing agency assigns the employee to two facilities in one day, the travel between them is employer-directed and compensable. Home-to-first-facility and last-facility-to-home travel is generally not compensable as ordinary commute time.",
         defenseStrategy: "Audit scheduling records to identify same-day multi-facility assignments. Calculate compensable travel time for each assignment and verify whether travel time was paid. If systematic underpayment exists, quantify it precisely for exposure modeling."
+      },
+      {
+        name: "Public Agency Immunity and Staffing Firm Liability",
+        statute: "Gov. Code §§ 815-818; Lab. Code § 2699",
+        analysis: "When a staffing firm places healthcare workers at government-operated hospitals or county health facilities, the staffing firm bears PAGA liability for Labor Code violations that arise from working conditions controlled by an immune public agency employer. The public agency itself may be immune from PAGA penalties under Government Code sections 815 through 818 — but the staffing firm, as the employer of record, has no parallel immunity. This creates a structural inequity: the entity that controls the conditions generating the violation (the public hospital) is immune, while the entity that cannot control those conditions (the staffing firm) bears the penalty. No published appellate decision has addressed whether PAGA penalties should attach to a secondary employer for violations arising from conditions controlled by an immune primary employer.",
+        defenseStrategy: "Identify all client facilities that are public agencies or government-operated entities. Document the operational control allocation at each public facility — scheduling authority, break timing control, overtime authorization. Build the immunity defense by demonstrating that the staffing firm lacked operational authority over the conditions that generated the violations, and that imposing penalties on the staffing firm for public-agency-controlled conditions would be inequitable and inconsistent with the statutory framework."
+      },
+      {
+        name: "On-Call and Standby Compensation",
+        statute: "Mendiola v. CPS Security Solutions (2015) 60 Cal.4th 833; Lab. Code § 510",
+        analysis: "Healthcare staffing agencies frequently require nurses and clinical staff to remain on-call for shift openings, emergency staffing needs, or client facility requests. Under Mendiola, the determination of whether on-call time is compensable turns on the degree of the employer's control over the employee during on-call periods. If the staffing agency requires the employee to remain within a geographic radius, respond within a short timeframe, or refrain from personal activities during on-call periods, the time may be compensable as hours worked. The 'engaged to wait' versus 'waiting to be engaged' distinction is fact-intensive — and healthcare on-call arrangements frequently fall on the compensable side because the response time requirements are short and the geographic restrictions are significant.",
+        defenseStrategy: "Audit on-call policies and actual practices for each client facility assignment. Document the degree of geographic restriction, response time requirements, and frequency of actual call-ins. If on-call time is compensable, calculate the additional hours worked and resulting overtime exposure. If the restrictions are minimal, document the employee's freedom during on-call periods to support the 'waiting to be engaged' characterization."
+      },
+      {
+        name: "Per Diem and Expense Reimbursement for Traveling Workers",
+        statute: "Lab. Code § 2802; Gattuso v. Harte-Hanks Shoppers (2007) 42 Cal.4th 554",
+        analysis: "Traveling healthcare workers — nurses, therapists, and technicians assigned to facilities away from their home base — incur substantial expenses: temporary housing, meals, transportation, and professional licensing fees for the assignment location. Section 2802 requires reimbursement of all necessary expenditures incurred in direct consequence of job duties. Many staffing agencies provide per diem stipends, but the stipend amount may not cover actual costs — and if the per diem is structured as taxable compensation rather than a non-taxable reimbursement, it may not satisfy section 2802 at all. The distinction between a per diem payment (which may or may not satisfy the reimbursement obligation) and an actual expense reimbursement (which does) creates PAGA exposure when the per diem is inadequate or improperly structured.",
+        defenseStrategy: "Audit per diem payment structures to determine whether they are structured as non-taxable reimbursements or taxable compensation. Compare per diem amounts against actual costs in the assignment location. If the per diem is inadequate, calculate the per-employee reimbursement shortfall. Implement expense submission procedures or increase per diem amounts to defensible levels."
+      },
+      {
+        name: "Exempt Classification for Traveling Nurses and Therapists",
+        statute: "Lab. Code § 515; IWC Wage Order 4, § 1(A)",
+        analysis: "Traveling nurses and therapists are sometimes classified as exempt under the professional exemption, but the classification may fail for nurses who are not registered nurses (LVNs, CNAs) or for therapists whose work is primarily the application of established protocols rather than the exercise of discretion and independent judgment. The professional exemption requires that the employee be 'primarily engaged in an occupation commonly recognized as a learned profession' — and the duties test requires the exercise of discretion and independent judgment. Staff-level nurses following physician orders and established care plans may not satisfy the discretion requirement, even though their work is important and requires specialized training.",
+        defenseStrategy: "Conduct a role-by-role analysis of all positions classified as exempt under the professional exemption. Verify that the employee holds the requisite professional license or certification. Document the degree of discretion and independent judgment exercised in daily work versus the application of established protocols and physician orders."
       }
     ],
-    authorities: ["Martinez v. Combs (2012) 49 Cal.4th 35", "Estrada v. Royalty Carpet Mills (2024) 15 Cal.5th 582", "Morillion v. Royal Packing (2000) 22 Cal.4th 575", "Dynamex Operations West v. Superior Court (2018) 4 Cal.5th 903"],
+    authorities: ["Martinez v. Combs (2012) 49 Cal.4th 35", "Estrada v. Royalty Carpet Mills (2024) 15 Cal.5th 582", "Morillion v. Royal Packing (2000) 22 Cal.4th 575", "Dynamex Operations West v. Superior Court (2018) 4 Cal.5th 903", "Mendiola v. CPS Security Solutions (2015) 60 Cal.4th 833", "Gattuso v. Harte-Hanks Shoppers (2007) 42 Cal.4th 554"],
     defenseStrategies: [
       "Develop the public agency immunity defense for violations occurring at government client facilities where the staffing firm lacks operational control.",
       "Pursue manageability limitations by demonstrating that each client facility presents a distinct compliance environment requiring individualized analysis.",
       "Distinguish between violations attributable to the staffing firm's payroll obligations (wage statements, timely payment) and violations attributable to client facility operations (meal/rest period scheduling) — penalties for the latter should not attach to the staffing firm.",
-      "Audit inter-facility travel time assignments and per diem/expense reimbursement compliance to address the violation categories the staffing firm directly controls."
+      "Audit inter-facility travel time assignments and per diem/expense reimbursement compliance to address the violation categories the staffing firm directly controls.",
+      "Review on-call and standby compensation policies at each client facility — the compensability determination is facility-specific and depends on the degree of control exercised during on-call periods."
     ],
     monitoring: [
       "Development of the joint employer PAGA penalty allocation doctrine — no published appellate authority addresses this issue.",
       "CDPH staffing ratio changes that affect meal period scheduling constraints at client facilities.",
-      "Legislative proposals affecting healthcare staffing agency liability for client facility working conditions."
+      "Legislative proposals affecting healthcare staffing agency liability for client facility working conditions.",
+      "Evolving treatment of on-call compensation in healthcare settings — the Mendiola control test applies differently in clinical environments where response times are driven by patient safety requirements."
     ],
     relatedTools: ["statute-of-limitations-calculator", "paga-penalty-estimator"],
     relatedInsights: ["statistical-sampling-in-wage-and-hour-defense-building-a-duran-compliant-framewo"],
