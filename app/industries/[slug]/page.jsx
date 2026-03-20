@@ -3,6 +3,7 @@ import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/indus
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import ArticleViz from '@/components/visuals/ArticleViz';
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map(function(slug) { return { slug: slug }; });
@@ -135,6 +136,8 @@ export default function IndustryPage({ params }) {
             </div>
           </div>
         )}
+
+        <ArticleViz slug={params.slug} type="industry" />
 
         <section style={{ marginBottom: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>

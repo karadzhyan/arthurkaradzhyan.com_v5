@@ -3,6 +3,7 @@ import { caseLaw, getCaseBySlug, getAllCaseSlugs } from '@/data/caseLaw';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import ArticleViz from '@/components/visuals/ArticleViz';
 
 export function generateStaticParams() {
   return getAllCaseSlugs().map(function(slug) { return { slug: slug }; });
@@ -67,6 +68,8 @@ export default function CasePage({ params }) {
           <div className="article-section-label green">Defense Strategy</div>
           <div className="article-defense-box-text">{caseItem.defense}</div>
         </div>
+
+        <ArticleViz slug={params.slug} type="case" />
 
         <div className="article-disclaimer">
           This analysis is for informational purposes only. Case law is current as of {caseItem.current}.

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { insights } from '@/data/insights';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import InsightsPageViz from '@/components/visuals/InsightsPageViz';
 
 export var metadata = {
   title: 'Insights & Publications — PAGA Defense Strategy | Arthur Karadzhyan',
@@ -56,6 +57,8 @@ export default function InsightsIndex() {
             );
           })}
         </div>
+
+        <InsightsPageViz />
       </div>
 
       <SiteFooter />

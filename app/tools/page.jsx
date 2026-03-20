@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { tools } from '@/data/tools';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { getToolIcon } from '@/components/Icons';
+import ToolsPageViz from '@/components/visuals/ToolsPageViz';
 
 export var metadata = {
   title: 'Interactive Tools — PAGA Defense Analytics | Arthur Karadzhyan',
@@ -11,6 +13,18 @@ export var metadata = {
     description: 'Eight PAGA defense analytical tools. All calculations run in your browser.',
     type: 'website',
   },
+};
+
+/* Tool phase categorization */
+var toolPhases = {
+  "PagaCalc": { phase: "Analysis", color: "#2c3e3a" },
+  "RegRateCalc": { phase: "Analysis", color: "#2c3e3a" },
+  "CapQualifier": { phase: "Compliance", color: "#4a7a6f" },
+  "SOLCalc": { phase: "Intake", color: "#CC8800" },
+  "RecoverCheck": { phase: "Analysis", color: "#2c3e3a" },
+  "DerivativeMapper": { phase: "Analysis", color: "#2c3e3a" },
+  "DecisionTree": { phase: "Intake", color: "#CC8800" },
+  "WageStmtCheck": { phase: "Compliance", color: "#4a7a6f" },
 };
 
 export default function ToolsIndex() {
@@ -34,39 +48,37 @@ export default function ToolsIndex() {
       <div className="page-body">
         <div className="tools-index-grid">
           {tools.map(function (tool) {
+            var ToolIcon = getToolIcon(tool.component);
+            var phaseInfo = toolPhases[tool.component] || { phase: "Analysis", color: "#2c3e3a" };
+
             return (
               <Link
                 key={tool.slug}
                 href={'/tools/' + tool.slug}
                 className="tool-index-card"
               >
-                <div className="tool-index-id">{String(tool.id + 1).padStart(2, '0')}</div>
+                <div className="tool-card-top">
+                  <div className="tool-card-icon-wrap" style={{ '--phase-color': phaseInfo.color }}>
+                    <ToolIcon size={24} color={phaseInfo.color} />
+                  </div>
+                  <span className="tool-card-phase" style={{
+                    color: phaseInfo.color,
+                    borderColor: phaseInfo.color + '30',
+                    background: phaseInfo.color + '08'
+                  }}>{phaseInfo.phase}</span>
+                </div>
+
+                <div className="tool-card-number">{String(tool.id + 1).padStart(2, '0')}</div>
                 <h2 className="tool-index-name">{tool.name}</h2>
                 <div className="tool-index-sub">{tool.sub}</div>
-                <p className="tool-index-desc">{tool.desc.length > 180 ? tool.desc.slice(0, 180) + '...' : tool.desc}</p>
-                <div className="tool-index-cta">Open Tool →</div>
+                <p className="tool-index-desc">{tool.desc.length > 160 ? tool.desc.slice(0, 160) + '…' : tool.desc}</p>
+                <div className="tool-index-cta">Open Tool <span className="tool-cta-arrow">→</span></div>
               </Link>
             );
           })}
         </div>
 
-        <div className="page-primer">
-          <div className="page-primer-label">New to PAGA?</div>
-          <p className="page-primer-text">
-            PAGA (Private Attorneys General Act, Lab. Code § 2698 et seq.)
-            authorizes employees to sue employers for Labor Code violations on
-            behalf of all "aggrieved employees." Penalties are calculated per
-            employee × per pay period × per violation category. A single meal
-            period violation across 50 employees and 26 pay periods generates
-            $260,000 — before derivative penalties multiply the exposure. The
-            2024 reforms (AB 2288 / SB 92) introduced penalty caps, cure
-            mechanisms, and manageability limitations that fundamentally changed
-            defense strategy.
-          </p>
-          <Link href="/insights" className="page-primer-link">
-            Read the Publications →
-          </Link>
-        </div>
+        <ToolsPageViz />
       </div>
 
       <SiteFooter />

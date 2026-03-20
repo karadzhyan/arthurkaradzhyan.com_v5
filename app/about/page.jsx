@@ -5,6 +5,8 @@ import { caseLaw } from '@/data/caseLaw';
 import { industries } from '@/data/industries';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { IconWrench, IconBook, IconGavel, IconBuilding, IconScale } from '@/components/Icons';
+import AboutPageViz from '@/components/visuals/AboutPageViz';
 
 export var metadata = {
   title: 'About — Background & Qualifications | Arthur Karadzhyan',
@@ -64,9 +66,11 @@ export default function AboutPage() {
             <div className="about-sidebar-section">
               <h4 className="about-sidebar-heading">On This Site</h4>
               <div className="about-stat-grid">
-                {[[String(tools.length), 'Tools'], [String(insights.length), 'Publications'], [String(caseLaw.length), 'Case Analyses'], [String(industries.length), 'Industries']].map(function (pair, i) {
+                {[[String(tools.length), 'Tools', IconWrench], [String(insights.length), 'Publications', IconBook], [String(caseLaw.length), 'Case Analyses', IconGavel], [String(industries.length), 'Industries', IconBuilding]].map(function (pair, i) {
+                  var StatIcon = pair[2];
                   return (
                     <div key={i} className="about-stat-item">
+                      <div className="about-stat-icon"><StatIcon size={18} color="#2c3e3a" /></div>
                       <div className="about-stat-num">{pair[0]}</div>
                       <div className="about-stat-label">{pair[1]}</div>
                     </div>
@@ -99,6 +103,8 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+
+        <AboutPageViz />
       </div>
 
       <SiteFooter />

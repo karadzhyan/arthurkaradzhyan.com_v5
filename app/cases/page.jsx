@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { caseLaw } from '@/data/caseLaw';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import CasesPageViz from '@/components/visuals/CasesPageViz';
 
 export var metadata = {
   title: 'Case Law Laboratory — Defense-Side Analysis | Arthur Karadzhyan',
@@ -54,6 +55,8 @@ export default function CasesIndex() {
             );
           })}
         </div>
+
+        <CasesPageViz />
 
         <div className="monitoring-section">
           <div className="monitoring-bar" />

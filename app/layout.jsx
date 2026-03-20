@@ -15,9 +15,10 @@ export const metadata = {
     url: 'https://www.arthurkaradzhyan.com',
     siteName: 'Arthur Karadzhyan — Employment Defense Attorney',
     locale: 'en_US',
+    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'Arthur Karadzhyan — Employment Defense Attorney' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Arthur Karadzhyan | Employment Defense Attorney | California',
     description: 'PAGA defense, wage-and-hour class actions, workplace investigations. Eight interactive analytical tools and twelve publications.',
   },
