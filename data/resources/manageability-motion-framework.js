@@ -5,6 +5,12 @@ export default {
   cardDesc: "Complete motion template with section-by-section structure, four manageability factor deep dives with hypotheticals, opposition anticipation, tiered scope limitation proposals with sample order language, bellwether trial alternative, discovery strategy, and dual-track coordination with class certification.",
   metaDescription: "Template for pre-trial PAGA manageability motions under California Labor Code § 2699(p) and Estrada v. Royalty Carpet Mills.",
   placeholder: false,
+  relatedInsights: ["manageability-after-estrada-using-2699-p-to-limit-paga-scope"],
+  relatedTools: ["paga-penalty-estimator"],
+  relatedCases: ["estrada-v-royalty-carpet-mills-inc"],
+  relatedIndustries: ["healthcare-staffing"],
+  datePublished: "2026-01-15",
+  dateModified: "2026-03-19",
   statutoryContext: {
     paragraphs: [
       {label: "The strategic landscape.", text: "After Estrada v. Royalty Carpet Mills, Inc. (2024) 15 Cal.5th 582, courts cannot dismiss PAGA claims on manageability grounds — but they can limit the scope of evidence and claims at trial. AB 2288 codified this authority in § 2699(p), giving trial courts explicit power to \"limit the evidence to be presented at trial or the scope\" of PAGA claims \"to ensure that the claims can be effectively tried.\""},

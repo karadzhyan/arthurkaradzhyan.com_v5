@@ -5,6 +5,12 @@ export default {
   cardDesc: "Comprehensive guide to the 33-day cure process under § 2699.3. Eligibility analysis, curability assessment matrix, seven-part proposal structure with sample language, monetary remediation methodology with worked calculations, cure conference preparation with objection/rebuttal frameworks, and strategic integration with penalty cap qualification.",
   metaDescription: "Step-by-step guide to the PAGA cure proposal process under California Labor Code § 2699.3 for employers with fewer than 100 employees. 33-day timeline, eligibility analysis, curability matrix, sample proposal language, monetary remediation calculations, cure conference preparation, and strategic integration with penalty caps.",
   placeholder: false,
+  relatedInsights: ["ab-2288-sb-92-a-defense-side-roadmap-to-the-2024-paga-reforms"],
+  relatedTools: ["paga-reform-decision-tree", "penalty-cap-qualifier"],
+  relatedCases: [],
+  relatedIndustries: [],
+  datePublished: "2026-01-15",
+  dateModified: "2026-03-19",
 
   statutoryContext: {
     paragraphs: [

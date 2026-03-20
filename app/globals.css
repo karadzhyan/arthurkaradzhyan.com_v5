@@ -412,9 +412,54 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .industry-index-name{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:12px}
 .industry-index-headline{font-family:'Outfit',sans-serif;font-size:12px;line-height:1.7;color:#888;margin-bottom:12px;font-style:italic}
 .industry-index-issues{font-family:'Outfit',sans-serif;font-size:11px;color:#aaa;margin-bottom:16px}
-.industry-index-metric{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#2c3e3a;padding-top:12px;border-top:1px solid #eee}
+.industry-index-metric{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#2c3e3a}
+
+.industry-index-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.industry-index-patterns{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8aa39e}
+.industry-index-stat{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;padding:10px 0;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0}
+.industry-index-stat-value{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#2c3e3a}
+.industry-index-stat-label{font-family:'Outfit',sans-serif;font-size:11px;color:#999}
+.industry-index-bottom{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid #eee;margin-bottom:12px}
+.industry-index-wage{font-family:'Outfit',sans-serif;font-size:10px;color:#bbb;letter-spacing:1px}
+.industry-index-cta{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(44,62,58,.4);transition:color .3s}
+.industry-index-card:hover .industry-index-cta{color:#2c3e3a}
 
 @media(max-width:768px){.industries-index-grid{grid-template-columns:1fr}}
+
+/* Industries — Section Dividers & Headers */
+.ind-section-divider{height:1px;background:#eee;margin:48px 0 40px}
+.ind-section-header{margin-bottom:32px}
+.ind-section-label{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(44,62,58,.4);margin-bottom:8px}
+.ind-section-title{font-size:clamp(22px,3vw,32px);font-weight:400;line-height:1.2;letter-spacing:-.5px;color:#1a1a1a;margin-bottom:12px}
+.ind-section-desc{font-family:'Outfit',sans-serif;font-size:13px;line-height:1.8;color:#888;max-width:700px}
+
+/* Industries — Cross-Industry Patterns */
+.cross-patterns-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px}
+.cross-pattern-card{padding:24px;border:1px solid #eee;transition:all .3s}
+.cross-pattern-card:hover{box-shadow:0 8px 32px rgba(44,62,58,.06)}
+.cross-pattern-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:10px}
+.cross-pattern-summary{font-family:'Outfit',sans-serif;font-size:12px;line-height:1.8;color:#888;margin-bottom:16px}
+.cross-pattern-industries{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.cross-pattern-pill{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#2c3e3a;background:#f3f7f6;padding:4px 10px;text-decoration:none;transition:all .3s}
+.cross-pattern-pill:hover{background:#2c3e3a;color:#fff}
+.cross-pattern-authority,.cross-pattern-defense{font-family:'Outfit',sans-serif;font-size:11px;line-height:1.7;color:#666;margin-bottom:8px}
+.cross-pattern-authority-label,.cross-pattern-defense-label{display:block;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(44,62,58,.4);margin-bottom:2px}
+@media(max-width:768px){.cross-patterns-grid{grid-template-columns:1fr}}
+
+/* Industries — Universal Frameworks */
+.frameworks-grid{display:flex;flex-direction:column;gap:0;margin-bottom:16px}
+.framework-card{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid #eee}
+.framework-card:first-child{border-top:1px solid #eee}
+.framework-num{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:rgba(44,62,58,.15);min-width:36px;line-height:1}
+.framework-content{flex:1}
+.framework-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.framework-subtitle{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8aa39e;margin-bottom:10px}
+.framework-desc{font-family:'Outfit',sans-serif;font-size:12px;line-height:1.8;color:#888;margin-bottom:12px}
+.framework-applies,.framework-insight{font-family:'Outfit',sans-serif;font-size:11px;line-height:1.7;color:#666;margin-bottom:8px}
+.framework-applies-label,.framework-insight-label{display:block;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.framework-applies-label{color:rgba(44,62,58,.4)}
+.framework-insight-label{color:#8aa39e}
+@media(max-width:480px){.framework-card{flex-direction:column;gap:8px}.framework-num{font-size:20px}}
 
 .page-essay{margin-top:16px;padding:28px;border:1px solid #eee}
 .page-essay-title{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:16px}
@@ -571,6 +616,41 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .article-industry-stat-num{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#8aa39e}
 .article-industry-stat-label{font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .article-industry-wage{font-family:'Outfit',sans-serif;font-size:11px;color:rgba(255,255,255,.35);margin-top:20px}
+
+.article-industry-key-stat{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.article-industry-key-stat-value{font-family:'Outfit',sans-serif;font-size:32px;font-weight:700;color:#8aa39e}
+.article-industry-key-stat-label{font-family:'Outfit',sans-serif;font-size:12px;color:rgba(255,255,255,.4)}
+
+.article-sector-context{font-family:'Outfit',sans-serif;font-size:14px;line-height:2;color:#777;padding:20px 24px;border-left:3px solid #e0e8e6;background:#fafcfb}
+
+.article-practice-note{padding:24px;background:#f8faf9;border:1px solid #e0e8e6;border-left:3px solid #2c3e3a;margin-bottom:48px}
+.article-practice-note-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2c3e3a;margin-bottom:10px}
+.article-practice-note-text{font-family:'Outfit',sans-serif;font-size:13px;line-height:2;color:#555;margin:0}
+
+.article-exposure-num-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.article-exposure-num{font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;color:rgba(44,62,58,.15);line-height:1;flex-shrink:0;min-width:24px;margin-top:2px}
+
+.article-cross-intro{font-family:'Outfit',sans-serif;font-size:13px;line-height:1.8;color:#888;margin-bottom:20px}
+.article-cross-patterns{display:flex;flex-direction:column;gap:16px}
+.article-cross-pattern-item{padding:20px;border:1px solid #eee;transition:all .3s}
+.article-cross-pattern-item:hover{box-shadow:0 4px 16px rgba(44,62,58,.05)}
+.article-cross-pattern-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:8px}
+.article-cross-pattern-summary{font-family:'Outfit',sans-serif;font-size:12px;line-height:1.8;color:#888;margin-bottom:12px}
+.article-cross-pattern-authority,.article-cross-pattern-defense{font-family:'Outfit',sans-serif;font-size:11px;line-height:1.7;color:#666;margin-bottom:8px}
+.article-cross-pattern-also{font-family:'Outfit',sans-serif;font-size:11px;color:#999;margin-top:12px;padding-top:10px;border-top:1px solid #f0f0f0}
+.article-cross-pattern-also-label{font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:9px;color:rgba(44,62,58,.4)}
+.article-cross-pattern-link{color:#2c3e3a;text-decoration:none;font-weight:500;transition:opacity .3s}
+.article-cross-pattern-link:hover{opacity:.6}
+
+.article-monitoring-dot.pending{background:#e6a817}
+.article-monitoring-dot.tracking{background:#2c3e3a}
+.article-monitoring-legend{display:flex;gap:16px;margin-bottom:12px}
+.article-monitoring-legend-item{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999}
+
+.article-nav-link{display:flex;flex-direction:column;gap:2px}
+.article-nav-link-next{text-align:right;align-items:flex-end}
+.article-nav-dir{font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999}
+.article-nav-name{font-family:'Outfit',sans-serif;font-size:13px;color:#2c3e3a;font-weight:500}
 
 .article-exposure-cat{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid #eee}
 .article-exposure-cat:last-child{border-bottom:none}

@@ -5,6 +5,12 @@ export default {
   cardDesc: "Tabbed reference covering every reform provision with defense actions: penalty caps, anti-stacking, standing, manageability, reduced penalties, weekly halving, cure procedures, and an interaction cascade showing cumulative exposure reduction.",
   metaDescription: "Complete defense-side reference to the 2024 California PAGA reforms (AB 2288 / SB 92).",
   placeholder: false,
+  relatedInsights: ["ab-2288-sb-92-a-defense-side-roadmap-to-the-2024-paga-reforms"],
+  relatedTools: ["paga-reform-decision-tree", "penalty-cap-qualifier", "paga-penalty-estimator"],
+  relatedCases: ["estrada-v-royalty-carpet-mills-inc"],
+  relatedIndustries: [],
+  datePublished: "2026-01-15",
+  dateModified: "2026-03-19",
   effectiveDate: "June 19, 2024",
   effectiveNote: "Applies to PAGA notices filed on or after this date. Pre-reform notices remain governed by prior law. Check the LWDA filing date, not the date of service on the employer. For matters involving both pre- and post-reform periods, use temporal bifurcation.",
   cascade: {

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { tools, getToolBySlug } from '@/data/tools';
+import { getIndustriesForTool } from '@/data/crossReferences';
 import PagaCalc from '@/components/tools/PagaCalc';
 import RegRateCalc from '@/components/tools/RegRateCalc';
 import CapQualifier from '@/components/tools/CapQualifier';
@@ -82,24 +83,36 @@ export default function ToolPageClient({ slug }) {
           </div>
         )}
 
-        {(tool.relatedInsights.length > 0 || tool.relatedCases.length > 0) && (
-          <div className="tool-detail-related">
-            {tool.relatedInsights.map(function(s, i) {
-              return (
-                <Link key={'i' + i} href={'/insights/' + s} className="tool-detail-related-link primary">
-                  Related Publication →
-                </Link>
-              );
-            })}
-            {tool.relatedCases.map(function(s, i) {
-              return (
-                <Link key={'c' + i} href={'/cases/' + s} className="tool-detail-related-link muted">
-                  Related Case →
-                </Link>
-              );
-            })}
-          </div>
-        )}
+        {(function() {
+          var relIndustries = getIndustriesForTool(slug);
+          var hasRelated = tool.relatedInsights.length > 0 || tool.relatedCases.length > 0 || relIndustries.length > 0;
+          if (!hasRelated) return null;
+          return (
+            <div className="tool-detail-related">
+              {tool.relatedInsights.map(function(s, i) {
+                return (
+                  <Link key={'i' + i} href={'/insights/' + s} className="tool-detail-related-link primary">
+                    Related Publication →
+                  </Link>
+                );
+              })}
+              {tool.relatedCases.map(function(s, i) {
+                return (
+                  <Link key={'c' + i} href={'/cases/' + s} className="tool-detail-related-link muted">
+                    Related Case →
+                  </Link>
+                );
+              })}
+              {relIndustries.map(function(ind) {
+                return (
+                  <Link key={'ind-' + ind.slug} href={'/industries/' + ind.slug} className="tool-detail-related-link muted">
+                    {ind.name} — Industry Profile →
+                  </Link>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
 
       <div className="tool-detail-band">

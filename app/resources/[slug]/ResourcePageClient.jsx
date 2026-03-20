@@ -2,6 +2,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { getResourceBySlug } from "@/data/resources";
+import { insights } from "@/data/insights";
+import { tools } from "@/data/tools";
+import { caseLaw } from "@/data/caseLaw";
+import { industries } from "@/data/industries";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -398,6 +402,45 @@ export default function ResourcePageClient({slug}) {
       <div style={{maxWidth:900,margin:"0 auto",padding:"0 48px 80px"}}>
         {isReform ? <ReformPage res={res}/> : <SectionedPage res={res}/>}
       </div>
+
+      {/* RELATED ON THIS SITE */}
+      {(function() {
+        var relInsightsArr = (res.relatedInsights || []).map(function(slug) {
+          return insights.find(function(ins) { return ins.slug === slug; });
+        }).filter(Boolean);
+        var relToolsArr = (res.relatedTools || []).map(function(slug) {
+          return tools.find(function(t) { return t.slug === slug; });
+        }).filter(Boolean);
+        var relCasesArr = (res.relatedCases || []).map(function(slug) {
+          return caseLaw.find(function(c) { return c.slug === slug; });
+        }).filter(Boolean);
+        var relIndustriesArr = (res.relatedIndustries || []).map(function(slug) {
+          return industries.find(function(ind) { return ind.slug === slug; });
+        }).filter(Boolean);
+        var hasRelated = relInsightsArr.length > 0 || relToolsArr.length > 0 || relCasesArr.length > 0 || relIndustriesArr.length > 0;
+        if (!hasRelated) return null;
+        return (
+          <div style={{maxWidth:900,margin:"0 auto",padding:"0 48px 32px"}}>
+            <div className="article-related">
+              <div className="article-related-label">Related on This Site</div>
+              <div className="article-related-links">
+                {relInsightsArr.map(function(ins) {
+                  return <Link key={'ins-' + ins.slug} href={'/insights/' + ins.slug} className="article-related-link">{ins.title} →</Link>;
+                })}
+                {relIndustriesArr.map(function(ind) {
+                  return <Link key={'ind-' + ind.slug} href={'/industries/' + ind.slug} className="article-related-link">{ind.name} — Industry Profile →</Link>;
+                })}
+                {relToolsArr.map(function(t) {
+                  return <Link key={'tool-' + t.slug} href={'/tools/' + t.slug} className="article-related-link muted">{t.name} →</Link>;
+                })}
+                {relCasesArr.map(function(c) {
+                  return <Link key={'case-' + c.slug} href={'/cases/' + c.slug} className="article-related-link muted">{c.case} →</Link>;
+                })}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* FOOTER */}
       {res.footer && <div style={{maxWidth:900,margin:"0 auto",padding:"0 48px 48px"}}>

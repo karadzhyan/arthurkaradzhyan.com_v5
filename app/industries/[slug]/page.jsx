@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { industries, getIndustryBySlug, getAllIndustrySlugs } from '@/data/industries';
+import { industries, getIndustryBySlug, getAllIndustrySlugs, crossIndustryPatterns } from '@/data/industries';
+import { insights } from '@/data/insights';
+import { tools } from '@/data/tools';
+import { matters } from '@/data/matters';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
@@ -13,9 +16,35 @@ export function generateMetadata({ params }) {
   if (!ind) return { title: 'Not Found' };
   return {
     title: ind.name + ' — PAGA Defense & Employment Litigation | Arthur Karadzhyan',
-    description: 'Defense-side analysis of PAGA and wage-and-hour exposure for ' + ind.name.toLowerCase() + ' employers in California.',
+    description: 'Defense-side analysis of PAGA and wage-and-hour exposure for ' + ind.name.toLowerCase() + ' employers in California. ' + ind.issues.length + ' exposure categories, ' + ind.authorities.length + ' governing authorities, ' + ind.defenseStrategies.length + ' defense strategies.',
     openGraph: { title: ind.name + ' — Industry Intelligence | Arthur Karadzhyan', description: ind.headline, type: 'article' },
   };
+}
+
+function getInsightTitle(slug) {
+  var found = insights.find(function(i) { return i.slug === slug; });
+  return found ? found.title : 'Publication';
+}
+
+function getToolName(slug) {
+  var found = tools.find(function(t) { return t.slug === slug; });
+  return found ? found.name : 'Interactive Tool';
+}
+
+function getMatterSlug(title) {
+  var found = matters.find(function(m) { return m.title === title; });
+  return found ? found.slug : null;
+}
+
+function getIndustryName(slug) {
+  var found = industries.find(function(i) { return i.slug === slug; });
+  return found ? found.name : slug;
+}
+
+function getPatternsForIndustry(industrySlug) {
+  return crossIndustryPatterns.filter(function(p) {
+    return p.industries.indexOf(industrySlug) !== -1;
+  });
 }
 
 export default function IndustryPage({ params }) {
@@ -34,6 +63,8 @@ export default function IndustryPage({ params }) {
     );
   }
 
+  var patterns = getPatternsForIndustry(params.slug);
+
   return (
     <div className="page-wrap">
       <BreadcrumbSchema items={[
@@ -43,11 +74,38 @@ export default function IndustryPage({ params }) {
       ]} />
       <SiteNav current="Industries" />
 
+      {ind.datePublished && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": ind.name + ' — PAGA Defense & Employment Litigation',
+              "description": ind.headline,
+              "author": { "@type": "Person", "name": "Arthur Karadzhyan" },
+              "datePublished": ind.datePublished,
+              "dateModified": ind.dateModified || ind.datePublished,
+              "publisher": { "@type": "Person", "name": "Arthur Karadzhyan" }
+            })
+          }}
+        />
+      )}
+
+      {/* ── Header ──────────────────────────────────────────── */}
       <div className="article-industry-header">
         <div className="article-industry-header-inner">
           <div className="page-label-dark">Industry Intelligence</div>
           <h1 className="page-title-dark" style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700 }}>{ind.name}</h1>
-          <div className="page-desc-dark" style={{ fontFamily: 'Georgia,serif', fontStyle: 'italic', maxWidth: 640, marginBottom: 24 }}>{ind.headline}</div>
+          <div className="page-desc-dark" style={{ fontFamily: 'Georgia,serif', fontStyle: 'italic', maxWidth: 640, marginBottom: 20 }}>{ind.headline}</div>
+
+          {ind.keyStatistic && (
+            <div className="article-industry-key-stat">
+              <span className="article-industry-key-stat-value">{ind.keyStatistic.value}</span>
+              <span className="article-industry-key-stat-label">{ind.keyStatistic.label}</span>
+            </div>
+          )}
+
           <div className="article-industry-stats">
             <div>
               <div className="article-industry-stat-num">{ind.issues.length}</div>
@@ -61,12 +119,27 @@ export default function IndustryPage({ params }) {
               <div className="article-industry-stat-num">{ind.defenseStrategies.length}</div>
               <div className="article-industry-stat-label">Defense Strategies</div>
             </div>
+            {patterns.length > 0 && (
+              <div>
+                <div className="article-industry-stat-num">{patterns.length}</div>
+                <div className="article-industry-stat-label">Cross-Sector Patterns</div>
+              </div>
+            )}
           </div>
           {ind.wageOrder && <div className="article-industry-wage">Applicable: {ind.wageOrder}</div>}
         </div>
       </div>
 
       <article className="article-wrap wide">
+
+        {/* ── Sector Context ────────────────────────────────── */}
+        {ind.sectorContext && (
+          <section style={{ marginBottom: 48 }}>
+            <div className="article-sector-context">{ind.sectorContext}</div>
+          </section>
+        )}
+
+        {/* ── Structural Vulnerability ──────────────────────── */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Structural Vulnerability</div>
           <div className="article-body">
@@ -74,13 +147,31 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* ── Practice Note ─────────────────────────────────── */}
+        {ind.practiceNote && (
+          <div className="article-practice-note">
+            <div className="article-practice-note-label">Practice Note</div>
+            <p className="article-practice-note-text">{ind.practiceNote}</p>
+          </div>
+        )}
+
+        {/* ── Exposure Categories ────────────────────────────── */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Exposure Categories</div>
+          <p className="article-cross-intro">
+            {ind.exposureCategories.length} violation categories mapped to their governing statutes,
+            analytical challenges, and defense strategies.
+          </p>
           {ind.exposureCategories.map(function(cat, i) {
             return (
               <div key={i} className="article-exposure-cat" style={{ borderBottom: i < ind.exposureCategories.length - 1 ? undefined : 'none' }}>
-                <div className="article-exposure-name">{cat.name}</div>
-                <div className="article-exposure-statute">{cat.statute}</div>
+                <div className="article-exposure-num-row">
+                  <div className="article-exposure-num">{i + 1}</div>
+                  <div>
+                    <div className="article-exposure-name">{cat.name}</div>
+                    <div className="article-exposure-statute">{cat.statute}</div>
+                  </div>
+                </div>
                 <div className="article-exposure-analysis">{cat.analysis}</div>
                 <div className="article-exposure-defense">
                   <div className="article-section-label green">Defense Strategy</div>
@@ -91,6 +182,7 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
+        {/* ── Full Exposure Profile ─────────────────────────── */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Full Exposure Profile</div>
           <div className="article-issues-grid">
@@ -100,6 +192,52 @@ export default function IndustryPage({ params }) {
           </div>
         </section>
 
+        {/* ── Cross-Industry Patterns ───────────────────────── */}
+        {patterns.length > 0 && (
+          <section style={{ marginBottom: 60 }}>
+            <div className="article-section-label lg">Cross-Industry Patterns</div>
+            <p className="article-cross-intro">
+              Defense strategies from {patterns.length === 1 ? 'one other sector applies' : patterns.length + ' other sectors apply'} here.
+              {' '}This industry shares {patterns.length} exposure {patterns.length === 1 ? 'pattern' : 'patterns'} with
+              other sectors — the same statutory framework creating parallel vulnerabilities
+              that the same defense methodology addresses.
+            </p>
+            <div className="article-cross-patterns">
+              {patterns.map(function(pattern) {
+                var otherIndustries = pattern.industries.filter(function(s) { return s !== params.slug; });
+                return (
+                  <div key={pattern.id} className="article-cross-pattern-item">
+                    <div className="article-cross-pattern-name">{pattern.name}</div>
+                    <p className="article-cross-pattern-summary">{pattern.summary}</p>
+                    <div className="article-cross-pattern-authority">
+                      <span className="article-cross-pattern-also-label">Key Authority: </span>
+                      {pattern.keyAuthority}
+                    </div>
+                    <div className="article-cross-pattern-defense">
+                      <span className="article-cross-pattern-also-label">Defense Angle: </span>
+                      {pattern.defenseAngle}
+                    </div>
+                    <div className="article-cross-pattern-also">
+                      <span className="article-cross-pattern-also-label">Also affects: </span>
+                      {otherIndustries.map(function(slug, i) {
+                        return (
+                          <span key={slug}>
+                            <Link href={'/industries/' + slug} className="article-cross-pattern-link">
+                              {getIndustryName(slug)}
+                            </Link>
+                            {i < otherIndustries.length - 1 ? ', ' : ''}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* ── Governing Authorities ─────────────────────────── */}
         <section style={{ marginBottom: 60 }}>
           <div className="article-section-label lg">Governing Authorities</div>
           {ind.authorities.map(function(auth, i) {
@@ -107,6 +245,7 @@ export default function IndustryPage({ params }) {
           })}
         </section>
 
+        {/* ── Defense Strategies ─────────────────────────────── */}
         <div className="article-defense-box" style={{ marginBottom: 60 }}>
           <div className="article-section-label green" style={{ marginBottom: 20 }}>Defense Strategies</div>
           {ind.defenseStrategies.map(function(strategy, i) {
@@ -119,16 +258,23 @@ export default function IndustryPage({ params }) {
           })}
         </div>
 
+        {/* ── Currently Monitoring ──────────────────────────── */}
         {ind.monitoring && ind.monitoring.length > 0 && (
           <div className="article-monitoring">
             <div className="article-monitoring-bar" />
             <div className="article-monitoring-inner">
               <div className="article-section-label lg">Currently Monitoring</div>
+              <div className="article-monitoring-legend">
+                <span className="article-monitoring-legend-item"><span className="article-monitoring-dot pending" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 4 }} /> Pending</span>
+                <span className="article-monitoring-legend-item"><span className="article-monitoring-dot tracking" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 4 }} /> Tracking</span>
+              </div>
               {ind.monitoring.map(function(item, i) {
+                var text = typeof item === 'string' ? item : item.text;
+                var status = typeof item === 'string' ? 'tracking' : item.status;
                 return (
                   <div key={i} className="article-monitoring-item">
-                    <div className="article-monitoring-dot" />
-                    <div className="article-monitoring-text">{item}</div>
+                    <div className={'article-monitoring-dot ' + status} />
+                    <div className="article-monitoring-text">{text}</div>
                   </div>
                 );
               })}
@@ -136,29 +282,45 @@ export default function IndustryPage({ params }) {
           </div>
         )}
 
+        {/* ── Related on This Site ──────────────────────────── */}
         <section style={{ marginBottom: 40 }}>
           <div className="article-section-label lg">Related on This Site</div>
           <div className="article-related-links">
             {ind.relatedInsights && ind.relatedInsights.map(function(slug, i) {
-              return <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">Publication →</Link>;
+              return <Link key={'i' + i} href={'/insights/' + slug} className="article-related-link">{getInsightTitle(slug)} →</Link>;
             })}
             {ind.relatedTools && ind.relatedTools.map(function(slug, i) {
-              return <Link key={'t' + i} href={'/tools/' + slug} className="article-related-link muted">Interactive Tool →</Link>;
+              return <Link key={'t' + i} href={'/tools/' + slug} className="article-related-link muted">{getToolName(slug)} →</Link>;
+            })}
+            {ind.relatedMatters && ind.relatedMatters.length > 0 && ind.relatedMatters.map(function(matter, i) {
+              var matterSlug = getMatterSlug(matter);
+              if (matterSlug) {
+                return <Link key={'m' + i} href={'/matters/' + matterSlug} className="article-related-link muted">{matter} →</Link>;
+              }
+              return <span key={'m' + i} className="article-related-link muted" style={{ cursor: 'default' }}>{matter}</span>;
             })}
             <Link href="/industries" className="article-related-link muted">All Industries →</Link>
           </div>
         </section>
 
+        {/* ── Disclaimer ────────────────────────────────────── */}
         <div className="article-disclaimer">
           This industry analysis is for informational purposes only and does not constitute legal advice.
         </div>
 
+        {/* ── Prev/Next Navigation ──────────────────────────── */}
         <div className="article-nav">
           {ind.index > 0 ? (
-            <Link href={'/industries/' + industries[ind.index - 1].slug} className="article-nav-link">← {industries[ind.index - 1].name}</Link>
+            <Link href={'/industries/' + industries[ind.index - 1].slug} className="article-nav-link">
+              <span className="article-nav-dir">← Previous</span>
+              <span className="article-nav-name">{industries[ind.index - 1].name}</span>
+            </Link>
           ) : <span />}
           {ind.index < industries.length - 1 ? (
-            <Link href={'/industries/' + industries[ind.index + 1].slug} className="article-nav-link">{industries[ind.index + 1].name} →</Link>
+            <Link href={'/industries/' + industries[ind.index + 1].slug} className="article-nav-link article-nav-link-next">
+              <span className="article-nav-dir">Next →</span>
+              <span className="article-nav-name">{industries[ind.index + 1].name}</span>
+            </Link>
           ) : <span />}
         </div>
       </article>
